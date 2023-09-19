@@ -1,25 +1,26 @@
 package Builders;
 
 import GameObject.Frame;
+import GameObject.GameObject;
 import Level.MapTile;
-import Level.TileLayout;
 import Level.TileType;
 
 import java.util.HashMap;
 
 // Builder class to instantiate a MapTile class
 public class MapTileBuilder {
-    private HashMap<String, Frame[]> animations = new HashMap<>();
+
     private TileType tileType = TileType.PASSABLE;
     private int tileIndex = -1;
-    private TileLayout tileLayout = null;
+    private HashMap<String, Frame[]> bottomLayer = new HashMap<>();;
+    private HashMap<String, Frame[]> topLayer = new HashMap<>();;
 
-    public MapTileBuilder(Frame frame) {
-        this.animations.put("DEFAULT", new Frame[] { frame });
+    public MapTileBuilder(Frame bottomLayer) {
+        this.bottomLayer.put("DEFAULT", new Frame[] { bottomLayer });
     }
 
-    public MapTileBuilder(Frame[] frames) {
-        this.animations.put("DEFAULT", frames);
+    public MapTileBuilder(Frame[] bottomLayer) {
+        this.bottomLayer.put("DEFAULT", bottomLayer);
     }
 
     public MapTileBuilder withTileType(TileType tileType) {
@@ -32,12 +33,27 @@ public class MapTileBuilder {
         return this;
     }
 
-    public MapTileBuilder withTileLayout(TileLayout tileLayout) {
-        this.tileLayout = tileLayout;
+    public MapTileBuilder withBottomLayer(Frame bottomLayer) {
+        this.bottomLayer.put("DEFAULT", new Frame[] { bottomLayer });
         return this;
     }
 
-    public HashMap<String, Frame[]> cloneAnimations() {
+    public MapTileBuilder withBottomLayer(Frame[] bottomLayer) {
+        this.bottomLayer.put("DEFAULT", bottomLayer);
+        return this;
+    }
+
+    public MapTileBuilder withTopLayer(Frame topLayer) {
+        this.topLayer.put("DEFAULT", new Frame[] { topLayer });
+        return this;
+    }
+
+    public MapTileBuilder withTopLayer(Frame[] topLayer) {
+        this.topLayer.put("DEFAULT", topLayer);
+        return this;
+    }
+
+    public HashMap<String, Frame[]> cloneAnimations(HashMap<String, Frame[]> animations) {
         HashMap<String, Frame[]> animationsCopy = new HashMap<>();
         for (String key : animations.keySet()) {
             Frame[] frames = animations.get(key);
@@ -51,10 +67,12 @@ public class MapTileBuilder {
     }
 
     public MapTile build(float x, float y) {
-        MapTile mapTile = new MapTile(x, y, cloneAnimations(), tileType, tileIndex);
-        if (tileLayout != null) {
-            mapTile.setLayout(tileLayout);
+        GameObject bottomLayerAnimation = new GameObject(x, y, cloneAnimations(bottomLayer), "DEFAULT");
+        GameObject topLayerAnimation = null;
+        if (!topLayer.isEmpty()) {
+            topLayerAnimation = new GameObject(x, y, cloneAnimations(topLayer), "DEFAULT");
         }
-        return mapTile;
+
+        return new MapTile(x, y, bottomLayerAnimation, topLayerAnimation, tileType, tileIndex);
     }
 }

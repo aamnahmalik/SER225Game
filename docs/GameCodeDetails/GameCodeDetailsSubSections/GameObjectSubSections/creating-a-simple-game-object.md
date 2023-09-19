@@ -46,7 +46,7 @@ Calling the game object's `draw` method will display it to the screen at its x a
 ## Setting the Map instance in a Game Object
 
 In the above example, the `GameObject` will always be drawn at its x and y position relative to the screen's coordinates.
-Many classes however, such as the `Player` and `Enemy` classes, need to have their drawing logic changed based on where the map's camera has moved (this creates that "scrolling" level effect). 
+Many classes however, such as the `Player` and `NPC` classes, need to have their drawing logic changed based on where the map's camera has moved (this creates that "scrolling" level effect). 
 To add the `Map` instance to the `GameObject` for it to automatically apply that draw logic, the `setMap` method can be used.
 
 ```java

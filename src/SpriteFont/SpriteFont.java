@@ -61,7 +61,7 @@ public class SpriteFont {
 	public void setOutlineColor(Color outlineColor) {
 		this.outlineColor = outlineColor;
 	}
-	
+
 	public void setOutlineThickness(float outlineThickness) {
 		this.outlineThickness = outlineThickness;
 	}
@@ -98,15 +98,15 @@ public class SpriteFont {
 	public void moveRight(float dx) {
 		x += dx;
 	}
-	
+
 	public void moveLeft(float dx) {
 		x -= dx;
 	}
-	
+
 	public void moveDown(float dy) {
 		y += dy;
 	}
-	
+
 	public void moveUp(float dy) {
 		y -= dy;
 	}

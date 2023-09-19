@@ -58,13 +58,13 @@ As the player moves throughout the map, the camera follows it to show different 
 
 ## Active Map Resources
 
-The camera is also responsible for determining which map tiles, NPCs, enhanced map tiles, and enemies
+The camera is also responsible for determining which map tiles, NPCs, enhanced map tiles, and triggers
 are a part of the current area of the map that is being shown, meaning those entities need to be a part of the `update` and `draw` cycle. 
 In order to not waste computing resources, the camera is constantly checking if a map entity is not in the "active" area (such as an NPC that is too far outside of the camera's bounds).
 This is important as wasting time updating and drawing items that do not affect the player can negatively affect FPS and cause the game to slow down.
 
 Map entities that are to be included in the `update` and `draw` cycle at any given time are considered "active".
-The `Map` class exposes three methods for `getActiveEnemies`, `getActiveNPCs`, and `getActiveEnhancedMapTiles` for other classes to use. 
+The `Map` class exposes three methods for `getActiveNPCs`, `getActiveEnhancedMapTiles` and `getActiveTriggers` for other classes to use. 
 These methods contain a subsection of each map entity resource that is currently active. This is useful for certain pieces of the game logic, such as collision detection -- instead of having to check against every entity in the game, only a subsection of the entities will be checked against, which saves time and computing resources. 
 Looking at the above images of the camera example on the entire map image, it's more apparent how only certain NPCs that are in the camera's range need to be included in the `update` and `draw` cycles at any given time. 
 If you look at the first image, there's no reason to update the walrus NPC during that time, as it is far off-screen that the player won't even see it until they move a bit.
@@ -74,5 +74,5 @@ It is currently set to 4, so if any map resource is more than 5 tiles away off-s
 Entities also have an `isUpdateOffScreen` instance variable that when toggled on will keep the entity in the update cycle regardless of where it is on the map.
 While this game currently does not make use of this, there are certainly future enhancements where this toggle can come in handy.
 
-The `Camera` class's `loadActiveEnemies`, `loadActiveNPCs`, and `loadActiveEnhancedMapTiles` methods are called each game loop cycle (each frame)
+The `Camera` class's `loadActiveNPCs`, `loadActiveEnhancedMapTiles`, and `loadActiveTriggers` methods are called each game loop cycle (each frame)
 to determine which map entities are currently active and which ones are not.

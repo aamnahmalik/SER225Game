@@ -1,7 +1,7 @@
 ---
 layout: default
 title: NPCs
-nav_order: 8
+nav_order: 6
 parent: Map
 grand_parent: Game Code Details
 permalink: /GameCodeDetails/Map/NPCs
@@ -25,36 +25,38 @@ An NPC can be given its own graphics/animations, as well as its own `update` cyc
 NPCs in a game tend to act as a neutral character, meaning they usually do not harm the player.
 They are typically designed to supplement the traversal through a level, as well as improve overall game immersion.
 
-The `NPC` class adds a `checkTalkedTo` method that any `NPC` subclass can override, which handles the code that is run if an NPC is talked to by the player. 
-The player character has to be within the NPC's range and then press space to talk to the NPC, and the NPC's `isInteractable` attribute must be set to `true`. 
-When an NPC is talked to, they can display a message until their `talkedToTime`, runs out, at which point the message disappears and they can be re-talked to again. 
-An NPC can be made to do any desired behavior, and is not limited to only this.
+An NPC is typically given an `interactScript` which will execute when the player interacts with them.
+Currently, this can be seen with both the walrus and dinosaur NPCs in the game. 
+Read more about scripts [here](./scripts.md).
+
+Creating interact scripts for NPCs is one of the main ways this game functions and carries out the story.
+An NPC can be made to do any desired behavior, and is not just limited to interact scripts, but it is up to the coder's skills to achieve their desired behavior!
 
 ## NPC Subclass
 
-In the `NPCs` package, there is currently only one subclass of the `NPC` class -- `Walrus`.
-This `Walrus` NPC can be seen in the `TestMap` map.
+In the `NPCs` package, there are currently only two subclasses of the `NPC` class -- `Walrus` and `Dinosaur`.
+Both NPCs can be seen in the `TestMap` map.
 
 ## Adding a new NPC to the game
 
-This is simple -- create a new class in the `NPCs` package, subclass the `NPC` class, and then just implement
-desired logic from there. 
-I recommend copying an existing npc class as a "template" of sorts to help set up and design the npc.
+This is simple -- create a new class in the `NPCs` package, subclass the `NPC` class, and then just implement desired logic from there.
+I recommend copying an existing NPC class as a "template" of sorts to help set up and design the NPC.
 
 ## Adding an NPC to a map
 
-In a map subclass's `loadNPCs` method, NPCs can be defined and added to the map's NPC list. For example, in `TestMap`,
-a `Walrus` class instance is created added to the NPC list:
+In a map subclass's `loadNPCs` method, NPCs can be defined and added to the map's NPC list. 
+For example, in `TestMap`, a `Walrus` class instance is created added to the NPC list:
 
 ```java
 @Override
 public ArrayList<NPC> loadNPCs() {
     ArrayList<NPC> npcs = new ArrayList<>();
 
-    Walrus walrus = new Walrus(getMapTile(30, 10).getLocation().subtractY(13));
+    Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
+    walrus.setInteractScript(new WalrusScript());
     npcs.add(walrus);
-
-    return npcs;
+    
+    // ...
 }
 ```
 
@@ -65,47 +67,49 @@ public ArrayList<NPC> loadNPCs() {
 ![walrus.png](../../../assets/images/walrus.png)
 
 This NPC is defined by the `Walrus` class. 
-In addition being the best made piece of art you have ever laid your eyes on, the walrus is able to be talked to when the player is in range of its "bounds" and presses space. 
-Upon doing so, the `Walrus` class will draw a box with text inside to the screen:
+In addition to being the best made piece of art you have ever laid your eyes on,
+the walrus is able to be interacted with. 
+Its `interactScript` is defined in the `WalrusScript` class (located in the `Scripts.TestMap` package).
+Read more about scripts [here](./scripts.md).
 
-![walrus-talking.png](../../../assets/images/walrus-talking.png)
-
-The `Walrus` class puts the message "Hello!" into the textbox and positions it appropriately in order to display the textbox with the message inside of it when talked to.
+The walrus doesn't do much except wait around to be talked to.
 
 The image file for the walrus is `Walrus.png`.
 
-## Textbox
+### Dinosaur
 
-All NPCs come with a `Textbox` attribute, which can be optionally used to display a textbox when the NPC is talked to.
+![dinosaur.png](../../../assets/images/dinosaur.png)
 
-The `Walrus` NPC sets up its textbox in its constructor like so:
+This NPC is defined by the `Dinosaur` class. 
+Like the walrus, it doesn't do much other than wait for the player to interact with it.
+Its `interactScript` is defined in the `DinoScript` class (located in the `Scripts.TestMap` package).
+The `DinoScript` is the most complex script in the game. 
+Understanding it is the key to mastering the scripting system and being create to do whatever you want in this game. 
+Read more about scripts [here](./scripts.md).
 
-```java
-talkedToTime = 200;
-textbox.setText("Hello!");
-textboxOffsetX = -4;
-textboxOffsetY = -34;
-```
+The dinosaur also has a walking animation, which is used during its `DinoScript` to force it to walk to a certain location.
 
-The `talkedToTime` is how many frames the textbox will stay up for.
-Setting `talkedToTime` to a negative number will cause it to last indefinitely.
+![dinosaur-walk.gif](../../../assets/images/dinosaur-walk.gif)
 
-The `setText` method adds text to be displayed in the textbox.
-Text can be displayed on separate lines by using new line characters `\n`.
+## NPC Id
 
-The `textboxOffsetX` and `textboxOffsetY` textbox properties tell the textbox where to position itself relative to the NPC's location.
-The above code is telling the textbox to position itself 4 pixels to the left and 34 pixels upwards from the Walrus's location.
-This positioning often takes some testing and tweaking to get it to be in the right spot.
+The constructor for an `NPC` class instance requires an `id` value. 
+This should be a unique number for each NPC in as map.
+This allows NPCs to be identifiable, which is useful in situations where you would want to move an NPC on the map in a script, even if you aren't interacting with them. 
+`TestMap` simply uses an id value of 0 for the walrus and 1 for the dinosaur, and if more NPCs were to be added, it would just increment from there.
 
-The textbox has a ton of additional customization options:
+## NPC Methods
 
-`setTextColor` -- sets color of text
-`setFontSize` -- sets font size for text, such as "size 12"
-`setFontStyle` -- sets font style for text, such as `Font.PLAIN` for no style, `Font.BOLD` for bolded font, etc.,
-`setFontName` -- sets font family for text, such as `"Times New Roman`, `Arial`, etc.
-`setFillColor` -- sets color of textbox
-`setBorderColor` -- sets color of textbox border
-`setBorderThickness` -- sets how thick textbox border is
-`setVPadding` -- sets how much whitespace there is between the box and the text in the box vertically
-`setHPadding` -- sets how much whitespace there is between the box and the text in the box horizontally
-`gap` -- if text has new line characters in it (`\n`), this sets how much space should be between each line; has no effect if text has no new line characters in it.
+The `NPC` class defines several methods that are meant to be used in scripts to force the NPC to perform a specific behavior.
+These are `facePlayer`, `stand`, and `walk`.
+
+Calling an NPC's `facePlayer` method will cause them to set their direction to "face" the player.
+This is nice to use in an NPC's `interactScript` for immersion purposes, as it looks a lot better if the NPC being interacted with turns and faces the player.
+
+The `stand` method changes the NPC's animation to STAND_LEFT or STAND_RIGHT. The NPC must have those animations defined in order to use this method.
+
+The `walk` method moves the NPC in a specified direction and at a specified speed. It will also change the NPC's animation to the appropriate walking animation (WALK_LEFT or WALK_RIGHT)
+based on which direction they were told to walk in and which direction they are facing. 
+The NPC must have those animations defined in order to use this method.
+
+These methods are very useful in scripts, but manipulating an NPC can be done outside of these methods as well if some special logic is necessary. 

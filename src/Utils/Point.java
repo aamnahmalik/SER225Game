@@ -34,7 +34,5 @@ public class Point {
         return new Point(this.x, this.y - y);
     }
 
-    public String toString() {
-        return String.format("(%s, %s)", x, y);
-    }
+    public String toString() { return String.format("(%s, %s)", this.x, this.y); }
 }

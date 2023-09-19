@@ -31,16 +31,16 @@ The constructor for the `Map` class has two parameters defined:
 From there, the map does several setup steps to get all of its resources in order and ready to go for the game:
 1. Read in map file (read more about the map file [here](./map-file.md)) 
 1. Create map tiles and place them in the appropriate locations (process detailed [here](./map-tiles-and-tilesets.md))
-1. Setup enemies (read more about enemies [here](./enemies.md))
 1. Setup enhanced map tiles (read more about enhanced map tiles [here](./enhanced-map-tiles.md))
 1. Setup NPCs (read more about NPCs [here](./npcs.md))
+1. Setup triggers (read more about Triggers [here](./triggers.md))
 1. Setup camera which handles which area of the map are shown on the screen at any given time (read more about the camera [here](./map-camera.md))
 
 ## Map Class Methods
 
 The `Map` class has a lot of methods, but most of them are very simple, and many of them are just getters.
 Nearly all of these methods will be covered in the other setup pages linked above, as most are directly involved with the setup step. 
-The methods `loadEnemies`, `loadNPCs`, and `loadEnhancedMapTiles` are all intended to be overridden by a subclass of the `Map` class.
+The methods `loadNPCs`, `loadEnhancedMapTiles`, `loadTriggers`, and `loadScripts` are all intended to be overridden by a subclass of the `Map` class.
 
 The `update` method is very small, as the `Camera` class does most of the work updating the map,
 however there are two very important methods it does call itself: `adjustMovementX` and `adjustMovementY`. 
@@ -68,25 +68,29 @@ public TestMap() {
 
 It also sets the `playerStartLocation` variable to a specific location, which is what tells the game where to start the player at in the map when it's first loaded.
 
-Each map subclass can also override the `loadEnemies`, `loadNPCs`, and `loadEnhancedMapTiles` methods in order to define
-[enemies](./enemies.md), [NPCs](./npcs.md), and [enhanced map tiles](./enhanced-map-tiles.md) for a map.
+Each map subclass can also override the `loadNPCs`, `loadEnhancedMapTiles`, `loadTriggers`, and `loadScripts` methods in order to define
+[NPCs](./npcs.md), [enhanced map tiles](./enhanced-map-tiles.md), [triggers](./triggers.md) and [scripts](./scripts.md) for a map.
 
-For example, in `TestMap`, the `loadEnemies` override method looks like this:
+For example, in `TestMap`, the `loadNPCs` override method looks like this:
 
 ```java
 @Override
-public ArrayList<Enemy> loadEnemies() {
-    ArrayList<Enemy> enemies = new ArrayList<>();
+public ArrayList<NPC> loadNPCs() {
+    ArrayList<NPC> npcs = new ArrayList<>();
 
-    BugEnemy bugEnemy = new BugEnemy(getMapTile(16, 10).getLocation().subtractY(25), Direction.LEFT);
-    enemies.add(bugEnemy);
+    Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
+    walrus.setInteractScript(new WalrusScript());
+    npcs.add(walrus);
 
-    DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19, 1).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2), Direction.RIGHT);
-    enemies.add(dinosaurEnemy);
+    Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
+    dinosaur.setExistenceFlag("hasTalkedToDinosaur");
+    dinosaur.setInteractScript(new DinoScript());
+    npcs.add(dinosaur);
 
-    return enemies;
+    return npcs;
 }
 ```
 
-This adds two enemies to the map -- the [bug](./enemies.md#Bug-Enemy) (`BugEnemy` class) and the [dinosaur](./enemies.md#Dinosaur-Enemy) (`DinosaurEnemy` class).
+This adds two NPCs to the map -- the [walrus](./npcs.md#walrus) (`Walrus` class) and the [dinosaur](./npcs.md#dinosaur) (`Dinosaur` class).
 The `getMapTile` `Map` method is used to make it easier to place the NPC on a specific tile index in the map by getting the tile at that index's location. 
+The other setters, like `setExistenceFlag` and `setInteractScript` are map entity attributes that can be used to make the NPCs behave a specific way, and are covered in more detail in both the [scripts](./scripts.md) and [NPCs](./npcs.md) pages.

@@ -31,7 +31,7 @@ For example, take a look at the below screenshot of a piece of a level:
 This image is actually made up of individual tiles, such as the grass tile and the sign tile:
 
 ![grass-tile.png](../../../assets/images/grass-tile.png)
-![sky-tile.png](../../../assets/images/sky-tile.png)
+![sign-tile.png](../../../assets/images/sign-tile.png)
 
 So the image seen above of the grass, sign, cobblestone and house is actually composed together by smaller individual tiles, which is known as a tile map:
 
@@ -98,7 +98,7 @@ public ArrayList<MapTileBuilder> defineTiles() {
             .build();
 
     MapTileBuilder grassTile = new MapTileBuilder(grassFrame)
-            .withTileType(TileType.NOT_PASSABLE);
+            .withTileType(TileType.PASSABLE);
 
     mapTiles.add(grassTile);
 
@@ -117,16 +117,16 @@ In the constructor, `getSubImage(0, 0)` takes a piece of the tileset image (`Com
 Since `CommonTileset` defines the tile width and tile height as 16x16, the `getSubImage` method will start at location (0, 0) on the image and then take 16 pixels in both directions and return the resulting subimage, which is how the individual grass tile graphic gets returned.
 
 Then, a `MapTileBuilder` class instance must be created to represent the actual `MapTile` (although it won't instantiate the `MapTile` at this time).
-Here is where the grass tile (`grassTile`) is given the `TileType` `NOT_PASSABLE`, meaning the player cannot walk or fall through it (it is "solid").
+Here is where the grass tile (`grassTile`) is given the `TileType` `PASSABLE`, meaning the player can walk over it.
 
 Finally, the tile is added to the `mapTiles` list.
 
-Let's do one for the sky tile now:
+Let's do one for the sign tile now:
 
-![sky-tile.png](../../../assets/images/sky-tile.png)
+![sign-tile.png](../../../assets/images/sign-tile.png)
 
-In the `CommmonTileset.png` image shown earlier, the sky tile is located to the left of the grass tile at index (0, 1).
-With that slight difference in mind, nearly everything else will be the same for the sky tile as the grass tile:
+In the `CommmonTileset.png` image shown earlier, the sign tile is located a couple rows down from the grass tile at index (3, 0).
+With that slight difference in mind, nearly everything else will be the same for the sign tile as the grass tile:
 
 ```java
 @Override
@@ -145,14 +145,15 @@ public ArrayList<MapTileBuilder> defineTiles() {
 
     return mapTiles;
 
-    // sky
-    Frame skyFrame = new FrameBuilder(getSubImage(0, 1))
+    // sign
+    Frame signFrame = new FrameBuilder(getSubImage(3, 0))
             .withScale(tileScale)
             .build();
 
-    MapTileBuilder skyTile = new MapTileBuilder(skyFrame)
+    MapTileBuilder signTile = new MapTileBuilder(signFrame)
+            .withTileType(TileType.NOT_PASSABLE);
 
-    mapTiles.add(skyTile);
+    mapTiles.add(signTile);
 
     // ...
 
@@ -161,9 +162,8 @@ public ArrayList<MapTileBuilder> defineTiles() {
 }
 ```
 
-Unlike with the grass tile, the sky tile is not "solid" and can be passed through by the player, 
-To achieve this, its `TileType` needs to be set to `PASSABLE`. 
-This is the default tile type, so it does not need to be specified, but it can be by adding `.withTileType(TileType.PASSABLE)`.
+Unlike with the grass tile, the sign tile is "solid", and the player shouldn't be able to walk over it.
+To achieve this, its `TileType` needs to be set to `NOT_PASSABLE`.
 
 ### Adding an animated map tile to a tileset
 
@@ -221,132 +221,39 @@ If the delay is set to -1, the animation will never move on from a frame without
 
 The available tile types are defined in the `TileType` enum, and include:
 
-- **NOT_PASSABLE** -- player cannot pass through it, they are "solid", such as the grass tiles
-- **PASSABLE** -- player can pass through it, such as the sky tiles
-- **JUMP_THROUGH_PLATFORM** -- the player can walk on top of it and cannot pass through it when coming downwards from above, but can pass through it when coming upwards from below, such as the tree branch tiles
-- **WATER** -- the player can pass through it; this tile type is just for informational purposes so an entity can react to touching it (which the player does by changing to its swim animation)
-- **SLOPE** -- the tile is a slope (incline) that the player can walk up or down; read more about slopes [here](#slope-tiles).
+- **NOT_PASSABLE** -- player cannot walk over it, they are "solid", such as the rock tiles
+- **PASSABLE** -- player can walk over it, such as grass tiles
 
-## Slope Tiles
+### Tile Layers
 
-A staple of the platformer drama, slope tiles (inclines) allow more creating more dynamic and interesting levels.
-Believe it or not, implementing slopes in a 2D space is rather complex, and is probably one of the most logic-heavy features in this entire project.
+Each map tile supports two "layers" -- a bottom layer (required) and a top layer (optional).
+Tile layering has two benefits. 
+The first is that tile images can be reused, as the top layer will be "pasted" on top of the bottom layer.
+The second is that the top layer of a map tile will be drawn after the player, meaning it will cover the player.
+You can see in the below gif that the tree tops use a top layer, which is why the player is covered by them when it makes its way to those tiles.
 
-![walking-on-slopes.gif](../../../assets/images/walking-on-slopes.gif)
+![map-tile-layer-example.gif](../../../assets/images/map-tile-layer-example.gif)
 
-### How slope tiles work
+This layered system gives off the illusion that the player is behind the tile and gives the game some more artistic depth, and is a common tactic video games of this style use. 
 
-The entire game is based around rectangles -- all collisions use rectangle math, all map tiles are a tiny rectangle, the player is represented as a rectangle, etc.
-Slopes, on the other hand, are clearly not able to be represented as pure rectangles due to their shape/properties.
-As a result, an entirely new collision system needed to be implemented to allow slopes to work correctly.
-
-For example, look at the below slope tile:
-
-![slope-tile.png](../../../assets/images/slope-tile.png)
-
-As the player walks forward (left or right) while on the ground, they are expected to follow the incline.
-
-![walking-on-45-left-slope.gif](../../../assets/images/walking-on-45-left-slope.gif)
-
-This is clearly not something that can be achieved with simple rectangle math alone.
-
-Internally, each slope tile has a `tileLayout` property (represented by the `TileLayout` class), which has a 2D array property that represents each pixel of the slope tile.
-The 2D array specifies which pixels of the slope are "passable" and while pixels of the slope are "not passable". 
-Below is an example of what a slope's 2D array could look like:
-
-```
-0 0 0 1
-0 0 1 1
-0 1 1 1
-1 1 1 1
-```
-
-Notice how the 1s (not passable) create a representation of the slope.
-In the `Utils` class `SlopeTileLayoutUtils`, there are methods for creating tile layouts of different angled slopes, with scale support.
-
-Slopes are also given a specified direction (left or right) based on which way the slope is facing.
-
-Putting this all together, defining the above 45 degree slope looks like this (as seen in the `CommonTileset` class):
+In the above examples for creating the grass and sign tiles, they only had a bottom layer. 
+A top layer must be explicitly specified.
+Both the bottom layer and top layer can be optionally animated as well.
+Below is the code used to create the tree tops that utilize a top layer being added to a map tile:
 
 ```java
-// left 45 degree slope
-Frame leftSlopeFrame = new FrameBuilder(getSubImage(3, 3))
+// tree top leaves
+Frame treeTopLeavesFrame = new FrameBuilder(getSubImage(1, 1))
         .withScale(tileScale)
         .build();
 
-MapTileBuilder leftSlopeTile = new MapTileBuilder(leftSlopeFrame)
-        .withTileType(TileType.SLOPE)
-        .withTileLayout(SlopeTileLayoutUtils.createLeft45SlopeLayout(spriteWidth, (int) tileScale));
+MapTileBuilder treeTopLeavesTile = new MapTileBuilder(grassFrame)
+        .withTopLayer(treeTopLeavesFrame)
+        .withTileType(TileType.PASSABLE);
+
+mapTiles.add(treeTopLeavesTile);
 ```
 
-From here, in order to make slopes work, the engine runs additional code is included during collision checks to determine if a slope tile was collided with.
-Essentially, slope tiles are initially treated by the regular collision engine as completely "passable".
-After an entity moves, if they are inside of a slope tile, they will then be repositioned based on the tile layout.
-The entity's current position inside the slope tile will be calculated against the tile layout, and if the entity is on a `1`, they will be pushed upwards until they are on a `0`.
-
-There is also some extra logic to allow for an entity to "stick" to a slope when walking down it, as well as ensure an entity doesn't fall through a slope.
-
-### Slope angles and layouts
-
-The engine supports slopes with different angles and layouts.
-Included already are slopes of a steady incline of both 45 degrees and 30 degrees, but any angle and layout should work.
-
-Swapping out existing tiles with the same slope layout will work fine.
-
-#### How to create a new slope angle or layout
-
-The key to creating a new slope angle or layout is to get the 2D array representation of the slope to properly represent it.
-This can be more challenging than it sounds at times, as tiles are scaled up by the engine, and a standard matrix scaling does not work with tile layouts.
-
-For example, say I have the following slope tile layout:
-
-```
-0 0 0 1
-0 0 1 1
-0 1 1 1
-1 1 1 1
-```
-
-If I were to scale this to be double in side and used regular matrix math, I would end up with the incorrect result of this:
-
-```
-0 0 0 0 1 1 1 1
-0 0 0 0 1 1 1 1
-0 0 1 1 1 1 1 1
-0 0 1 1 1 1 1 1
-1 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1
-```
-
-The issue here is that this type of scaling messes with the inclines actual angle/trajectory, which will cause the player to jump extra pixels and will create "choppy" movement.
-
-Instead, the tile layout should match the original incline while still being scaled, and should look something like this:
-
-```
-0 0 0 0 0 1 1 1
-0 0 0 0 1 1 1 1
-0 0 0 1 1 1 1 1
-0 0 1 1 1 1 1 1
-0 1 1 1 1 1 1 1
-1 1 1 1 1 1 1 1
-```
-
-This is where the `TileLayout` methods in the `SlopeTileLayoutUtils` come in.
-Their job is to properly create a tile layout and incorporate the desired scaling to esnure the layout comes out correctly.
-
-The methods may look a bit convoluted, but they are really just doing some standard 2D array manipulation to place 0s and 1s in the correct spot.
-I recommend creating one of these methods outside of this project to ensure the logic works and the layout looks as desired before putting it into the game, as it is must easier to test the logic without having to run the entire game every time.
-
-### Slope rules
-
-If an entity enters a slope from the bottom while grounded, they will be "lifted" to the next available `0` space in the tile layout upwards from where they currently are in the tile.
-This means that even if the next `0` space is ten pixels up, the entity will be "teleported" there.
-
-If an entity enters the top of a slope while grounded, logic will "stick" them to the slope in order to keep them grounded and walking downwards.
-
-There is special logic in place to allow an entity to stand on the tip of a slope, as well as allow an entity to be between two slopes at once.
-
-**Warning**: Only a slope's incline is factored into collisions.
-This means that the other areas of the slope are considered "passable" and will teleport an entity weirdly if walked through.
-It is preferred to ensure a slope either naturally transitions into another slope, or into a solid block.
-If a standalone slope is required, a technique is to create an additional map tile that has one pixel thick bounds that can be used to cover the exposed non-incline sides.
+The bottom layer is just a grass tile, while the top layer is the tree top tile. 
+The tile is also set to passable, so the player is able to walk on it.
+The bottom layer will be covered by the player (the grass), while the top layer covers the player (the tree tops).

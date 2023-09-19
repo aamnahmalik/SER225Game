@@ -1,4 +1,4 @@
-# SER225 Platformer Game
+# SER225 RPG Game
 
 ## What is this?
 This is a game created for Quinnipiac's SER225 Agile Development class.
@@ -14,7 +14,7 @@ The main method for the map editor is in the `MapEditor` package > `MapEditor.ja
 
 ## Documentation
 This project includes a GitHub pages website in the `docs` folder where the documentation resides.<br>
-It can be accessed at [https://a-r-t.github.io/SER-225-Game-Platformer/](https://a-r-t.github.io/SER-225-Game-Platformer/).
+It can be accessed at [https://a-r-t.github.io/SER-225-Game-RPG/](https://a-r-t.github.io/SER-225-Game-RPG/).
 
 Changes to content in the `docs` folder will not show up on the website unless they are pushed to the `master` branch.
 

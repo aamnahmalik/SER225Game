@@ -45,13 +45,13 @@ public class AnimatedSprite implements IntersectableRectangle {
 		updateCurrentFrame();
 	}
 
-	public AnimatedSprite(float x, float y, HashMap<String, Frame[]> animations, String startingAnimationName) {
-		this.x = x;
-		this.y = y;
-		this.animations = animations;
-		this.currentAnimationName = startingAnimationName;
-		updateCurrentFrame();
-	}
+    public AnimatedSprite(float x, float y, HashMap<String, Frame[]> animations, String startingAnimationName) {
+        this.x = x;
+        this.y = y;
+        this.animations = animations;
+        this.currentAnimationName = startingAnimationName;
+        updateCurrentFrame();
+    }
 
 	public AnimatedSprite(float x, float y, Frame[] frames) {
 		this.x = x;
@@ -63,9 +63,9 @@ public class AnimatedSprite implements IntersectableRectangle {
 		updateCurrentFrame();
 	}
 
-	public AnimatedSprite(float x, float y, Frame frame) {
-		this.x = x;
-		this.y = y;
+    public AnimatedSprite(float x, float y, Frame frame) {
+        this.x = x;
+        this.y = y;
 		this.animations = new HashMap<String, Frame[]>() {{
 			put("DEFAULT", new Frame[] { frame });
 		}};
@@ -85,7 +85,7 @@ public class AnimatedSprite implements IntersectableRectangle {
 			if (getCurrentAnimation().length > 1 && currentFrame.getDelay() > 0) {
 				frameDelayCounter--;
 
-				// if enough frames have passed based on current frame's delay and it's time to transition to a new frame,
+				// if enough time has passed based on current frame's delay and it's time to transition to a new frame,
 				// update frame index to the next frame
 				// It will also wrap around back to the first frame index if it was already on the last frame index (the animation will loop)
 				if (frameDelayCounter == 0) {
@@ -107,6 +107,8 @@ public class AnimatedSprite implements IntersectableRectangle {
 	    return null;
     }
 
+    public HashMap<String, Frame[]> getAnimations() { return this.animations; }
+
     // currentFrame is essentially a sprite, so each game loop cycle
 	// the sprite needs to have its current state updated based on animation logic,
 	// and location updated to match any changes to the animated sprite class
@@ -122,7 +124,7 @@ public class AnimatedSprite implements IntersectableRectangle {
 	}
 
 	// gets the animation that the animated sprite class is currently using
-	protected Frame[] getCurrentAnimation() { return animations.get(currentAnimationName); }
+	public Frame[] getCurrentAnimation() { return animations.get(currentAnimationName); }
 
 	public String getCurrentAnimationName() { return this.currentAnimationName; }
 	public int getCurrentFrameIndex() { return this.currentFrameIndex; }
@@ -203,17 +205,17 @@ public class AnimatedSprite implements IntersectableRectangle {
 		currentFrame.setScale(scale);
 	}
 
-	public int getWidth() {
-		return currentFrame.getWidth();
-	}
-	public int getHeight() {
-		return currentFrame.getHeight();
-	}
 	public void setWidth(int width) {
 		currentFrame.setWidth(width);
 	}
 	public void setHeight(int height) {
 		currentFrame.setHeight(height);
+	}
+	public int getWidth() {
+		return currentFrame.getWidth();
+	}
+	public int getHeight() {
+		return currentFrame.getHeight();
 	}
 
 	public Rectangle getBounds() {
@@ -250,6 +252,8 @@ public class AnimatedSprite implements IntersectableRectangle {
     }
 
 	public boolean overlaps(IntersectableRectangle other) { return currentFrame.overlaps(other); }
+
+	public float getAreaOverlapped(IntersectableRectangle other) { return currentFrame.getAreaOverlapped(other); }
 
 	@Override
 	public String toString() {

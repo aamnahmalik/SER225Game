@@ -26,7 +26,7 @@ This makes the class quick and easy to use without requiring a massive amount of
 In this game, the `GameObject` class is subclassed by every map entity, which includes:
 - [Player](./player.md) 
 - [NPCs](./MapSubSections/npcs.md)
-- [Enemies](./MapSubSections/enemies.md)
+- [Triggers](./MapSubSections/triggers.md)
 - [Map Tiles](/GameDetails/Map/MapTilesAndTilesets) 
 - [Enhanced Map Tiles](./MapSubSections/enhanced-map-tiles.md)
 

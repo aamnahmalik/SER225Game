@@ -29,7 +29,7 @@ You can only do as much as you can, and coding is really hard, so my biggest pie
 
 Start by playing around with the code and changing minor things. 
 Running the game and seeing your changes in action will help you identify and confirm where different pieces of game logic is located. 
-Maybe head over to the `Cat` class and change its `jumpHeight` instance variable, or play around in the map editor. 
+Maybe head over to the `Cat` class and change its `walkSpeed` instance variable, or play around in the map editor. 
 Just get a feel for the project and what you're going to be working with. 
 Also, don't be afraid to consult your peers, search with google, or use this site to get answers to your questions.
 

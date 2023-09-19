@@ -28,11 +28,11 @@ public class MenuBar extends JMenuBar {
             }
         });
         options.add(showEnchancedMapTiles);
-        showTriggers = new JCheckBoxMenuItem("Show Enemies");
+        showTriggers = new JCheckBoxMenuItem("Show Triggers");
         showTriggers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tileBuilder.setShowEnemies(!tileBuilder.getShowEnemies());
+                tileBuilder.setShowTriggers(!tileBuilder.getShowTriggers());
             }
         });
         options.add(showTriggers);

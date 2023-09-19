@@ -2,7 +2,6 @@ package Utils;
 
 // Class for some useful print methods to make debugging easier (and prevent me from having to type the same stuff out over and over again)
 public class PrintUtils {
-
     public static void printArray(int[] array) {
         for (int i = 0; i < array.length; i++) {
             System.out.print(array[i] + " ");

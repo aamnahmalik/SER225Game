@@ -1,15 +1,18 @@
 package Maps;
 
-import Enemies.BugEnemy;
-import Enemies.DinosaurEnemy;
-import Engine.ImageLoader;
-import EnhancedMapTiles.EndLevelBox;
-import EnhancedMapTiles.HorizontalMovingPlatform;
-import GameObject.Rectangle;
-import Level.*;
+import EnhancedMapTiles.PushableRock;
+import Level.EnhancedMapTile;
+import Level.Map;
+import Level.NPC;
+import Level.Trigger;
+import NPCs.Dinosaur;
 import NPCs.Walrus;
+import Scripts.SimpleTextScript;
+import Scripts.TestMap.DinoScript;
+import Scripts.TestMap.LostBallScript;
+import Scripts.TestMap.TreeScript;
+import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
-import Utils.Direction;
 
 import java.util.ArrayList;
 
@@ -18,39 +21,15 @@ public class TestMap extends Map {
 
     public TestMap() {
         super("test_map.txt", new CommonTileset());
-        this.playerStartPosition = getMapTile(2, 11).getLocation();
-    }
-
-    @Override
-    public ArrayList<Enemy> loadEnemies() {
-        ArrayList<Enemy> enemies = new ArrayList<>();
-
-        BugEnemy bugEnemy = new BugEnemy(getMapTile(16, 10).getLocation().subtractY(25), Direction.LEFT);
-        enemies.add(bugEnemy);
-
-        DinosaurEnemy dinosaurEnemy = new DinosaurEnemy(getMapTile(19, 1).getLocation().addY(2), getMapTile(22, 1).getLocation().addY(2), Direction.RIGHT);
-        enemies.add(dinosaurEnemy);
-
-        return enemies;
+        this.playerStartPosition = getMapTile(17, 20).getLocation();
     }
 
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        HorizontalMovingPlatform hmp = new HorizontalMovingPlatform(
-                ImageLoader.load("GreenPlatform.png"),
-                getMapTile(24, 6).getLocation(),
-                getMapTile(27, 6).getLocation(),
-                TileType.JUMP_THROUGH_PLATFORM,
-                3,
-                new Rectangle(0, 6,16,4),
-                Direction.RIGHT
-        );
-        enhancedMapTiles.add(hmp);
-
-        EndLevelBox endLevelBox = new EndLevelBox(getMapTile(32, 7).getLocation());
-        enhancedMapTiles.add(endLevelBox);
+        PushableRock pushableRock = new PushableRock(getMapTile(2, 7).getLocation());
+        enhancedMapTiles.add(pushableRock);
 
         return enhancedMapTiles;
     }
@@ -59,9 +38,36 @@ public class TestMap extends Map {
     public ArrayList<NPC> loadNPCs() {
         ArrayList<NPC> npcs = new ArrayList<>();
 
-        Walrus walrus = new Walrus(getMapTile(30, 10).getLocation().subtractY(13));
+        Walrus walrus = new Walrus(1, getMapTile(4, 28).getLocation().subtractY(40));
+        walrus.setInteractScript(new WalrusScript());
         npcs.add(walrus);
+
+        Dinosaur dinosaur = new Dinosaur(2, getMapTile(13, 4).getLocation());
+        dinosaur.setExistenceFlag("hasTalkedToDinosaur");
+        dinosaur.setInteractScript(new DinoScript());
+        npcs.add(dinosaur);
 
         return npcs;
     }
+
+    @Override
+    public ArrayList<Trigger> loadTriggers() {
+        ArrayList<Trigger> triggers = new ArrayList<>();
+        triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
+        return triggers;
+    }
+
+    @Override
+    public void loadScripts() {
+        getMapTile(21, 19).setInteractScript(new SimpleTextScript("Cat's house"));
+
+        getMapTile(7, 26).setInteractScript(new SimpleTextScript("Walrus's house"));
+
+        getMapTile(20, 4).setInteractScript(new SimpleTextScript("Dino's house"));
+
+        getMapTile(2, 6).setInteractScript(new TreeScript());
+    }
 }
+

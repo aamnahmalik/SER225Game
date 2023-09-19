@@ -87,7 +87,7 @@ public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
         put("STAND_RIGHT", new Frame[] {
                 new FrameBuilder(spriteSheet.getSprite(0, 0))
                         .withScale(3)
-                        .withBounds(8, 9, 8, 9)
+                        .withBounds(6, 12, 12, 7)
                         .build()
         });
     
@@ -96,7 +96,7 @@ public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
                 new FrameBuilder(spriteSheet.getSprite(0, 0))
                         .withScale(3)
                         .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
-                        .withBounds(8, 9, 8, 9)
+                        .withBounds(6, 12, 12, 7)
                         .build()
         });
     }};
@@ -130,19 +130,19 @@ public HashMap<String, Frame[]> loadAnimations(SpriteSheet spriteSheet) {
         put("WALK_RIGHT", new Frame[] {
             new FrameBuilder(spriteSheet.getSprite(1, 0), 14)
                     .withScale(3)
-                    .withBounds(8, 9, 8, 9)
+                    .withBounds(6, 12, 12, 7)
                     .build(),
             new FrameBuilder(spriteSheet.getSprite(1, 1), 14)
                     .withScale(3)
-                    .withBounds(8, 9, 8, 9)
+                    .withBounds(6, 12, 12, 7)
                     .build(),
             new FrameBuilder(spriteSheet.getSprite(1, 2), 14)
                     .withScale(3)
-                    .withBounds(8, 9, 8, 9)
+                    .withBounds(6, 12, 12, 7)
                     .build(),
             new FrameBuilder(spriteSheet.getSprite(1, 3), 14)
                     .withScale(3)
-                    .withBounds(8, 9, 8, 9)
+                    .withBounds(6, 12, 12, 7)
                     .build()
         });
 
@@ -181,7 +181,7 @@ For example, in the `Player` class's `update` logic for when the player is stand
 // ...
 
 // if walk left, right, up, or down key is pressed, player enters WALKING state
-if (Keyboard.isKeyDown(MOVE_LEFT_KEY) || Keyboard.isKeyDown(MOVE_RIGHT_KEY)) {
+if (Keyboard.isKeyDown(MOVE_LEFT_KEY) || Keyboard.isKeyDown(MOVE_RIGHT_KEY) || Keyboard.isKeyDown(MOVE_UP_KEY) || Keyboard.isKeyDown(MOVE_DOWN_KEY)) {
     playerState = PlayerState.WALKING;
 }
 

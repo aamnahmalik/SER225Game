@@ -18,7 +18,7 @@ public class TileBuilder extends JPanel {
     private JLabel hoveredTileIndexLabel;
     private boolean showNPCs;
     private boolean showEnhancedMapTiles;
-    private boolean showEnemies;
+    private boolean showTriggers;
 
     public TileBuilder(SelectedTileIndexHolder controlPanelHolder, JLabel hoveredTileIndexLabel) {
         setBackground(Colors.MAGENTA);
@@ -86,9 +86,9 @@ public class TileBuilder extends JPanel {
             }
         }
 
-        if (showEnemies) {
-            for (Enemy enemy : map.getEnemies()) {
-                enemy.draw(graphicsHandler);
+        if (showTriggers) {
+            for (Trigger trigger : map.getTriggers()) {
+                trigger.draw(graphicsHandler, new Color(255, 0, 255, 100));
             }
         }
 
@@ -175,12 +175,12 @@ public class TileBuilder extends JPanel {
         repaint();
     }
 
-    public boolean getShowEnemies() {
-        return showEnemies;
+    public boolean getShowTriggers() {
+        return showTriggers;
     }
 
-    public void setShowEnemies(boolean showEnemies) {
-        this.showEnemies = showEnemies;
+    public void setShowTriggers(boolean showTriggers) {
+        this.showTriggers = showTriggers;
         repaint();
     }
 }

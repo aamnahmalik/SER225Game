@@ -25,10 +25,8 @@ public class GameLoop {
         return new Runnable() {
             @Override
             public void run() {
-                // FPS and UPS are tied together for engine simplicity
-                double targetTickRate = 1000000000 / (float) Config.TARGET_FPS;
-
                 long previousTime = System.nanoTime();
+                double targetTickRate = 1000000000 / (float) Config.TARGET_FPS;
                 double delta = 0;
                 int frames = 0;
                 double lastCycleTime = System.currentTimeMillis();
@@ -62,13 +60,14 @@ public class GameLoop {
         return new Runnable() {
             @Override
             public void run() {
-                // UPS and FPS are tied together for engine simplicity
-                final double TIME_BETWEEN_UPDATES = 1000000000 / (double)Config.TARGET_FPS;
-                final double TARGET_TIME_BETWEEN_RENDERS = 1000000000 / (double)Config.TARGET_FPS;
-
                 final int MAX_UPDATES_BEFORE_RENDER = 5;
                 double lastUpdateTime = System.nanoTime();
                 double lastRenderTime = System.nanoTime();
+
+                double tickRate = 1000000000 / (double) Config.TARGET_FPS;
+
+                final double TIME_BETWEEN_UPDATES = tickRate;
+                final double TARGET_TIME_BETWEEN_RENDERS = tickRate;
 
                 int lastSecondTime = (int)(lastUpdateTime / 1000000000);
 
@@ -81,7 +80,7 @@ public class GameLoop {
                     int updateCount = 0;
 
                     //Do as many game updates as we need to, potentially playing catchup.
-                    while(now - lastUpdateTime > TIME_BETWEEN_UPDATES && updateCount < MAX_UPDATES_BEFORE_RENDER) {
+                    while( now - lastUpdateTime > TIME_BETWEEN_UPDATES && updateCount < MAX_UPDATES_BEFORE_RENDER ) {
                         gamePanel.update();
                         lastUpdateTime += TIME_BETWEEN_UPDATES;
                         updateCount++;
@@ -104,7 +103,7 @@ public class GameLoop {
                     }
 
                     // Yield until it has been at least the target time between renders. This saves the CPU from hogging.
-                    while (now - lastRenderTime < TARGET_TIME_BETWEEN_RENDERS && now - lastUpdateTime < TIME_BETWEEN_UPDATES) {
+                    while ( now - lastRenderTime < TARGET_TIME_BETWEEN_RENDERS && now - lastUpdateTime < TIME_BETWEEN_UPDATES) {
                         Thread.yield();
 
                         // This stops the app from consuming a ton of CPU/using a ton of power.

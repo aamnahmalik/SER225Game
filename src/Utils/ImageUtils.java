@@ -36,18 +36,16 @@ public class ImageUtils {
 	public static BufferedImage resizeImage(BufferedImage image, int newWidth, int newHeight) {
 		BufferedImage resized = new BufferedImage(newWidth, newHeight, image.getType());
 		Graphics2D g = resized.createGraphics();
-		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g.drawImage(image, 0, 0, newWidth, newHeight, 0, 0, image.getWidth(),
-				image.getHeight(), null);
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g.drawImage(image, 0, 0, newWidth, newHeight, 0, 0, image.getWidth(), image.getHeight(), null);
 		g.dispose();
 		return resized;
 	}
 
 	public static BufferedImage createSolidImage(Color color) {
-		BufferedImage nothing = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
-		nothing = ImageUtils.transformColorToTransparency(nothing, color);
-		return nothing;
+		BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
+		image = ImageUtils.transformColorToTransparency(image, color);
+		return image;
 	}
 
 	public static BufferedImage createSolidImage(Color color, int width, int height) {
