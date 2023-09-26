@@ -22,7 +22,7 @@ public class PushableRock extends EnhancedMapTile {
     @Override
     public void update(Player player) {
         super.update(player);
-        if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING) {
+        if (player.overlaps(this) && player.getPlayerState() == PlayerState.WALKING || player.overlaps(this) && player.getPlayerState() == PlayerState.RUNNING) {
             if (player.getCurrentWalkingXDirection() == Direction.LEFT) {
                 if (canMoveLeft(player)) {
                     moveXHandleCollision(-1);

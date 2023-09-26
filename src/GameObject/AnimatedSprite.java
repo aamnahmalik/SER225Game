@@ -182,6 +182,17 @@ public class AnimatedSprite implements IntersectableRectangle {
 		currentFrame.moveLeft(dx);
 	}
 
+	public void RunRight(float dx) { 
+		this.x += dx;
+		currentFrame.RunRight(dx); 
+		}
+
+	public void RunLeft(float dx) { 
+		this.x += dx; 
+		currentFrame.RunLeft(dx); 
+	}
+	
+
 	public void moveY(float dy) {
 		this.y += dy;
 		currentFrame.moveY(dy);
@@ -195,6 +206,16 @@ public class AnimatedSprite implements IntersectableRectangle {
 	public void moveUp(float dy) {
 		this.y -= dy;
 		currentFrame.moveUp(dy);
+	}
+
+	public void runDown(float dy) { 
+		this.y += dy; 
+		currentFrame.runDown(dy);
+	}
+
+	public void runUp(float dy) { 
+		this.y += dy;
+		currentFrame.runUp(dy);
 	}
 
 	public float getScale() {

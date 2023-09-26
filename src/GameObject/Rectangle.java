@@ -79,6 +79,14 @@ public class Rectangle implements IntersectableRectangle {
 		this.x -= dx;
 	}
 
+	public void runLeft(float dx) { 
+		this.x = dx - 2;
+	}
+
+	public void runRight(float dx) {
+		this.x = dx + 2;
+	}
+
 	public float getY() {
 		return y;
 	}
@@ -105,6 +113,14 @@ public class Rectangle implements IntersectableRectangle {
 
 	public void moveUp(float dy) {
 		this.y -= dy;
+	}
+
+	public void runDown(float dy) { 
+		this.y = dy - 2;
+	}
+
+	public void runUp(float dy) {
+		this.y = dy + 2;
 	}
 
 	public Point getLocation() { return new Point(x, y); }

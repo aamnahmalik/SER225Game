@@ -37,4 +37,16 @@ public class Frame extends Sprite {
 	public Frame copy() {
 		return new Frame(image, imageEffect, scale, bounds, delay);
 	}
+
+    public void RunRight(float dx) {
+    }
+
+    public void RunLeft(float dx) {
+    }
+
+    public void runDown(float dy) {
+    }
+
+    public void runUp(float dy) {
+    }
 }
