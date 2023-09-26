@@ -94,7 +94,6 @@ public class GraphicsHandler {
 
         g.setColor(outlineColor);
         g.draw(textShape); // draw outline
-
         g.setColor(textColor);
         g.fill(textShape); // fill the shape
 
@@ -102,5 +101,11 @@ public class GraphicsHandler {
         g.setColor(originalColor);
         g.setStroke(originalStroke);
         g.setRenderingHints(originalHints);
+    }
+
+    public void setColor(Color black) {
+    }
+
+    public void fillRect(int i, int j, int k, int l) {
     }
 }
