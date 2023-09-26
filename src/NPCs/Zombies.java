@@ -7,7 +7,6 @@ import GameObject.Frame;
 import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.NPC;
-import Level.Player;
 import Utils.Point;
 
 import java.util.HashMap;
@@ -16,12 +15,7 @@ public class Zombies extends NPC
 {
     public Zombies(int id, Point location) 
     {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("zombie2.png"), 30, 35), "STAND_LEFT");
-    }
-
-    public void update(Player player) 
-    {
-        super.update(player);
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("zombie2.png"), 35, 50), "STAND_LEFT");
     }
 
     @Override
@@ -33,14 +27,14 @@ public class Zombies extends NPC
                 put("STAND_LEFT", new Frame[] 
                 {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(2)
+                            .withScale(1)
                             .withBounds(7, 13, 11, 7)
                             .build()
                 });
                 put("STAND_RIGHT", new Frame[] 
                 {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(2)
+                            .withScale(1)
                             .withBounds(7, 13, 11, 7)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                             .build()
