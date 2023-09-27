@@ -76,7 +76,15 @@ public class GameObject extends AnimatedSprite {
 		this.previousY = y;
 	}
 
-	public boolean isAffectedByTriggers() {
+	public GameObject(Utils.Point location, Frame frame) {
+		super(location.x, location.y, frame);
+		this.startPositionX = x;
+		this.startPositionY = y;
+		this.previousX = x;
+		this.previousY = y;
+    }
+
+    public boolean isAffectedByTriggers() {
 		return affectedByTriggers;
 	}
 

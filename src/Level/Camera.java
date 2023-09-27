@@ -2,6 +2,7 @@ package Level;
 
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
+import Game.Game;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 
@@ -26,6 +27,7 @@ public class Camera extends Rectangle {
     private ArrayList<EnhancedMapTile> activeEnhancedMapTiles = new ArrayList<>();
     private ArrayList<NPC> activeNPCs = new ArrayList<>();
     private ArrayList<Trigger> activeTriggers = new ArrayList<>();
+    private ArrayList<GameObject> activeGameObjects = new ArrayList<>();
 
     // determines how many tiles off screen an entity can be before it will be deemed inactive and not included in the update/draw cycles until it comes back in range
     private final int UPDATE_OFF_SCREEN_RANGE = 4;
@@ -65,6 +67,7 @@ public class Camera extends Rectangle {
     public void updateMapEntities(Player player) {
         activeEnhancedMapTiles = loadActiveEnhancedMapTiles();
         activeNPCs = loadActiveNPCs();
+        activeGameObjects = loadActiveGameObjects();
 
         for (EnhancedMapTile enhancedMapTile : activeEnhancedMapTiles) {
             enhancedMapTile.update(player);
@@ -130,6 +133,18 @@ public class Camera extends Rectangle {
             }
         }
         return activeNPCs;
+    }
+
+    private ArrayList<GameObject> loadActiveGameObjects()
+    {
+        ArrayList<GameObject> activeGameObjects = new ArrayList<>();
+        for (int i = map.getGameObjects().size() - 1; i >= 0; i--) 
+        {
+            GameObject gameObject = map.getGameObjects().get(i);
+
+            activeGameObjects.add(gameObject);
+        }
+        return activeGameObjects;
     }
 
     // determine which trigger map tiles are active (exist and are within range of the camera)

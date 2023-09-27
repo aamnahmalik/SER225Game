@@ -2,7 +2,11 @@ package Level;
 
 import Engine.Config;
 import Engine.GraphicsHandler;
+import Engine.ImageLoader;
 import Engine.ScreenManager;
+import Game.Game;
+import GameObject.Frame;
+import GameObject.GameObject;
 import GameObject.Rectangle;
 import Utils.Direction;
 import Utils.Point;
@@ -57,6 +61,7 @@ public abstract class Map {
     protected ArrayList<EnhancedMapTile> enhancedMapTiles;
     protected ArrayList<NPC> npcs;
     protected ArrayList<Trigger> triggers;
+    protected ArrayList<GameObject> gameObjects;
 
     protected Script activeInteractScript;
 
@@ -106,6 +111,12 @@ public abstract class Map {
         this.triggers = loadTriggers();
         for (Trigger trigger: this.triggers) {
             trigger.setMap(this);
+        }
+
+        this.gameObjects = loadGameObjects();
+        for (GameObject gameObject: this.gameObjects)
+        {
+            gameObject.setMap(this);
         }
 
         this.loadScripts();
@@ -287,6 +298,11 @@ public abstract class Map {
         return new ArrayList<>();
     }
 
+    protected ArrayList<GameObject> loadGameObjects()
+    {
+        return new ArrayList<>();
+    }
+
     public Camera getCamera() {
         return camera;
     }
@@ -298,6 +314,12 @@ public abstract class Map {
     public ArrayList<NPC> getNPCs() {
         return npcs;
     }
+
+    public ArrayList<GameObject> getGameObjects()
+    {
+        return gameObjects;
+    }
+
     public ArrayList<Trigger> getTriggers() { return triggers; }
 
     public ArrayList<MapTile> getAnimatedMapTiles() {

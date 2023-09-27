@@ -1,11 +1,15 @@
 package Maps;
 
 import EnhancedMapTiles.PushableRock;
+import Game.Game;
+import GameObject.Frame;
+import GameObject.GameObject;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
+import NPCs.FirstAidKit;
 import NPCs.Walrus;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
@@ -15,6 +19,8 @@ import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
+
+import Engine.ImageLoader;
 
 // Represents a test map to be used in a level
 public class TestMap extends Map {
@@ -46,6 +52,9 @@ public class TestMap extends Map {
         dinosaur.setExistenceFlag("hasTalkedToDinosaur");
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur);
+
+        FirstAidKit firstaidkit = new FirstAidKit(3, getMapTile(11, 17).getLocation());
+        npcs.add(firstaidkit);
 
         return npcs;
     }
