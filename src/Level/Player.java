@@ -14,6 +14,7 @@ public abstract class Player extends GameObject {
     // values that affect player movement
     // these should be set in a subclass
     protected float walkSpeed = 0;
+    protected float runSpeed = 4;
     protected int interactionRange = 5;
     protected Direction currentWalkingXDirection;
     protected Direction currentWalkingYDirection;
@@ -40,6 +41,11 @@ public abstract class Player extends GameObject {
     protected Key MOVE_UP_KEY = Key.UP;
     protected Key MOVE_DOWN_KEY = Key.DOWN;
     protected Key INTERACT_KEY = Key.SPACE;
+    protected Key RUN_LEFT_KEY = Key.A;
+    protected Key RUN_RIGHT_KEY = Key.D;
+    protected Key RUN_UP_KEY = Key.W; 
+    protected Key RUN_DOWN_KEY = Key.S; 
+
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
         super(spriteSheet, x, y, startingAnimationName);
@@ -86,6 +92,9 @@ public abstract class Player extends GameObject {
             case INTERACTING:
                 playerInteracting();
                 break;
+            case RUNNING: 
+                playerRunning();
+                break;
         }
     }
 
@@ -99,6 +108,11 @@ public abstract class Player extends GameObject {
         // if a walk key is pressed, player enters WALKING state
         if (Keyboard.isKeyDown(MOVE_LEFT_KEY) || Keyboard.isKeyDown(MOVE_RIGHT_KEY) || Keyboard.isKeyDown(MOVE_UP_KEY) || Keyboard.isKeyDown(MOVE_DOWN_KEY)) {
             playerState = PlayerState.WALKING;
+        }
+
+        // uf a run key is pressed, player enters RUNNING state 
+        if (Keyboard.isKeyDown(RUN_LEFT_KEY) || Keyboard.isKeyDown(RUN_RIGHT_KEY) || Keyboard.isKeyDown(RUN_UP_KEY) || Keyboard.isKeyDown(RUN_DOWN_KEY)) { 
+            playerState = PlayerState.RUNNING;
         }
     }
 
@@ -155,6 +169,59 @@ public abstract class Player extends GameObject {
         }
     }
 
+    //player RUNNING staet logic 
+    protected void playerRunning() {
+        if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
+            keyLocker.lockKey(INTERACT_KEY);
+            map.entityInteract(this);
+        }
+
+        // if run left key is pressed, run player to the left
+        if (Keyboard.isKeyDown(RUN_LEFT_KEY)) {
+            moveAmountX -= runSpeed;
+            facingDirection = Direction.LEFT;
+            currentWalkingXDirection = Direction.LEFT;
+            lastWalkingXDirection = Direction.LEFT;
+        }
+
+        // if run right key is pressed, run player to the right
+        else if (Keyboard.isKeyDown(RUN_RIGHT_KEY)) {
+            moveAmountX += runSpeed;
+            facingDirection = Direction.RIGHT;
+            currentWalkingXDirection = Direction.RIGHT;
+            lastWalkingXDirection = Direction.RIGHT;
+        }
+        else {
+            currentWalkingXDirection = Direction.NONE;
+        }
+
+        if (Keyboard.isKeyDown(RUN_UP_KEY)) {
+            moveAmountY -= runSpeed;
+            currentWalkingYDirection = Direction.UP;
+            lastWalkingYDirection = Direction.UP;
+        }
+        else if (Keyboard.isKeyDown(RUN_DOWN_KEY)) {
+            moveAmountY += runSpeed;
+            currentWalkingYDirection = Direction.DOWN;
+            lastWalkingYDirection = Direction.DOWN;
+        }
+        else {
+            currentWalkingYDirection = Direction.NONE;
+        }
+
+        if ((currentWalkingXDirection == Direction.RIGHT || currentWalkingXDirection == Direction.LEFT) && currentWalkingYDirection == Direction.NONE) {
+            lastWalkingYDirection = Direction.NONE;
+        }
+
+        if ((currentWalkingYDirection == Direction.UP || currentWalkingYDirection == Direction.DOWN) && currentWalkingXDirection == Direction.NONE) {
+            lastWalkingXDirection = Direction.NONE;
+        }
+
+        if (Keyboard.isKeyUp(RUN_LEFT_KEY) && Keyboard.isKeyUp(RUN_RIGHT_KEY) && Keyboard.isKeyUp(RUN_UP_KEY) && Keyboard.isKeyUp(RUN_DOWN_KEY)) {
+            playerState = PlayerState.STANDING;
+        }
+    }
+
     // player INTERACTING state logic -- intentionally does nothing so player is locked in place while a script is running
     protected void playerInteracting() { }
 
@@ -178,6 +245,10 @@ public abstract class Player extends GameObject {
             // sets animation to STAND when player is interacting
             // player can be told to stand or walk during Script by using the "stand" and "walk" methods
             this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
+        }
+        else if (playerState == PlayerState.RUNNING) { 
+            //sets animation to a RUN animation based on which way player is facing
+            this.currentAnimationName = facingDirection == Direction.RIGHT ? "RUN_RIGHT" : "RUN_LEFT";
         }
     }
 
@@ -250,6 +321,36 @@ public abstract class Player extends GameObject {
             }
             else {
                 this.currentAnimationName = "WALK_LEFT";
+            }
+        }
+        if (direction == Direction.UP) {
+            moveY(-speed);
+        }
+        else if (direction == Direction.DOWN) {
+            moveY(speed);
+        }
+        else if (direction == Direction.LEFT) {
+            moveX(-speed);
+        }
+        else if (direction == Direction.RIGHT) {
+            moveX(speed);
+        }
+    }
+
+    public void run(Direction direction, float speed) { 
+        facingDirection = direction;
+        if (direction == Direction.RIGHT) {
+            this.currentAnimationName = "RUN_RIGHT";
+        }
+        else if (direction == Direction.LEFT) {
+            this.currentAnimationName = "RUN_LEFT";
+        }
+        else {
+            if (this.currentAnimationName.contains("RIGHT")) {
+                this.currentAnimationName = "RUN_RIGHT";
+            }
+            else {
+                this.currentAnimationName = "RUN_LEFT";
             }
         }
         if (direction == Direction.UP) {
