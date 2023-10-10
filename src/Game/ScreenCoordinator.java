@@ -39,7 +39,7 @@ public class ScreenCoordinator extends Screen {
 	public void update() {
 		do {
 			// if previousGameState does not equal gameState, it means there was a change in gameState
-			// this triggers ScreenCoordinator to bring up a new Screen based on what the gameState is
+			// this triggers ScreenCoordinator to bring up a new Screen based on what the gameState is.
 			if (previousGameState != gameState) {
 				switch(gameState) {
 					case MENU:
