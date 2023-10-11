@@ -4,9 +4,12 @@ import Engine.*;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
+import Level.Player;
 import Maps.TitleScreenMap;
 import Players.*;
+import Screens.PlayLevelScreen.PlayLevelScreenState;
 import SpriteFont.SpriteFont;
+
 
 import java.awt.*;
 
@@ -19,49 +22,50 @@ public class PlayerSelection extends Screen {
     protected SpriteFont creditsLabel;
     protected SpriteFont createdByLabel;
     protected SpriteFont returnInstructionsLabel;
-    private Blair blair;
-    private Chuck chuck;
+    private BlairCopy blair;
+    private ChuckCopy chuck;
     protected SpriteFont selectYourPlayer;
     protected SpriteFont pressEnter;
-    private boolean isChuckSelected = true; // Initially, Chuck is selected
+    private boolean isChuckSelected; 
     private SpriteFont chuckLabel;
     private SpriteFont blairLabel;
+    private PlayLevelScreen playLevelScreen;
 
-    public PlayerSelection(ScreenCoordinator screenCoordinator) {
-        this.screenCoordinator = screenCoordinator; 
-        this.blair = new Blair(495, 190);  
-        this.chuck = new Chuck(115,190);
+    public PlayerSelection(PlayLevelScreen playLevelScreen) {
+        this.playLevelScreen = playLevelScreen;
+        this.blair = new BlairCopy(490, 190);  
+        this.chuck = new ChuckCopy(115,190);
+        initialize();
     }
 
     @Override
     public void initialize() {
+        screenCoordinator = new ScreenCoordinator();
         selectYourPlayer = new SpriteFont("SELECT YOUR  PLAYER", 62 , 75, "ArcadeClassic", 75, Color.WHITE);
         pressEnter = new SpriteFont("PRESS  ENTER  WHEN  READY", 203 , 530, "ArcadeClassic", 35, Color.WHITE);
         chuckLabel = new SpriteFont("Chuck", 136, 400, "ArcadeClassic", 50, Color.WHITE);
         blairLabel = new SpriteFont("Blair", 520, 400, "ArcadeClassic", 50, Color.WHITE);
+    
     }
     
 
     @Override
     public void update() {
         if (Keyboard.isKeyDown(Key.RIGHT)) {
-            isChuckSelected = false;
-        }
-
-        if (Keyboard.isKeyDown(Key.LEFT)) {
+                isChuckSelected = false;
+        } 
+        else if (Keyboard.isKeyDown(Key.LEFT)) {
             isChuckSelected = true;
         }
-
         //Transition to another screen when Enter is pressed
         if (Keyboard.isKeyDown(Key.ENTER)) {
-            // Replace 'GameState.MENU' with the appropriate game state
-            // you want to transition to (e.g., the game itself).
-            screenCoordinator.setGameState(GameState.LEVEL);
+            playLevelScreen.setGameState(PlayLevelScreenState.RUNNING);
         }
     }
 
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
+
         // Draw a black background
         graphicsHandler.drawFilledRectangle( 0, 0, 800, 600, Color.BLACK);
         graphicsHandler.fillRect(0, 0, 600, 800);
@@ -86,5 +90,8 @@ public class PlayerSelection extends Screen {
         chuckLabel.draw(graphicsHandler);
         blairLabel.draw(graphicsHandler);
         
+    }
+    public boolean isChuckSelected() {
+        return isChuckSelected;
     }
 }
