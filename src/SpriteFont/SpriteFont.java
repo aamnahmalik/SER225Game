@@ -38,6 +38,10 @@ public class SpriteFont {
 		this.color = color;
 	}
 
+	public Color getColor() {
+		return this.color;
+	}
+
 	public String getText() {
 		return text;
 	}
