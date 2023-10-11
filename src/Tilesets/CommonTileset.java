@@ -284,9 +284,9 @@ public class CommonTileset extends Tileset {
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(doorTile);
-
+                
         // top water
-        Frame[] topWaterFrames = new Frame[] {
+        final Frame[] topWaterFrames = new Frame[] {
             new FrameBuilder(getSubImage(5, 0), 65)
                     .withScale(tileScale)
                     .build(),
@@ -313,10 +313,18 @@ public class CommonTileset extends Tileset {
                     .build()
         };
 
+
         MapTileBuilder topWaterTile = new MapTileBuilder(topWaterFrames)
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(topWaterTile);
+
+        // Frame checkListFrame = new FrameBuilder(getSubImage(6, 1))
+        //         .withScale(tileScale)
+        //         .build(); 
+        // MapTileBuilder checkListTile = new MapTileBuilder(checkListFrame)
+        //         .withTileType(TileType.NOT_PASSABLE);
+        // mapTiles.add(checkListTile);
 
 
         return mapTiles;

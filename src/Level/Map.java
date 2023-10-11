@@ -10,7 +10,7 @@ import GameObject.GameObject;
 import GameObject.Rectangle;
 import Utils.Direction;
 import Utils.Point;
-
+import Level.CheckList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -77,6 +77,8 @@ public abstract class Map {
     // map's textbox instance
     protected Textbox textbox;
 
+    protected CheckList checkList; 
+
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
@@ -123,6 +125,8 @@ public abstract class Map {
 
         this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
         this.textbox = new Textbox(this);
+
+        this.checkList = new CheckList(this);
     }
 
     // reads in a map file to create the map's tilemap
@@ -295,6 +299,10 @@ public abstract class Map {
     }
 
     protected ArrayList<Trigger> loadTriggers() {
+        return new ArrayList<>();
+    }
+
+    protected ArrayList<Trigger> loadTriggersTwo() { 
         return new ArrayList<>();
     }
 
@@ -500,7 +508,7 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.update();
         }
-    }
+        }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
     // adjust the player's and camera's positions accordingly in order to properly create the map "scrolling" effect
@@ -569,6 +577,12 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.draw(graphicsHandler);
         }
+        if(!checkList.isActive()){
+            checkList.setIsActive(true);
+        }
+        else{
+            checkList.draw(graphicsHandler);
+        }
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -581,4 +595,11 @@ public abstract class Map {
 
     public int getEndBoundX() { return endBoundX; }
     public int getEndBoundY() { return endBoundY; }
+
+    public void setCheckList (CheckList checkList){
+        this.checkList = checkList;
+    }
+    public CheckList getCheckList(){
+        return this.checkList;
+    }
 }

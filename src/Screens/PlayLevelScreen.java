@@ -30,6 +30,7 @@ public class PlayLevelScreen extends Screen {
         flagManager.addFlag("hasTalkedToWalrus", false);
         flagManager.addFlag("hasTalkedToDinosaur", false);
         flagManager.addFlag("hasFoundBall", false);
+        flagManager.addFlag("hasTalkedToSerena", false);
 
         // define/setup map
         this.map = new TestMap();
