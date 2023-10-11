@@ -1,7 +1,10 @@
 package Maps;
 
+import EnhancedMapTiles.FirstAidKit;
+import EnhancedMapTiles.Food;
 import EnhancedMapTiles.PushableRock;
-import EnhancedMapTiles.WaterCheckList;
+
+
 import Game.Game;
 import GameObject.Frame;
 import GameObject.GameObject;
@@ -10,7 +13,6 @@ import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
-import NPCs.FirstAidKit;
 import NPCs.Serena;
 import NPCs.Walrus;
 import NPCs.Zombies;
@@ -41,9 +43,6 @@ public class TestMap extends Map {
         PushableRock pushableRock = new PushableRock(getMapTile(2, 7).getLocation());
         enhancedMapTiles.add(pushableRock);
 
-        // WaterCheckList waterCheckList = new WaterCheckList (1, getMapTile(2, 7).getLocation());
-        // enhancedMapTiles.add(waterCheckList);
-
         return enhancedMapTiles;
     }
 
@@ -59,9 +58,6 @@ public class TestMap extends Map {
         dinosaur.setExistenceFlag("hasTalkedToDinosaur");
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur);
-
-        FirstAidKit firstaidkit = new FirstAidKit(3, getMapTile(11, 17).getLocation());
-        npcs.add(firstaidkit);
 
         Zombies zombie1 = new Zombies(3, getMapTile(12, 20).getLocation());
         npcs.add(zombie1);
