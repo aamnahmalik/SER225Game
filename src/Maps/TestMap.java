@@ -1,15 +1,20 @@
 package Maps;
 
+import EnhancedMapTiles.FirstAidKit;
+import EnhancedMapTiles.Food;
 import EnhancedMapTiles.PushableRock;
-import Game.Game;
-import GameObject.Frame;
-import GameObject.GameObject;
+import EnhancedMapTiles.Water;
+// import Game.Game;
+// import GameObject.Frame;
+// import GameObject.GameObject;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
-import NPCs.FirstAidKit;
+// import NPCs.FirstAidKit;
+// import NPCs.Water;
+// import NPCs.Food;
 import NPCs.Walrus;
 import NPCs.Zombies;
 import Scripts.SimpleTextScript;
@@ -38,6 +43,10 @@ public class TestMap extends Map {
         PushableRock pushableRock = new PushableRock(getMapTile(2, 7).getLocation());
         enhancedMapTiles.add(pushableRock);
 
+        enhancedMapTiles.add(new Water(getMapTile(6, 9).getLocation(), this));
+        enhancedMapTiles.add(new FirstAidKit(getMapTile(5, 10).getLocation(), this));
+        enhancedMapTiles.add(new Food(getMapTile(3, 8).getLocation(), this));
+
         return enhancedMapTiles;
     }
 
@@ -53,9 +62,6 @@ public class TestMap extends Map {
         dinosaur.setExistenceFlag("hasTalkedToDinosaur");
         dinosaur.setInteractScript(new DinoScript());
         npcs.add(dinosaur);
-
-        FirstAidKit firstaidkit = new FirstAidKit(3, getMapTile(11, 17).getLocation());
-        npcs.add(firstaidkit);
 
         Zombies zombie1 = new Zombies(3, getMapTile(12, 20).getLocation());
         npcs.add(zombie1);
