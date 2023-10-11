@@ -10,7 +10,9 @@ import GameObject.GameObject;
 import GameObject.Rectangle;
 import Utils.Direction;
 import Utils.Point;
-import Level.HealthMeter;
+
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -77,10 +79,6 @@ public abstract class Map {
     // map's textbox instance
     protected Textbox textbox;
 
-    //map's health meter instance
-    protected HealthMeter healthMeter;
-    protected boolean hasChangedHealthMeter = false;
-
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
@@ -127,7 +125,6 @@ public abstract class Map {
 
         this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
         this.textbox = new Textbox(this);
-        this.healthMeter = new HealthMeter(this);
     }
 
     // reads in a map file to create the map's tilemap
@@ -300,6 +297,10 @@ public abstract class Map {
     }
 
     protected ArrayList<Trigger> loadTriggers() {
+        return new ArrayList<>();
+    }
+
+    protected ArrayList<Trigger> loadTriggersTwo() { 
         return new ArrayList<>();
     }
 
@@ -505,13 +506,6 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.update();
         }
-
-        if (hasChangedHealthMeter)
-        {
-        	healthMeter.addHealth(1);
-        	healthMeter.update();
-        	hasChangedHealthMeter = false;
-        }
     }
 
     // based on the player's current X position (which in a level can potentially be updated each frame),
@@ -581,15 +575,6 @@ public abstract class Map {
         if (textbox.isActive()) {
             textbox.draw(graphicsHandler);
         }
-
-        if(!healthMeter.isActive())
-        {
-        	healthMeter.setIsActive(true);
-        }
-        else
-        {
-        	healthMeter.draw(graphicsHandler);
-        }
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -602,16 +587,4 @@ public abstract class Map {
 
     public int getEndBoundX() { return endBoundX; }
     public int getEndBoundY() { return endBoundY; }
-
-    public void setHealthMeter(HealthMeter healthMeter) {
-    	this.healthMeter = healthMeter;
-    }
-    
-    public HealthMeter getHealthMeter() {
-    	return this.healthMeter;
-    }
-    
-    public void setHasChangedHealthMeter(boolean status) {
-    	hasChangedHealthMeter = status;
-    }
 }

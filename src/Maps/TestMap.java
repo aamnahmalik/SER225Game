@@ -3,23 +3,23 @@ package Maps;
 import EnhancedMapTiles.FirstAidKit;
 import EnhancedMapTiles.Food;
 import EnhancedMapTiles.PushableRock;
-import EnhancedMapTiles.Water;
-// import Game.Game;
-// import GameObject.Frame;
-// import GameObject.GameObject;
+
+
+import Game.Game;
+import GameObject.Frame;
+import GameObject.GameObject;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
-// import NPCs.FirstAidKit;
-// import NPCs.Water;
-// import NPCs.Food;
+import NPCs.Serena;
 import NPCs.Walrus;
 import NPCs.Zombies;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
+import Scripts.TestMap.SerenaScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
@@ -42,10 +42,6 @@ public class TestMap extends Map {
 
         PushableRock pushableRock = new PushableRock(getMapTile(2, 7).getLocation());
         enhancedMapTiles.add(pushableRock);
-
-        enhancedMapTiles.add(new Water(getMapTile(6, 9).getLocation(), this));
-        enhancedMapTiles.add(new FirstAidKit(getMapTile(5, 10).getLocation(), this));
-        enhancedMapTiles.add(new Food(getMapTile(3, 8).getLocation(), this));
 
         return enhancedMapTiles;
     }
@@ -78,6 +74,10 @@ public class TestMap extends Map {
         Zombies zombie5 = new Zombies(7, getMapTile(12, 16).getLocation());
         npcs.add(zombie5);
 
+        Serena serena = new Serena(3, getMapTile(20, 25).getLocation());
+        serena.setInteractScript(new SerenaScript());
+        npcs.add(serena);
+
         return npcs;
     }
 
@@ -87,6 +87,7 @@ public class TestMap extends Map {
         triggers.add(new Trigger(790, 1030, 100, 10, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
+        triggers.add(new Trigger(200, 200, 10,80, new SerenaScript(), "hasTalkedToSerena"));
         return triggers;
     }
 
@@ -99,6 +100,8 @@ public class TestMap extends Map {
         getMapTile(20, 4).setInteractScript(new SimpleTextScript("Dino's house"));
 
         getMapTile(2, 6).setInteractScript(new TreeScript());
+
+        getMapTile(20, 25).setInteractScript(new SerenaScript());
     }
 }
 

@@ -86,11 +86,7 @@ public class TileBuilder extends JPanel {
             }
         }
 
-        if (showTriggers) {
-            for (Trigger trigger : map.getTriggers()) {
-                trigger.draw(graphicsHandler, new Color(255, 0, 255, 100));
-            }
-        }
+        
 
         if (hoveredMapTile != null) {
             graphicsHandler.drawRectangle(
