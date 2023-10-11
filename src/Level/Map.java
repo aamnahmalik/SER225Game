@@ -11,6 +11,7 @@ import GameObject.Rectangle;
 import Utils.Direction;
 import Utils.Point;
 import Level.HealthMeter;
+import Level.CheckList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -81,6 +82,8 @@ public abstract class Map {
     protected HealthMeter healthMeter;
     protected boolean hasChangedHealthMeter = false;
 
+    protected CheckList checkList; 
+
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
@@ -128,6 +131,7 @@ public abstract class Map {
         this.camera = new Camera(0, 0, tileset.getScaledSpriteWidth(), tileset.getScaledSpriteHeight(), this);
         this.textbox = new Textbox(this);
         this.healthMeter = new HealthMeter(this);
+        this.checkList = new CheckList(this);
     }
 
     // reads in a map file to create the map's tilemap
@@ -594,6 +598,13 @@ public abstract class Map {
         {
         	healthMeter.draw(graphicsHandler);
         }
+
+        if(!checkList.isActive()){
+            checkList.setIsActive(true);
+        }
+        else{
+            checkList.draw(graphicsHandler);
+        }
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -617,5 +628,13 @@ public abstract class Map {
 
     public void setHasChangedHealthMeter(boolean status) {
     	hasChangedHealthMeter = status;
+    }
+
+
+    public void setCheckList (CheckList checkList){
+        this.checkList = checkList;
+    }
+    public CheckList getCheckList(){
+        return this.checkList;
     }
 }
