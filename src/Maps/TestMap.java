@@ -3,8 +3,7 @@ package Maps;
 import EnhancedMapTiles.FirstAidKit;
 import EnhancedMapTiles.Food;
 import EnhancedMapTiles.PushableRock;
-
-
+import EnhancedMapTiles.Water;
 import Game.Game;
 import GameObject.Frame;
 import GameObject.GameObject;
@@ -42,6 +41,10 @@ public class TestMap extends Map {
 
         PushableRock pushableRock = new PushableRock(getMapTile(2, 7).getLocation());
         enhancedMapTiles.add(pushableRock);
+
+        enhancedMapTiles.add(new Water(getMapTile(6, 9).getLocation(), this));
+        enhancedMapTiles.add(new FirstAidKit(getMapTile(5, 10).getLocation(), this));
+        enhancedMapTiles.add(new Food(getMapTile(3, 8).getLocation(), this));
 
         return enhancedMapTiles;
     }
