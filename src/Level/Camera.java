@@ -93,7 +93,9 @@ public class Camera extends Rectangle {
                 trigger.getTriggerScript().update();
             }
         }
+
     }
+
 
     // determine which enhanced map tiles are active (exist and are within range of the camera)
     private ArrayList<EnhancedMapTile> loadActiveEnhancedMapTiles() {
@@ -152,6 +154,7 @@ public class Camera extends Rectangle {
         ArrayList<Trigger> activeTriggers = new ArrayList<>();
         for (int i = map.getTriggers().size() - 1; i >= 0; i--) {
             Trigger trigger = map.getTriggers().get(i);
+
 
             if (isMapEntityActive(trigger)) {
                 activeTriggers.add(trigger);

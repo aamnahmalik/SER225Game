@@ -1,6 +1,7 @@
 package SpriteFont;
 
 import Engine.GraphicsHandler;
+import GameObject.SpriteSheet;
 
 import java.awt.*;
 
@@ -30,8 +31,15 @@ public class SpriteFont {
 		this.color = color;
 	}
 
-	public void setColor(Color color) {
+	public SpriteFont(SpriteSheet spriteSheet) {
+    }
+
+    public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public Color getColor() {
+		return this.color;
 	}
 
 	public String getText() {
