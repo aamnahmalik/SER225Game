@@ -1,27 +1,23 @@
 package NPCs;
 
 import java.util.HashMap;
-
 import Builders.FrameBuilder;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.SpriteSheet;
 import Level.NPC;
+import Level.Player;
 import Utils.Point;
 
-public class FirstAidKit extends NPC {
-
-     public FirstAidKit(int id, Point location) {
-        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("firstaidkit.png"), 40, 40), "STAND_LEFT");
+public class Serena extends NPC {
+    
+    public Serena(int id, Point location) {
+        super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("SerenaPurple.png"), 69, 88), "STAND_LEFT");
     }
 
-    public void update() {
-        super.update();
-    }
-
-   public void draw(GraphicsHandler graphicsHandler) {
-        super.draw(graphicsHandler);
+    public void update(Player player) {
+        super.update(player);
     }
 
     @Override
@@ -29,12 +25,18 @@ public class FirstAidKit extends NPC {
         return new HashMap<String, Frame[]>() {{
            put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
-                            .withScale(1)
-                            .withBounds(5, 6, 5, 10)
+                            .withScale(.8f)
+                            .withBounds(5, 6, 15, 30)
                             .build()
             });
         }};
     }
+    @Override
+    public void draw(GraphicsHandler graphicsHandler) {
+        super.draw(graphicsHandler);
+     }
+    }
+    
+     
 
- }
 

@@ -17,7 +17,7 @@ public class Trigger extends MapEntity {
         this.setY(y);
         this.setWidth(width);
         this.setHeight(height);
-        this.setBounds(new Rectangle(0, 0, width, height));
+        this.setBounds(new Rectangle(1, 1, width, height));
     }
 
     public Trigger(int x, int y, int width, int height, Script triggerScript, String existenceFlag) {
@@ -27,7 +27,7 @@ public class Trigger extends MapEntity {
         this.setY(y);
         this.setWidth(width);
         this.setHeight(height);
-        this.setBounds(new Rectangle(0, 0, width, height));
+        this.setBounds(new Rectangle(1, 1, width, height));
         this.existenceFlag = existenceFlag;
     }
 
@@ -38,18 +38,21 @@ public class Trigger extends MapEntity {
         this.triggerScript = triggerScript;
     }
 
-    // only used for debugging purposes if seeing the trigger is necessary
-    @Override
-    public void draw(GraphicsHandler graphicsHandler) {
-        drawBounds(graphicsHandler, Color.red);
-    }
+    
 
-    // only used for debugging purposes if seeing the trigger is necessary
-    public void draw(GraphicsHandler graphicsHandler, Color color) {
-        Rectangle scaledCalibratedBounds = getCalibratedBounds();
-        scaledCalibratedBounds.setColor(color);
-        scaledCalibratedBounds.setBorderColor(Color.black);
-        scaledCalibratedBounds.setBorderThickness(1);
-        scaledCalibratedBounds.draw(graphicsHandler);
-    }
+        // only used for debugging purposes if seeing the trigger is necessary
+        @Override
+        public void draw(GraphicsHandler graphicsHandler) {
+            drawBounds(graphicsHandler, Color.red);
+        }
+    
+        // only used for debugging purposes if seeing the trigger is necessary
+        public void draw(GraphicsHandler graphicsHandler, Color color) {
+            Rectangle scaledCalibratedBounds = getCalibratedBounds();
+            scaledCalibratedBounds.setColor(color);
+            scaledCalibratedBounds.setBorderColor(Color.black);
+            scaledCalibratedBounds.setBorderThickness(1);
+            scaledCalibratedBounds.draw(graphicsHandler);
 }
+    }
+    

@@ -6,7 +6,6 @@ import Engine.Screen;
 import Screens.CreditsScreen;
 import Screens.MenuScreen;
 import Screens.PlayLevelScreen;
-import Screens.PlayerSelection;
 
 /*
  * Based on the current game state, this class determines which Screen should be shown
@@ -39,7 +38,7 @@ public class ScreenCoordinator extends Screen {
 	public void update() {
 		do {
 			// if previousGameState does not equal gameState, it means there was a change in gameState
-			// this triggers ScreenCoordinator to bring up a new Screen based on what the gameState is
+			// this triggers ScreenCoordinator to bring up a new Screen based on what the gameState is.
 			if (previousGameState != gameState) {
 				switch(gameState) {
 					case MENU:
@@ -50,9 +49,6 @@ public class ScreenCoordinator extends Screen {
 						break;
 					case CREDITS:
 						currentScreen = new CreditsScreen(this);
-						break;
-					case SELECTION:
-						currentScreen = new PlayerSelection(this);
 						break;
 				}
 				currentScreen.initialize();

@@ -6,7 +6,8 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
 import Maps.TestMap;
-import Players.Cat;
+import Players.Blair;
+import Players.Chuck;
 import Utils.Direction;
 import Utils.Point;
 
@@ -18,74 +19,148 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected FlagManager flagManager;
+    protected PlayerSelection selectionScreen;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
-
+    
     public void initialize() {
+
         // setup state
         flagManager = new FlagManager();
         flagManager.addFlag("hasLostBall", false);
         flagManager.addFlag("hasTalkedToWalrus", false);
         flagManager.addFlag("hasTalkedToDinosaur", false);
         flagManager.addFlag("hasFoundBall", false);
+        flagManager.addFlag("hasTalkedToSerena", false);
 
         // define/setup map
         this.map = new TestMap();
         map.setFlagManager(flagManager);
 
-        // setup player
-        this.player = new Cat(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
-        this.player.setMap(map);
-        Point playerStartPosition = map.getPlayerStartPosition();
-        this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
-        this.playLevelScreenState = PlayLevelScreenState.RUNNING;
-        this.player.setFacingDirection(Direction.LEFT);
+        selectionScreen = new PlayerSelection(this);
 
-        // let pieces of map know which button to listen for as the "interact" button
-        map.getTextbox().setInteractKey(player.getInteractKey());
+    
+        // if flag is set at any point during gameplay, game is "won"
+        if (map.getFlagManager().isFlagSet("hasFoundBall")) {
+            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        }
+    
+        
+        // //set up the value of isChuckSelected
+        //         boolean isChuckSelected = selectionScreen.isChuckSelected();
 
-        // setup map scripts to have references to the map and player
-        for (MapTile mapTile : map.getMapTiles()) {
-            if (mapTile.getInteractScript() != null) {
-                mapTile.getInteractScript().setMap(map);
-                mapTile.getInteractScript().setPlayer(player);
-            }
-        }
-        for (NPC npc : map.getNPCs()) {
-            if (npc.getInteractScript() != null) {
-                npc.getInteractScript().setMap(map);
-                npc.getInteractScript().setPlayer(player);
-            }
-        }
-        for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
-            if (enhancedMapTile.getInteractScript() != null) {
-                enhancedMapTile.getInteractScript().setMap(map);
-                enhancedMapTile.getInteractScript().setPlayer(player);
-            }
-        }
-        for (Trigger trigger : map.getTriggers()) {
-            if (trigger.getTriggerScript() != null) {
-                trigger.getTriggerScript().setMap(map);
-                trigger.getTriggerScript().setPlayer(player);
-            }
-        }
+        //         // // setup player
+                // if(isChuckSelected)
+                // {
+                //     this.player = new Chuck(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+                // }
+                // else 
+                // {
+                //     this.player = new Blair(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+                // }
+                
+                // this.player.setMap(map);
+                // Point playerStartPosition = map.getPlayerStartPosition();
+                // this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+                // this.player.setFacingDirection(Direction.LEFT);
+
+
+        // // let pieces of map know which button to listen for as the "interact" button
+        // map.getTextbox().setInteractKey(player.getInteractKey());
+
+        // // setup map scripts to have references to the map and player
+        // for (MapTile mapTile : map.getMapTiles()) {
+        //     if (mapTile.getInteractScript() != null) {
+        //         mapTile.getInteractScript().setMap(map);
+        //         mapTile.getInteractScript().setPlayer(player);
+        //     }
+        // }
+        // for (NPC npc : map.getNPCs()) {
+        //     if (npc.getInteractScript() != null) {
+        //         npc.getInteractScript().setMap(map);
+        //         npc.getInteractScript().setPlayer(player);
+        //     }
+        // }
+        // for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
+        //     if (enhancedMapTile.getInteractScript() != null) {
+        //         enhancedMapTile.getInteractScript().setMap(map);
+        //         enhancedMapTile.getInteractScript().setPlayer(player);
+        //     }
+        // }
+        // for (Trigger trigger : map.getTriggers()) {
+        //     if (trigger.getTriggerScript() != null) {
+        //         trigger.getTriggerScript().setMap(map);
+        //         trigger.getTriggerScript().setPlayer(player);
+        //     }
+        // }
 
         winScreen = new WinScreen(this);
+        playLevelScreenState = PlayLevelScreenState.SELECTION;
     }
+
 
     public void update() {
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
-            // if level is "running" update player and map to keep game logic for the platformer level going
-            case RUNNING:
+                // if level is "running" update player and map to keep game logic for the platformer level going
+                case RUNNING:
                 player.update();
                 map.update(player);
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
+                break;
+            case SELECTION:
+                selectionScreen.update();
+                 //set up the value of isChuckSelected
+                boolean isChuckSelected = selectionScreen.isChuckSelected();
+
+                // setup player
+                if(isChuckSelected)
+                {
+                    this.player = new Chuck(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+                }
+                else 
+                {
+                    this.player = new Blair(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+                }
+                
+                this.player.setMap(map);
+                Point playerStartPosition = map.getPlayerStartPosition();
+                this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+                this.player.setFacingDirection(Direction.LEFT);
+
+                // let pieces of map know which button to listen for as the "interact" button
+                map.getTextbox().setInteractKey(player.getInteractKey());
+
+                // setup map scripts to have references to the map and player
+                for (MapTile mapTile : map.getMapTiles()) {
+                    if (mapTile.getInteractScript() != null) {
+                        mapTile.getInteractScript().setMap(map);
+                        mapTile.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (NPC npc : map.getNPCs()) {
+                    if (npc.getInteractScript() != null) {
+                        npc.getInteractScript().setMap(map);
+                        npc.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
+                    if (enhancedMapTile.getInteractScript() != null) {
+                        enhancedMapTile.getInteractScript().setMap(map);
+                        enhancedMapTile.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (Trigger trigger : map.getTriggers()) {
+                    if (trigger.getTriggerScript() != null) {
+                        trigger.getTriggerScript().setMap(map);
+                        trigger.getTriggerScript().setPlayer(player);
+                    }
+                }
                 break;
         }
 
@@ -104,7 +179,14 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
                 break;
+            case SELECTION:
+                selectionScreen.draw(graphicsHandler);
+                break;
         }
+    }
+
+    public void setGameState(PlayLevelScreenState playLevelScreenState) {
+        this.playLevelScreenState = playLevelScreenState;
     }
 
     public PlayLevelScreenState getPlayLevelScreenState() {
@@ -121,7 +203,9 @@ public class PlayLevelScreen extends Screen {
     }
 
     // This enum represents the different states this screen can be in
-    private enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED
+    protected enum PlayLevelScreenState {
+        RUNNING, LEVEL_COMPLETED, SELECTION
     }
+
+
 }
