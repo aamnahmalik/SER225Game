@@ -45,6 +45,7 @@ public abstract class Player extends GameObject {
     protected Key RUN_RIGHT_KEY = Key.D;
     protected Key RUN_UP_KEY = Key.W; 
     protected Key RUN_DOWN_KEY = Key.S; 
+    protected Key ATTACK = Key.E;
 
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
@@ -94,7 +95,10 @@ public abstract class Player extends GameObject {
                 break;
             case RUNNING: 
                 playerRunning();
-                break;
+                break; 
+            case ATTACKING:
+                playerAttacking();
+                break;           
         }
     }
 
@@ -114,8 +118,29 @@ public abstract class Player extends GameObject {
         if (Keyboard.isKeyDown(RUN_LEFT_KEY) || Keyboard.isKeyDown(RUN_RIGHT_KEY) || Keyboard.isKeyDown(RUN_UP_KEY) || Keyboard.isKeyDown(RUN_DOWN_KEY)) { 
             playerState = PlayerState.RUNNING;
         }
-    }
 
+        if (Keyboard.isKeyDown(ATTACK)) { 
+            playerState = PlayerState.ATTACKING;
+        }
+        }
+
+    // player ATTACKING state logic
+    protected void playerAttacking() {
+        if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
+            keyLocker.lockKey(INTERACT_KEY);
+            map.entityInteract(this);
+        }
+
+        // if the player press 'E', the attack will be made
+        if (Keyboard.isKeyDown(ATTACK)) {
+            return;
+        }
+        if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
+            playerState = PlayerState.STANDING;
+        }
+
+        }
+    
     // player WALKING state logic
     protected void playerWalking() {
         if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
@@ -277,6 +302,23 @@ public abstract class Player extends GameObject {
                 this.currentAnimationName = "RUN_DOWN";
             }
         }
+        else if (playerState == PlayerState.ATTACKING) { 
+            if (facingDirection == Direction.RIGHT) {
+                this.currentAnimationName = "ATTACK_RIGHT";
+            } 
+            else if (facingDirection == Direction.LEFT)
+            {
+                this.currentAnimationName = "ATTACK_LEFT";
+            }
+            else if (facingDirection == Direction.UP)
+            {
+                this.currentAnimationName = "ATTACK_BACK";
+            }
+            else 
+            {
+                this.currentAnimationName = "ATTACK_FRONT";
+            }
+        }
     }
 
     @Override
@@ -415,6 +457,36 @@ public abstract class Player extends GameObject {
         }
         else if (direction == Direction.RIGHT) {
             moveX(speed);
+        }
+    }
+
+    public void attack(Direction direction) {
+        facingDirection = direction;
+        if (direction == Direction.RIGHT) {
+            this.currentAnimationName = "ATTACK_RIGHT";
+        }
+        else if (direction == Direction.LEFT) {
+            this.currentAnimationName = "ATTACK_LEFT";
+        }
+        else if (direction == Direction.UP) {
+            this.currentAnimationName = "ATTACK_FRONT";
+        }
+        else if (direction == Direction.DOWN) {
+            this.currentAnimationName = "ATTACK_BACK";
+        }
+        else {
+            if (this.currentAnimationName.contains("RIGHT")) {
+                this.currentAnimationName = "ATTACK_RIGHT";
+            }
+            else if (this.currentAnimationName.contains("LEFT")){
+                this.currentAnimationName = "ATTACK_LEFT";
+            }
+            else if (this.currentAnimationName.contains("FRONT")){
+                this.currentAnimationName = "ATTACK_FRONT";
+            }
+            else if (this.currentAnimationName.contains("BACK")){
+                this.currentAnimationName = "ATTACK_BACK";
+            }
         }
     }
 }
