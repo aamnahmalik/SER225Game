@@ -33,6 +33,7 @@ public class CheckList {
     private Sprite firstAidKitWhite;
     private Sprite axeWhite;
     private Sprite keyWhite;
+    private Sprite lockedSymbol;
 
     int count = 0; 
 
@@ -44,6 +45,7 @@ public class CheckList {
         BufferedImage firstAidKitWhiteImage = ImageLoader.load("firstAidKitWhite.png");
         BufferedImage axeWhiteImage = ImageLoader.load("AxeWhite.png");
         BufferedImage keyWhiteImage = ImageLoader.load("keyWhite.png");
+        BufferedImage lockedSymbolImage = ImageLoader.load("lockedSymbol.png");
 
         waterBottle = new Sprite(waterBottleImage, x , topY );
         food = new Sprite(foodImage, x +25, topY + 3);
@@ -53,6 +55,8 @@ public class CheckList {
         axeWhite = new Sprite(axeWhiteImage, x+77, topY);
         axeWhite.setScale(.9f);
         keyWhite = new Sprite(keyWhiteImage, x+95, topY +3);
+        lockedSymbol = new Sprite(lockedSymbolImage, x+97, topY+3);
+        lockedSymbol.setScale(.04f);
         
     }
         //super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Water.png"), 69, 90), "STAND_LEFT");
@@ -92,6 +96,7 @@ public class CheckList {
             firstAidKitWhite.draw(graphicsHandler);
             axeWhite.draw(graphicsHandler);
             keyWhite.draw(graphicsHandler);
+            lockedSymbol.draw(graphicsHandler);
         // }
         // else { 
         //     update();

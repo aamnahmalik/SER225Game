@@ -40,9 +40,14 @@ public class HealthMeter {
         health = 10;
         count = count + health;
         update();
-       
     }
-    
+
+    public void minusHealth(int health){
+        health = 20;
+        count = count - health;
+        update();
+    }    
+
     public int getHealthMeter() {
 	return count;
     }
