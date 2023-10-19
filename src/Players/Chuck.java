@@ -255,6 +255,96 @@ public class Chuck extends Player {
                                 .withScale(3)
                                 .build()
                 });
+
+                put("ATTACK_FRONT", new Frame[] {
+                        new FrameBuilder(spriteSheet.getSprite(32, 0), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(32, 1), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(32, 2), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(32, 3), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(32, 4), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                });
+                
+                put("ATTACK_BACK", new Frame[] {
+                        new FrameBuilder(spriteSheet.getSprite(33, 0), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(33, 1), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(33, 2), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(33, 3), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(33, 4), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                });
+                put("ATTACK_RIGHT", new Frame[] {
+                        new FrameBuilder(spriteSheet.getSprite(34, 0), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(34, 1), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(34, 2), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(34, 3), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(34, 4), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                });
+                put("ATTACK_LEFT", new Frame[] {
+                        new FrameBuilder(spriteSheet.getSprite(35, 0), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(35, 1), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(35, 2), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(35, 3), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                        new FrameBuilder(spriteSheet.getSprite(35, 4), 14)
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .build(),
+                });
         }};
     }
 }
