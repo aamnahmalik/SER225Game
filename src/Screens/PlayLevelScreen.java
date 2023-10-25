@@ -47,57 +47,6 @@ public class PlayLevelScreen extends Screen {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
 
-        this.player = new Blair(17, 20, 0);
-    
-        
-        // //set up the value of isChuckSelected
-        //         boolean isChuckSelected = selectionScreen.isChuckSelected();
-
-        //         // // setup player
-                // if(isChuckSelected)
-                // {
-                //     this.player = new Chuck(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
-                // }
-                // else 
-                // {
-                //     this.player = new Blair(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
-                // }
-                
-                // this.player.setMap(map);
-                // Point playerStartPosition = map.getPlayerStartPosition();
-                // this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
-                // this.player.setFacingDirection(Direction.LEFT);
-
-
-        // // let pieces of map know which button to listen for as the "interact" button
-        // map.getTextbox().setInteractKey(player.getInteractKey());
-
-        // // setup map scripts to have references to the map and player
-        // for (MapTile mapTile : map.getMapTiles()) {
-        //     if (mapTile.getInteractScript() != null) {
-        //         mapTile.getInteractScript().setMap(map);
-        //         mapTile.getInteractScript().setPlayer(player);
-        //     }
-        // }
-        // for (NPC npc : map.getNPCs()) {
-        //     if (npc.getInteractScript() != null) {
-        //         npc.getInteractScript().setMap(map);
-        //         npc.getInteractScript().setPlayer(player);
-        //     }
-        // }
-        // for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
-        //     if (enhancedMapTile.getInteractScript() != null) {
-        //         enhancedMapTile.getInteractScript().setMap(map);
-        //         enhancedMapTile.getInteractScript().setPlayer(player);
-        //     }
-        // }
-        // for (Trigger trigger : map.getTriggers()) {
-        //     if (trigger.getTriggerScript() != null) {
-        //         trigger.getTriggerScript().setMap(map);
-        //         trigger.getTriggerScript().setPlayer(player);
-        //     }
-        // }
-
         winScreen = new WinScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
     }
@@ -111,7 +60,9 @@ public class PlayLevelScreen extends Screen {
                 boolean isChuckSelected = selectionScreen.isChuckSelected();
 
                 // setup player
-                if(isChuckSelected)
+                if (this.player == null)
+                {
+                    if(isChuckSelected)
                 {
                     this.player = new Chuck(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
                 }
@@ -124,6 +75,8 @@ public class PlayLevelScreen extends Screen {
                 Point playerStartPosition = map.getPlayerStartPosition();
                 this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
                 this.player.setFacingDirection(Direction.LEFT);
+                }
+                
 
                 // let pieces of map know which button to listen for as the "interact" button
                 map.getTextbox().setInteractKey(player.getInteractKey());
