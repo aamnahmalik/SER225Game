@@ -28,6 +28,7 @@ public class Blair  extends Player {
 
     public void update() {
         super.update();
+    
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -46,6 +47,14 @@ public class Blair  extends Player {
 
             put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
+                            .withScale(3)
+                            .withBounds(6, 12, 12, 7)
+                            .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                            .build()
+            });
+
+            put("STAND_AXL", new Frame[] {
+                    new FrameBuilder(spriteSheet.getSprite(34, 0))
                             .withScale(3)
                             .withBounds(6, 12, 12, 7)
                             .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
