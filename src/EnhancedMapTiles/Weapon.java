@@ -41,7 +41,6 @@ public class Weapon extends EnhancedMapTile
         
         if (player.overlaps(this) && !hasInteracted)
         {
-        	map.setHasChangedHealthMeter(true);
             hasInteracted = true;
             this.isHidden = true;
         }

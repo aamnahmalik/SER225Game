@@ -25,7 +25,22 @@ public class Zombies extends NPC
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Zombie11.png"), 24, 32), "STAND_LEFT");
         directionChangeDelay = random.nextInt(1500) + 500;
         directionChangeCounter = directionChangeDelay;
-        currentDirection = Direction.LEFT;
+        int newDirection = random.nextInt(4);
+            
+            switch (newDirection) 
+            {
+                case 0:
+                    currentDirection = Direction.LEFT;
+                    break;
+                case 1:
+                    currentDirection = Direction.RIGHT;
+                    break;
+                case 2:
+                    currentDirection = Direction.UP;
+                    break;
+                case 3:
+                    currentDirection = Direction.DOWN;
+            }
     }
 
     public void update(Player player) 
