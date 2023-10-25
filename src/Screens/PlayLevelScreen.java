@@ -6,6 +6,7 @@ import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
 import Maps.TestMap;
+import Maps.ZombieMap;
 import Players.Blair;
 import Players.Chuck;
 import Utils.Direction;
@@ -29,23 +30,23 @@ public class PlayLevelScreen extends Screen {
 
         // setup state
         flagManager = new FlagManager();
-        flagManager.addFlag("hasLostBall", false);
-        flagManager.addFlag("hasTalkedToWalrus", false);
-        flagManager.addFlag("hasTalkedToDinosaur", false);
-        flagManager.addFlag("hasFoundBall", false);
+        // flagManager.addFlag("hasLostBall", false);
+        // flagManager.addFlag("hasTalkedToWalrus", false);
+        // flagManager.addFlag("hasTalkedToDinosaur", false);
+        // flagManager.addFlag("hasFoundBall", false);
         flagManager.addFlag("hasTalkedToSerena", false);
 
         // define/setup map
-        this.map = new TestMap();
+        this.map = new ZombieMap();
         map.setFlagManager(flagManager);
 
         selectionScreen = new PlayerSelection(this);
 
     
         // if flag is set at any point during gameplay, game is "won"
-        if (map.getFlagManager().isFlagSet("hasFoundBall")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-        }
+        // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
+        //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        // }
     
         
         // //set up the value of isChuckSelected
