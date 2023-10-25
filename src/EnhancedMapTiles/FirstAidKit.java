@@ -14,6 +14,7 @@ import Level.TileType;
 import Maps.TestMap;
 import Utils.Direction;
 import Utils.Point;
+import EnhancedMapTiles.KeyPurple;
 
 public class FirstAidKit extends EnhancedMapTile{
     

@@ -62,7 +62,7 @@ public class CheckList {
         axeWhite = new Sprite(axeWhiteImage, x+77, topY);
         axeWhite.setScale(.9f);
         keyWhite = new Sprite(keyWhiteImage, x+95, topY +3);
-        keyPurple = new Sprite(keyPurpleImage, x+95, topY +3);
+        keyPurple = new Sprite(keyPurpleImage, x+95, topY +4);
         LockedSymbol = new Sprite(LockedSymbolImage, x+97, topY+3);
         LockedSymbol.setScale(.04f);
         
@@ -78,8 +78,15 @@ public class CheckList {
 
         if (collectedItems == 4)
         { 
-            System.out.println("4 items have been collected");
+            KeyPurple keyPurple = new KeyPurple (map.getMapTile(0, 2).getLocation(),map);
+            keyPurple.setMap(map);
+            map.enhancedMapTiles.add(keyPurple);
+
+            //System.out.println("4 items have been collected");
         }
+    }
+    public int getCollectedItems() {
+        return collectedItems;
     }
 
     public void addItem (int item) { 
@@ -119,7 +126,8 @@ public class CheckList {
 
             //if items collected = 4 unlockedsymbol
             //if items collected = less than 4 locked symbol 
-            if (collectedItems == 4)
+        
+            if (collectedItems >= 4)
             { 
                 keyWhite.draw(graphicsHandler);
                 keyPurple.draw(graphicsHandler);
