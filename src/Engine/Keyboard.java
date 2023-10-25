@@ -18,7 +18,7 @@ public class Keyboard {
 	// maps a Key enum type to its key code
 	private static final EnumMap<Key, Integer> keyMap = buildKeyMap();
 
-	private static final KeyListener keyListener = new KeyListener() {
+	public final static KeyListener keyListener = new KeyListener() {
         @Override
         public void keyTyped(KeyEvent e) {}
 
@@ -40,7 +40,7 @@ public class Keyboard {
     };
 
 	// prevents Keyboard from being instantiated -- it's my way of making a "static" class like C# has
-	private Keyboard() { }
+	public Keyboard() { }
     
     public static KeyListener getKeyListener() {
     	return keyListener;
@@ -65,7 +65,7 @@ public class Keyboard {
     	}
     	return true;
     }
-
+	
 	// checks if multiple keys are not being pressed at the same time
 	public static boolean areKeysUp(Key[] keys) {
     	for (Key key : keys) {
