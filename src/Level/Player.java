@@ -7,7 +7,7 @@ import GameObject.GameObject;
 import GameObject.Rectangle;
 import GameObject.SpriteSheet;
 import Utils.Direction;
-
+import EnhancedMapTiles.Weapon;
 import java.util.ArrayList;
 
 public abstract class Player extends GameObject {
@@ -20,6 +20,7 @@ public abstract class Player extends GameObject {
     protected Direction currentWalkingYDirection;
     protected Direction lastWalkingXDirection;
     protected Direction lastWalkingYDirection;
+    protected boolean isAttacking = false;
 
     // values used to handle player movement
     protected float moveAmountX, moveAmountY;
@@ -126,20 +127,42 @@ public abstract class Player extends GameObject {
 
     // player ATTACKING state logic
     protected void playerAttacking() {
+        
         if (!keyLocker.isKeyLocked(INTERACT_KEY) && Keyboard.isKeyDown(INTERACT_KEY)) {
-            keyLocker.lockKey(INTERACT_KEY);
-            map.entityInteract(this);
+        keyLocker.lockKey(INTERACT_KEY);
+        map.entityInteract(this);            
         }
 
-        // if the player press 'E', the attack will be made
-        if (Keyboard.isKeyDown(ATTACK)) {
-            return;
-        }
-        if (Keyboard.isKeyUp(MOVE_LEFT_KEY) && Keyboard.isKeyUp(MOVE_RIGHT_KEY) && Keyboard.isKeyUp(MOVE_UP_KEY) && Keyboard.isKeyUp(MOVE_DOWN_KEY)) {
+        if (Weapon.hasTheWeapon()) {
+            if (Keyboard.isKeyDown(ATTACK)) {
+                if (!isAttacking) {
+                    // Start the attacking animation
+                    playerState = PlayerState.ATTACKING;
+                    isAttacking = true;
+                }
+            } else {
+                // The "E" key is released, reset the flag to allow for attacking again
+                isAttacking = false;
+    
+                // Transition to another state when the attack animation is complete, if needed.
+                // For example, you can transition to STANDING state here.
+                if (isAttackAnimationComplete()) {
+                    playerState = PlayerState.STANDING;
+                }
+            }
+        } 
+        else {
+            // Player doesn't have the weapon, set the player state to STANDING
             playerState = PlayerState.STANDING;
         }
+    }
 
-        }
+    private boolean isAttackAnimationComplete() {
+        // Check if the current frame index for the attack animation has reached the last frame
+        int totalFrames = animations.get("ATTACK_RIGHT").length; // Adjust based on your animation naming
+        return getCurrentFrameIndex() == totalFrames - 1;
+    }
+    
     
     // player WALKING state logic
     protected void playerWalking() {
@@ -260,8 +283,14 @@ public abstract class Player extends GameObject {
     // anything extra the player should do based on interactions can be handled here
     protected void handlePlayerAnimation() {
         if (playerState == PlayerState.STANDING) {
-            // sets animation to a STAND animation based on which way player is facing
-            this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
+            if (Weapon.hasTheWeapon() == false)
+            {
+                // sets animation to a STAND animation based on which way player is facing
+                this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
+            }
+            else{
+                this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_AXL" : "STAND_AXL";
+            }
         }
         else if (playerState == PlayerState.WALKING) {
             if (facingDirection == Direction.RIGHT) {
@@ -283,7 +312,14 @@ public abstract class Player extends GameObject {
         else if (playerState == PlayerState.INTERACTING) {
             // sets animation to STAND when player is interacting
             // player can be told to stand or walk during Script by using the "stand" and "walk" methods
-            this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
+            if (Weapon.hasTheWeapon() == false)
+            {
+                // sets animation to a STAND animation based on which way player is facing
+                this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
+            }
+            else{
+                this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_AXL" : "STAND_AXL";
+            }
         }
         else if (playerState == PlayerState.RUNNING) { 
             if (facingDirection == Direction.RIGHT) {
