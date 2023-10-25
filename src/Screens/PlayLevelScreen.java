@@ -46,6 +46,8 @@ public class PlayLevelScreen extends Screen {
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
+
+        this.player = new Blair(17, 20, 0);
     
         
         // //set up the value of isChuckSelected
@@ -106,16 +108,6 @@ public class PlayLevelScreen extends Screen {
         switch (playLevelScreenState) {
                 // if level is "running" update player and map to keep game logic for the platformer level going
                 case RUNNING:
-                player.update();
-                map.update(player);
-                break;
-            // if level has been completed, bring up level cleared screen
-            case LEVEL_COMPLETED:
-                winScreen.update();
-                break;
-            case SELECTION:
-                selectionScreen.update();
-                 //set up the value of isChuckSelected
                 boolean isChuckSelected = selectionScreen.isChuckSelected();
 
                 // setup player
@@ -161,6 +153,61 @@ public class PlayLevelScreen extends Screen {
                         trigger.getTriggerScript().setPlayer(player);
                     }
                 }
+                player.update();
+                map.update(player);
+                break;
+            // if level has been completed, bring up level cleared screen
+            case LEVEL_COMPLETED:
+                winScreen.update();
+                break;
+            case SELECTION:
+                selectionScreen.update();
+                 //set up the value of isChuckSelected
+                // boolean isChuckSelected = selectionScreen.isChuckSelected();
+
+                // // setup player
+                // if(isChuckSelected)
+                // {
+                //     this.player = new Chuck(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+                // }
+                // else 
+                // {
+                //     this.player = new Blair(map.getPlayerStartPosition().x, map.getPlayerStartPosition().y);
+                // }
+                
+                // this.player.setMap(map);
+                // Point playerStartPosition = map.getPlayerStartPosition();
+                // this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+                // this.player.setFacingDirection(Direction.LEFT);
+
+                // // let pieces of map know which button to listen for as the "interact" button
+                // map.getTextbox().setInteractKey(player.getInteractKey());
+
+                // // setup map scripts to have references to the map and player
+                // for (MapTile mapTile : map.getMapTiles()) {
+                //     if (mapTile.getInteractScript() != null) {
+                //         mapTile.getInteractScript().setMap(map);
+                //         mapTile.getInteractScript().setPlayer(player);
+                //     }
+                // }
+                // for (NPC npc : map.getNPCs()) {
+                //     if (npc.getInteractScript() != null) {
+                //         npc.getInteractScript().setMap(map);
+                //         npc.getInteractScript().setPlayer(player);
+                //     }
+                // }
+                // for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
+                //     if (enhancedMapTile.getInteractScript() != null) {
+                //         enhancedMapTile.getInteractScript().setMap(map);
+                //         enhancedMapTile.getInteractScript().setPlayer(player);
+                //     }
+                // }
+                // for (Trigger trigger : map.getTriggers()) {
+                //     if (trigger.getTriggerScript() != null) {
+                //         trigger.getTriggerScript().setMap(map);
+                //         trigger.getTriggerScript().setPlayer(player);
+                //     }
+                // }
                 break;
         }
 

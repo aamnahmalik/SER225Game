@@ -20,6 +20,12 @@ public class Blair  extends Player {
                 walkSpeed = 2.3f;
     }
 
+    public Blair(float x, float y, int z)
+    {
+        super(
+                new SpriteSheet(ImageLoader.load("BlairWorking.png"), 1, 1),  x, y, "STAND_RIGHT");
+    }
+
     public void update() {
         super.update();
     }
