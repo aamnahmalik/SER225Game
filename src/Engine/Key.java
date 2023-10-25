@@ -45,5 +45,9 @@ public enum Key {
     NINE,
     ZERO,
     SPACE,
-    ESC
+    ESC;
+
+    public int getKeyCode() {
+        return 0;
+    }
 }

@@ -43,6 +43,14 @@ public class Chuck extends Player {
                                 .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
                                 .build()
                 });
+
+                put("STAND_AXL", new Frame[] {
+                        new FrameBuilder(spriteSheet.getSprite(34, 0))
+                                .withScale(3)
+                                .withBounds(6, 12, 12, 7)
+                                .withImageEffect(ImageEffect.FLIP_HORIZONTAL)
+                                .build()
+                });
     
                 put("WALK_RIGHT", new Frame[] {
                         new FrameBuilder(spriteSheet.getSprite(2, 0), 14)
