@@ -15,9 +15,10 @@ import Maps.TestMap;
 import Utils.Direction;
 import Utils.Point;
 
+
 public class Water extends EnhancedMapTile{
-	protected Map map;
 	private boolean hasInteracted = false;
+    
 	
     public Water(Point location) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("waterbottle.png"),92, 261), TileType.PASSABLE);
@@ -37,6 +38,7 @@ public class Water extends EnhancedMapTile{
         	map.setHasChangedHealthMeter(true);
             hasInteracted = true;
             this.isHidden = true;
+            this.map.getCheckList().itemCollected();
         }
     }
 

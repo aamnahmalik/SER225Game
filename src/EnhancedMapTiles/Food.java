@@ -18,6 +18,7 @@ import Utils.Point;
 public class Food extends EnhancedMapTile{
 	protected Map map;
 	private boolean hasInteracted = false;
+
 	
     public Food(Point location) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("food.png"),58, 55), TileType.PASSABLE);
@@ -37,6 +38,7 @@ public class Food extends EnhancedMapTile{
         	map.setHasChangedHealthMeter(true);
             hasInteracted = true;
             this.isHidden = true;
+            this.map.getCheckList().itemCollected();
         }
     }
 

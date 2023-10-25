@@ -2,6 +2,7 @@ package Level;
 
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
+import EnhancedMapTiles.KeyPurple;
 import GameObject.Sprite;
 import GameObject.SpriteSheet;
 import SpriteFont.SpriteFont;
@@ -33,7 +34,10 @@ public class CheckList {
     private Sprite firstAidKitWhite;
     private Sprite axeWhite;
     private Sprite keyWhite;
-    private Sprite lockedSymbol;
+    private Sprite LockedSymbol;
+    private Sprite keyPurple;
+    public int collectedItems;
+    
 
     int count = 0; 
 
@@ -45,7 +49,10 @@ public class CheckList {
         BufferedImage firstAidKitWhiteImage = ImageLoader.load("firstAidKitWhite.png");
         BufferedImage axeWhiteImage = ImageLoader.load("AxeWhite.png");
         BufferedImage keyWhiteImage = ImageLoader.load("keyWhite.png");
-        BufferedImage lockedSymbolImage = ImageLoader.load("lockedSymbol.png");
+        BufferedImage LockedSymbolImage = ImageLoader.load("lockedSymbol.png");
+        BufferedImage keyPurpleImage = ImageLoader.load("keyPurple.png");
+
+        
 
         waterBottle = new Sprite(waterBottleImage, x , topY );
         food = new Sprite(foodImage, x +25, topY + 3);
@@ -55,12 +62,25 @@ public class CheckList {
         axeWhite = new Sprite(axeWhiteImage, x+77, topY);
         axeWhite.setScale(.9f);
         keyWhite = new Sprite(keyWhiteImage, x+95, topY +3);
-        lockedSymbol = new Sprite(lockedSymbolImage, x+97, topY+3);
-        lockedSymbol.setScale(.04f);
+        keyPurple = new Sprite(keyPurpleImage, x+95, topY +3);
+        LockedSymbol = new Sprite(LockedSymbolImage, x+97, topY+3);
+        LockedSymbol.setScale(.04f);
+        
         
     }
+   
+        
         //super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Water.png"), 69, 90), "STAND_LEFT");
 
+    public void itemCollected () { 
+        collectedItems = collectedItems +1;
+        update();
+
+        if (collectedItems == 4)
+        { 
+            System.out.println("4 items have been collected");
+        }
+    }
 
     public void addItem (int item) { 
         item = item + item; 
@@ -95,8 +115,20 @@ public class CheckList {
             food.draw(graphicsHandler);
             firstAidKitWhite.draw(graphicsHandler);
             axeWhite.draw(graphicsHandler);
-            keyWhite.draw(graphicsHandler);
-            lockedSymbol.draw(graphicsHandler);
+            //keyWhite.draw(graphicsHandler);
+
+            //if items collected = 4 unlockedsymbol
+            //if items collected = less than 4 locked symbol 
+            if (collectedItems == 4)
+            { 
+                keyWhite.draw(graphicsHandler);
+                keyPurple.draw(graphicsHandler);
+            }
+            else 
+            { 
+                LockedSymbol.draw(graphicsHandler);
+            }
+            
         // }
         // else { 
         //     update();
