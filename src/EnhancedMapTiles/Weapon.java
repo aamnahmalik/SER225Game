@@ -15,12 +15,13 @@ import Maps.TestMap;
 import Utils.Direction;
 import Utils.Point;
 
+
 //axe
 
 public class Weapon extends EnhancedMapTile
 {
     protected Map map;
-	private boolean hasInteracted = false;
+	private static boolean hasInteracted = false;
 	
     public Weapon(Point location) 
     {
@@ -55,4 +56,17 @@ public class Weapon extends EnhancedMapTile
         		
         return new GameObject(x+12, y, frame);
     }
+
+    public static boolean hasTheWeapon()
+    {
+        if (hasInteracted == true)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }
+
