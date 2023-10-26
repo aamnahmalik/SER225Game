@@ -43,7 +43,7 @@ public class HealthMeter {
     }
 
     public void minusHealth(int health){
-        health = 20;
+        health = 30;
         count = count - health;
         update();
     }    
@@ -64,7 +64,7 @@ public class HealthMeter {
 //    		text = new SpriteFont("Coins: " + String.valueOf(count), fontX, fontBottomY, "Arial", 12, Color.white);
 //    	}
     }
-
+            
     public void draw(GraphicsHandler graphicsHandler) {
         // if camera is at bottom of screen, textbox is drawn at top of screen instead of the bottom like usual
         // to prevent it from covering the player
@@ -88,7 +88,5 @@ public class HealthMeter {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
-
-    
 
 }
