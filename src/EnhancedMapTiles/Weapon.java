@@ -43,6 +43,7 @@ public class Weapon extends EnhancedMapTile
         {
             hasInteracted = true;
             this.isHidden = true;
+            this.map.getCheckList().itemCollected();
         }
     }
 

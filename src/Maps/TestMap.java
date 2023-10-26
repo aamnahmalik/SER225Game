@@ -2,9 +2,11 @@ package Maps;
 
 import EnhancedMapTiles.FirstAidKit;
 import EnhancedMapTiles.Food;
+import EnhancedMapTiles.KeyPurple;
 import EnhancedMapTiles.PushableRock;
 import EnhancedMapTiles.Water;
 import EnhancedMapTiles.Weapon;
+import EnhancedMapTiles.LockedSymbol;
 import Game.Game;
 import GameObject.Frame;
 import GameObject.GameObject;
@@ -16,6 +18,7 @@ import NPCs.Dinosaur;
 import NPCs.Serena;
 import NPCs.Walrus;
 import NPCs.Zombies;
+import Level.CheckList;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
 import Scripts.TestMap.LostBallScript;
@@ -31,6 +34,7 @@ import Engine.ImageLoader;
 // Represents a test map to be used in a level
 public class TestMap extends Map {
 
+
     public TestMap() {
         super("test_map.txt", new CommonTileset());
         this.playerStartPosition = getMapTile(17, 20).getLocation();
@@ -38,6 +42,7 @@ public class TestMap extends Map {
 
     @Override
     public ArrayList<EnhancedMapTile> loadEnhancedMapTiles() {
+        
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
         PushableRock pushableRock = new PushableRock(getMapTile(2, 7).getLocation());
@@ -47,7 +52,7 @@ public class TestMap extends Map {
         enhancedMapTiles.add(new FirstAidKit(getMapTile(5, 10).getLocation(), this));
         enhancedMapTiles.add(new Food(getMapTile(3, 8).getLocation(), this));
         enhancedMapTiles.add(new Weapon(getMapTile(4, 9).getLocation(), this));
-
+        
         return enhancedMapTiles;
     }
 
