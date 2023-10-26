@@ -14,10 +14,13 @@ import Level.TileType;
 import Maps.TestMap;
 import Utils.Direction;
 import Utils.Point;
+import EnhancedMapTiles.KeyPurple;
 
 public class FirstAidKit extends EnhancedMapTile{
+    
 	protected Map map;
 	private boolean hasInteracted = false;
+
 	
     public FirstAidKit(Point location) {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("firstaidkit.png"),40, 40), TileType.PASSABLE);
@@ -37,6 +40,7 @@ public class FirstAidKit extends EnhancedMapTile{
         	map.setHasChangedHealthMeter(true);
             hasInteracted = true;
             this.isHidden = true;
+            this.map.getCheckList().itemCollected();
         }
     }
 

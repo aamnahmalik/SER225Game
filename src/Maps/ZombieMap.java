@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import EnhancedMapTiles.FirstAidKit;
 import EnhancedMapTiles.Food;
+import EnhancedMapTiles.KeyPurple;
 import EnhancedMapTiles.Water;
 import EnhancedMapTiles.Weapon;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
+import Level.CheckList;
 import Level.Trigger;
 import NPCs.Serena;
 import NPCs.Zombies;
@@ -18,6 +20,7 @@ import Utils.Point;
 
 public class ZombieMap extends Map {
     
+
     public ZombieMap() 
     {
         super("zombie_map.txt", new ZombieTileset());
@@ -33,6 +36,7 @@ public class ZombieMap extends Map {
         enhancedMapTiles.add(new FirstAidKit(getMapTile(19, 28).getLocation(), this));
         enhancedMapTiles.add(new Food(getMapTile(4, 26).getLocation(), this));
         enhancedMapTiles.add(new Weapon(getMapTile(17, 13).getLocation(), this));
+        
 
         return enhancedMapTiles;
     }
