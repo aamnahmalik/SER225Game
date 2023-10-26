@@ -19,6 +19,7 @@ public class Zombies extends NPC
     private int directionChangeDelay;
     private int directionChangeCounter;
     private Random random = new Random();
+    private boolean hasInteracted = false;
 
     public Zombies(int id, Point location) 
     {
@@ -46,6 +47,15 @@ public class Zombies extends NPC
     public void update(Player player) 
     {
         super.update(player);
+
+        if (player.overlaps(this) && !hasInteracted) {
+                int healthDecreaseAmount = 0; 
+                
+                map.getHealthMeter().minusHealth(healthDecreaseAmount);
+        
+                map.setHasChangedHealthMeter(true);
+                hasInteracted = true;
+        }
 
         directionChangeCounter--;
 
