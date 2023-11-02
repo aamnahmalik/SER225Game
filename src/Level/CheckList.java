@@ -8,6 +8,7 @@ import GameObject.SpriteSheet;
 import SpriteFont.SpriteFont;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import EnhancedMapTiles.Checkmark;
 //Represents the game's textbox for the checklist 
 //will display the text it is given to its textQueue 
 //each String in the textQueue will be displayed in the textbox, and hitting the interact key will cycle between additional Strings 
@@ -36,7 +37,16 @@ public class CheckList {
     private Sprite keyWhite;
     private Sprite LockedSymbol;
     private Sprite keyPurple;
+    private Sprite Checkmark;
+    private Sprite Checkmark2;
+    private Sprite Checkmark3;
+    private Sprite Checkmark4;
     public int collectedItems;
+    public int collectedWater;
+    public int collectedFood;
+    public int collectedFirstAidKit;
+    public int collectedWeapon;
+
     
 
     int count = 0; 
@@ -51,6 +61,7 @@ public class CheckList {
         BufferedImage keyWhiteImage = ImageLoader.load("keyWhite.png");
         BufferedImage LockedSymbolImage = ImageLoader.load("lockedSymbol.png");
         BufferedImage keyPurpleImage = ImageLoader.load("keyPurple.png");
+        BufferedImage CheckmarkImage = ImageLoader.load("Checkmark.png");
 
         
 
@@ -65,6 +76,15 @@ public class CheckList {
         keyPurple = new Sprite(keyPurpleImage, x+95, topY +4);
         LockedSymbol = new Sprite(LockedSymbolImage, x+97, topY+3);
         LockedSymbol.setScale(.04f);
+        Checkmark = new Sprite(CheckmarkImage, x, topY);
+        Checkmark.setScale(.1f);
+        Checkmark2= new Sprite(CheckmarkImage, x+25, topY);
+        Checkmark2.setScale(.1f);
+        Checkmark3 = new Sprite(CheckmarkImage, x+50, topY);
+        Checkmark3.setScale(.1f);
+        Checkmark4 = new Sprite(CheckmarkImage, x+75, topY);
+        Checkmark4.setScale(.1f);
+
         
         
     }
@@ -85,8 +105,79 @@ public class CheckList {
             //System.out.println("4 items have been collected");
         }
     }
+
+
+    public void waterCollected () { 
+        collectedWater = collectedWater +1;
+        update();
+
+        if (collectedWater ==1) 
+        { 
+            Checkmark checkmark = new Checkmark (map.getMapTile(0,2).getLocation(),map);
+            checkmark.setMap(map);
+        }
+    }
+
+    public void foodCollected () {
+        collectedFood = collectedFood +1;
+        update(); 
+
+        if (collectedFood ==1);
+        {
+            Checkmark checkmark2 = new Checkmark (map.getMapTile(0,2).getLocation(),map);
+            checkmark2.setMap(map);
+        }
+    }
+
+    public void firstAidKitCollected () { 
+        collectedFirstAidKit = collectedFirstAidKit +1;
+        update();
+
+        if (collectedFirstAidKit ==1);
+        {
+            Checkmark checkmark3 = new Checkmark (map.getMapTile(0,2).getLocation(),map);
+            checkmark3.setMap(map);
+        }
+    }
+
+    public void weaponCollected () { 
+        collectedWeapon = collectedWeapon +1;
+        update();
+
+        if (collectedWeapon ==1);
+        {
+            System.out.println("weapon is collected");
+            Checkmark checkmark4 = new Checkmark (map.getMapTile(0,2).getLocation(),map);
+            checkmark4.setMap(map);
+        }
+    }
+
+
+
+
+
+    // public void waterCollected () {
+    //     protected boolean collectedWater = false; 
+    //     Checkmark.isHidden = true;
+    //     update();
+
+    //     if (collectedWater == true) { 
+    //         this.isHidden = false;
+    //     }
+    // }
+
+
+
     public int getCollectedItems() {
         return collectedItems;
+    }
+
+    public int getCollectedWater() {
+        return collectedWater;
+    }
+
+    public int getCollectedFood() {
+        return collectedFood;
     }
 
     public void addItem (int item) { 
@@ -122,8 +213,8 @@ public class CheckList {
             food.draw(graphicsHandler);
             firstAidKitWhite.draw(graphicsHandler);
             axeWhite.draw(graphicsHandler);
-            //keyWhite.draw(graphicsHandler);
-
+            //Checkmark.draw(graphicsHandler);
+            
             //if items collected = 4 unlockedsymbol
             //if items collected = less than 4 locked symbol 
         
@@ -135,6 +226,23 @@ public class CheckList {
             else 
             { 
                 LockedSymbol.draw(graphicsHandler);
+            }
+
+            if (collectedWater >=1) 
+            { 
+                Checkmark.draw(graphicsHandler);
+            }
+
+            if (collectedFood >=1) {
+                Checkmark2.draw(graphicsHandler);
+            }
+
+            if (collectedFirstAidKit >=1) {
+                Checkmark3.draw(graphicsHandler);
+            }
+
+            if (collectedWeapon >= 1) {
+                Checkmark4.draw(graphicsHandler);
             }
             
         // }

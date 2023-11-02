@@ -39,6 +39,7 @@ public class Water extends EnhancedMapTile{
             hasInteracted = true;
             this.isHidden = true;
             this.map.getCheckList().itemCollected();
+            this.map.getCheckList().waterCollected();
         }
     }
 

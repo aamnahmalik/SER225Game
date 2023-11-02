@@ -41,6 +41,7 @@ public class FirstAidKit extends EnhancedMapTile{
             hasInteracted = true;
             this.isHidden = true;
             this.map.getCheckList().itemCollected();
+            this.map.getCheckList().firstAidKitCollected();
         }
     }
 
