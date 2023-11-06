@@ -4,6 +4,7 @@ import Level.Map;
 import Maps.TestMap;
 import Maps.TitleScreenMap;
 import Maps.ZombieMap;
+import Maps.BlankMap;
 import Maps.JurassicMap;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class EditorMaps {
             add("TestMap");
             add("TitleScreen");
             add("ZombieMap");
+            add("BlankMap");
 
             add("JurassicMap");
         }};
@@ -27,6 +29,8 @@ public class EditorMaps {
                 return new TitleScreenMap();
             case "ZombieMap":
                 return new ZombieMap();
+            case "BlankMap":
+                return new BlankMap();
 
 
             case "JurassicMap":
