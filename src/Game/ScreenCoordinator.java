@@ -18,6 +18,8 @@ public class ScreenCoordinator extends Screen {
 	// keep track of gameState so ScreenCoordinator knows which Screen to show
 	protected GameState gameState;
 	protected GameState previousGameState;
+    protected MenuScreen menuScreen = new MenuScreen(this);
+
 
 	public GameState getGameState() {
 		return gameState;
@@ -42,7 +44,7 @@ public class ScreenCoordinator extends Screen {
 			if (previousGameState != gameState) {
 				switch(gameState) {
 					case MENU:
-						currentScreen = new MenuScreen(this);
+						currentScreen = menuScreen;
 						break;
 					case LEVEL:
 						currentScreen = new PlayLevelScreen(this);
