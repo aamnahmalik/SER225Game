@@ -4,7 +4,6 @@ import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
-import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
 
@@ -533,7 +532,8 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile57 = new MapTileBuilder(frame57);
+        MapTileBuilder tile57 = new MapTileBuilder(frame1)
+                .withTopLayer(frame57);
 
         mapTiles.add(tile57);
 
@@ -541,7 +541,8 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile58 = new MapTileBuilder(frame58);
+        MapTileBuilder tile58 = new MapTileBuilder(frame2)
+                .withTopLayer(frame58);
 
         mapTiles.add(tile58);
 
@@ -549,7 +550,8 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile59 = new MapTileBuilder(frame59);
+        MapTileBuilder tile59 = new MapTileBuilder(frame3)
+                .withTopLayer(frame59);
 
         mapTiles.add(tile59);
 
@@ -1238,7 +1240,7 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile141 = new MapTileBuilder(frame141)
+        MapTileBuilder tile141 = new MapTileBuilder(frame6)
                 .withTopLayer(frame141)
                 .withTileType(TileType.NOT_PASSABLE);
 
@@ -1248,7 +1250,7 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile142 = new MapTileBuilder(frame142)
+        MapTileBuilder tile142 = new MapTileBuilder(frame7)
                 .withTopLayer(frame142)
                 .withTileType(TileType.NOT_PASSABLE);
 
@@ -1258,11 +1260,17 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile143 = new MapTileBuilder(frame143)
+        MapTileBuilder tile143 = new MapTileBuilder(frame12)
                 .withTopLayer(frame143)
                 .withTileType(TileType.NOT_PASSABLE);
 
         mapTiles.add(tile143);
+
+         MapTileBuilder tile193 = new MapTileBuilder(frame4)
+                .withTopLayer(frame143)
+                .withTileType(TileType.NOT_PASSABLE);
+
+        mapTiles.add(tile193);
 
         // Frame frame144 = new FrameBuilder(getSubImage(17, 7))
         //         .withScale(tileScale)
@@ -1376,109 +1384,109 @@ public class JurassicTileset extends Tileset
 
         // mapTiles.add(tile157);
 
-        // Frame frame158 = new FrameBuilder(getSubImage(19, 5))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame158 = new FrameBuilder(getSubImage(19, 5))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile158 = new MapTileBuilder(frame158);
+        MapTileBuilder tile158 = new MapTileBuilder(frame158);
 
-        // mapTiles.add(tile158);
+        mapTiles.add(tile158);
 
-        // Frame frame159 = new FrameBuilder(getSubImage(19, 6))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame159 = new FrameBuilder(getSubImage(19, 6))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile159 = new MapTileBuilder(frame159);
+        MapTileBuilder tile159 = new MapTileBuilder(frame159);
 
-        // mapTiles.add(tile159);
+        mapTiles.add(tile159);
 
-        // Frame frame160 = new FrameBuilder(getSubImage(19, 7))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame160 = new FrameBuilder(getSubImage(19, 7))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile160 = new MapTileBuilder(frame160);
+        MapTileBuilder tile160 = new MapTileBuilder(frame160);
 
-        // mapTiles.add(tile160);
+        mapTiles.add(tile160);
 
-        // Frame frame161 = new FrameBuilder(getSubImage(20, 0))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame161 = new FrameBuilder(getSubImage(20, 0))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile161 = new MapTileBuilder(frame161);
+        MapTileBuilder tile161 = new MapTileBuilder(frame161);
 
-        // mapTiles.add(tile161);
+        mapTiles.add(tile161);
 
-        // Frame frame162 = new FrameBuilder(getSubImage(20, 1))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame162 = new FrameBuilder(getSubImage(20, 1))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile162 = new MapTileBuilder(frame162);
+        MapTileBuilder tile162 = new MapTileBuilder(frame162);
 
-        // mapTiles.add(tile162);
+        mapTiles.add(tile162);
 
-        // Frame frame163 = new FrameBuilder(getSubImage(20, 2))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame163 = new FrameBuilder(getSubImage(20, 2))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile163 = new MapTileBuilder(frame163);
+        MapTileBuilder tile163 = new MapTileBuilder(frame163);
 
-        // mapTiles.add(tile163);
+        mapTiles.add(tile163);
 
-        // Frame frame164 = new FrameBuilder(getSubImage(20, 3))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame164 = new FrameBuilder(getSubImage(20, 3))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile164 = new MapTileBuilder(frame164);
+        MapTileBuilder tile164 = new MapTileBuilder(frame164);
 
-        // mapTiles.add(tile164);
+        mapTiles.add(tile164);
 
-        // Frame frame165 = new FrameBuilder(getSubImage(20, 4))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame165 = new FrameBuilder(getSubImage(20, 4))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile165 = new MapTileBuilder(frame165);
+        MapTileBuilder tile165 = new MapTileBuilder(frame165);
 
-        // mapTiles.add(tile165);
+        mapTiles.add(tile165);
 
-        // Frame frame166 = new FrameBuilder(getSubImage(20, 5))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame166 = new FrameBuilder(getSubImage(20, 5))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile166 = new MapTileBuilder(frame166);
+        MapTileBuilder tile166 = new MapTileBuilder(frame166);
 
-        // mapTiles.add(tile166);
+        mapTiles.add(tile166);
 
-        // Frame frame167 = new FrameBuilder(getSubImage(20, 6))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame167 = new FrameBuilder(getSubImage(20, 6))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile167 = new MapTileBuilder(frame167);
+        MapTileBuilder tile167 = new MapTileBuilder(frame167);
 
-        // mapTiles.add(tile167);
+        mapTiles.add(tile167);
 
-        // Frame frame168 = new FrameBuilder(getSubImage(20, 7))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame168 = new FrameBuilder(getSubImage(20, 7))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile168 = new MapTileBuilder(frame168);
+        MapTileBuilder tile168 = new MapTileBuilder(frame168);
 
-        // mapTiles.add(tile168);
+        mapTiles.add(tile168);
 
-        // Frame frame169 = new FrameBuilder(getSubImage(21, 0))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame169 = new FrameBuilder(getSubImage(21, 0))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile169 = new MapTileBuilder(frame169);
+        MapTileBuilder tile169 = new MapTileBuilder(frame169);
 
-        // mapTiles.add(tile169);
+        mapTiles.add(tile169);
 
-        // Frame frame170 = new FrameBuilder(getSubImage(21, 1))
-        //         .withScale(tileScale)
-        //         .build();
+        Frame frame170 = new FrameBuilder(getSubImage(21, 1))
+                .withScale(tileScale)
+                .build();
 
-        // MapTileBuilder tile170 = new MapTileBuilder(frame170);
+        MapTileBuilder tile170 = new MapTileBuilder(frame170);
 
-        // mapTiles.add(tile170);
+        mapTiles.add(tile170);
 
         Frame frame171 = new FrameBuilder(getSubImage(21, 2))
                 .withScale(tileScale)

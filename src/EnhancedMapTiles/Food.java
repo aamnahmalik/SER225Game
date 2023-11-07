@@ -46,6 +46,7 @@ public class Food extends EnhancedMapTile{
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
                 .withScale(0.5f)
+                .withBounds(1, 1, 58, 75)
                 .build();
         		
         return new GameObject(x+12, y, frame);

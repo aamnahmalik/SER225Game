@@ -4,7 +4,6 @@ import Builders.FrameBuilder;
 import Builders.MapTileBuilder;
 import Engine.ImageLoader;
 import GameObject.Frame;
-import GameObject.ImageEffect;
 import Level.TileType;
 import Level.Tileset;
 
@@ -14,7 +13,7 @@ public class ZombieTileset extends Tileset
 {
         public ZombieTileset()
         {
-                super(ImageLoader.load("ZombieTileset4.png"), 16, 16, 3);
+                super(ImageLoader.load("ZombieTileset.png"), 16, 16, 3);
         }
 
         @Override
@@ -647,7 +646,7 @@ public class ZombieTileset extends Tileset
                                 .build();
 
                 MapTileBuilder tile69 = new MapTileBuilder(frame5)
-                                .withTopLayer(frame64)
+                                .withTopLayer(frame69)
                                 .withTileType(TileType.NOT_PASSABLE);
 
                 mapTiles.add(tile69);

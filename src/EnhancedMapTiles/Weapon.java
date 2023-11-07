@@ -52,6 +52,7 @@ public class Weapon extends EnhancedMapTile
     {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
                 .withScale(2)
+                .withBounds(1, 2, 14, 24)
                 .build();
         		
         return new GameObject(x+12, y, frame);

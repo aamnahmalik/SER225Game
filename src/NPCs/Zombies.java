@@ -94,29 +94,29 @@ public class Zombies extends NPC
                 {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build()
                 });
                 put("STAND_RIGHT", new Frame[] 
                 {
                     new FrameBuilder(spriteSheet.getSprite(1, 0))
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build()
                 });
 
                 put("WALK_LEFT", new Frame[]{
                     new FrameBuilder(spriteSheet.getSprite(1, 0), 14)
                             .withScale(2)
-                            .withBounds(7, 17, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(1, 1), 14)
                             .withScale(2)
-                            .withBounds(7, 17, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(1, 2), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build()
                 });
 
@@ -124,15 +124,15 @@ public class Zombies extends NPC
                 {
                     new FrameBuilder(spriteSheet.getSprite(2, 0), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(2, 1), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(2, 2), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build()
                 });
 
@@ -140,30 +140,30 @@ public class Zombies extends NPC
                 {
                     new FrameBuilder(spriteSheet.getSprite(3, 0), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(3, 1), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(3, 2), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build()
                 });
                 put("WALK_DOWN", new Frame[]
                 {
                     new FrameBuilder(spriteSheet.getSprite(0, 0), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 1), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build(),
                     new FrameBuilder(spriteSheet.getSprite(0, 2), 14)
                             .withScale(2)
-                            .withBounds(7, 13, 20, 30)
+                            .withBounds(0, 0, 20, 30)
                             .build()
                 });
         }};

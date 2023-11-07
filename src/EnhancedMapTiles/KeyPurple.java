@@ -90,6 +90,7 @@ public class KeyPurple extends EnhancedMapTile{
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
                 .withScale(2)
+                .withBounds(1, 2, 17, 17)
                 .build();
         		
         return new GameObject(x+12, y, frame);
