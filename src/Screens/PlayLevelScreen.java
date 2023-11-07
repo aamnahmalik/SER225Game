@@ -23,13 +23,15 @@ public class PlayLevelScreen extends Screen {
     protected WinScreen winScreen;
     protected FlagManager flagManager;
     protected PlayerSelection selectionScreen;
+    protected IntroVideoScreen introVideoScreen;
+    protected boolean isChuckSelected;
+
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
     }
     
     public void initialize() {
-
         // setup state
         flagManager = new FlagManager();
         flagManager.addFlag("hasTalkedToSerena", false);
@@ -39,6 +41,7 @@ public class PlayLevelScreen extends Screen {
         map.setFlagManager(flagManager);
 
         selectionScreen = new PlayerSelection(this);
+        introVideoScreen = new IntroVideoScreen(this, isChuckSelected);
 
         winScreen = new WinScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
@@ -65,6 +68,8 @@ public class PlayLevelScreen extends Screen {
             case SELECTION:
                 selectionScreen.update();
                 break;
+            case INTRO:
+                introVideoScreen.update();
         }
 
         // if flag is set at any point during gameplay, game is "won"
@@ -85,6 +90,8 @@ public class PlayLevelScreen extends Screen {
             case SELECTION:
                 selectionScreen.draw(graphicsHandler);
                 break;                
+            case INTRO:
+                introVideoScreen.draw(graphicsHandler);
         }
     }
 

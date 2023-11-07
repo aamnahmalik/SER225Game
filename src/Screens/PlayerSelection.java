@@ -29,7 +29,9 @@ public class PlayerSelection extends Screen {
     private boolean isChuckSelected; 
     private SpriteFont chuckLabel;
     private SpriteFont blairLabel;
-    private PlayLevelScreen playLevelScreen;
+    protected PlayLevelScreen playLevelScreen;
+    protected IntroVideoScreen introVideoScreen;
+    protected BackgroundMusic backgroundMusic;
 
     public PlayerSelection(PlayLevelScreen playLevelScreen) {
         this.playLevelScreen = playLevelScreen;
@@ -45,7 +47,8 @@ public class PlayerSelection extends Screen {
         pressEnter = new SpriteFont("PRESS  ENTER  WHEN  READY", 203 , 530, "ArcadeClassic", 35, Color.WHITE);
         chuckLabel = new SpriteFont("Chuck", 136, 400, "ArcadeClassic", 50, Color.WHITE);
         blairLabel = new SpriteFont("Blair", 520, 400, "ArcadeClassic", 50, Color.WHITE);
-    
+        backgroundMusic = new BackgroundMusic("Resources/Player.wav");
+        backgroundMusic.play(); // Start playing the background music
     }
     
 
@@ -59,7 +62,8 @@ public class PlayerSelection extends Screen {
         }
         //Transition to another screen when Enter is pressed
         if (Keyboard.isKeyDown(Key.ENTER)) {
-            playLevelScreen.setGameState(PlayLevelScreenState.RUNNING);
+            backgroundMusic.stop();
+            playLevelScreen.setGameState(PlayLevelScreenState.INTRO);
         }
     }
 
