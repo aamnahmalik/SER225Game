@@ -5,10 +5,13 @@ import Engine.ImageLoader;
 import EnhancedMapTiles.KeyPurple;
 import GameObject.Sprite;
 import GameObject.SpriteSheet;
+import Maps.TestMap;
 import SpriteFont.SpriteFont;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import EnhancedMapTiles.Checkmark;
+import EnhancedMapTiles.Portal;
+import Maps.TestMap;
 //Represents the game's textbox for the checklist 
 //will display the text it is given to its textQueue 
 //each String in the textQueue will be displayed in the textbox, and hitting the interact key will cycle between additional Strings 
@@ -41,11 +44,13 @@ public class CheckList {
     private Sprite Checkmark2;
     private Sprite Checkmark3;
     private Sprite Checkmark4;
+    private Sprite Portal;
     public int collectedItems;
     public int collectedWater;
     public int collectedFood;
     public int collectedFirstAidKit;
     public int collectedWeapon;
+    public int collectedPortal;
 
     
 
@@ -62,6 +67,7 @@ public class CheckList {
         BufferedImage LockedSymbolImage = ImageLoader.load("lockedSymbol.png");
         BufferedImage keyPurpleImage = ImageLoader.load("keyPurple.png");
         BufferedImage CheckmarkImage = ImageLoader.load("Checkmark.png");
+        BufferedImage PortalImage = ImageLoader.load("portal.png");
 
         
 
@@ -84,6 +90,7 @@ public class CheckList {
         Checkmark3.setScale(.1f);
         Checkmark4 = new Sprite(CheckmarkImage, x+75, topY);
         Checkmark4.setScale(.1f);
+        Portal = new Sprite (PortalImage, x-100, topY);
 
         
         
@@ -102,7 +109,16 @@ public class CheckList {
             keyPurple.setMap(map);
             map.enhancedMapTiles.add(keyPurple);
 
+
             //System.out.println("4 items have been collected");
+        }
+
+        if (collectedItems ==5) {
+            
+            Portal portal = new Portal (map.getMapTile(9, 10).getLocation(),map);
+            portal.setMap(map);
+            map.enhancedMapTiles.add(portal);
+
         }
     }
 
@@ -149,6 +165,18 @@ public class CheckList {
             System.out.println("weapon is collected");
             Checkmark checkmark4 = new Checkmark (map.getMapTile(0,2).getLocation(),map);
             checkmark4.setMap(map);
+        }
+    }
+
+    public void portalCollected ()  {
+        collectedPortal = collectedPortal + 1;
+        update(); 
+
+        if (collectedPortal ==1)
+        {
+            System.out.println("portal is collceted");
+            //change logic to get screen to switch when portal is touched 
+
         }
     }
 
