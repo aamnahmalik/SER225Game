@@ -158,7 +158,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     protected enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, SELECTION
+        RUNNING, LEVEL_COMPLETED, SELECTION, INTRO
     }
 
     //check the map number
