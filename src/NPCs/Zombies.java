@@ -57,6 +57,21 @@ public class Zombies extends NPC
                 hasInteracted = true;
         }
 
+        // Point playerLocation = player.getLocation();
+        // Point zombie1L = this.getLocation();
+
+        // if (player.isAttacking() && (((Math.abs(playerLocation.x - zombie1L.x) >= 26) && (Math.abs(playerLocation.x - zombie1L.x) <= 39))
+        //     || 
+        //     ((Math.abs(playerLocation.y - zombie1L.y) <= 47) && (Math.abs(playerLocation.y-zombie1L.y) >= 34)))) {
+        //         this.isHidden = true;
+        //     }
+
+        
+        // if (isAttacking.intersects(this)) {
+        //     this.setIsHidden(true);
+        // }
+        // super.update();
+
         directionChangeCounter--;
 
         if (directionChangeCounter <= 0) 
