@@ -26,6 +26,7 @@ public class Zombies extends NPC
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Zombie11.png"), 24, 32), "STAND_LEFT");
         directionChangeDelay = random.nextInt(1500) + 500;
         directionChangeCounter = directionChangeDelay;
+        this.isUpdateOffScreen = true;
         int newDirection = random.nextInt(4);
             
             switch (newDirection) 
