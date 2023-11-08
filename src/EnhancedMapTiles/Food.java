@@ -39,6 +39,7 @@ public class Food extends EnhancedMapTile{
             hasInteracted = true;
             this.isHidden = true;
             this.map.getCheckList().itemCollected();
+            this.map.getCheckList().foodCollected();
         }
     }
 
