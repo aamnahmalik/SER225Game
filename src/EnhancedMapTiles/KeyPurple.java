@@ -75,7 +75,6 @@ public class KeyPurple extends EnhancedMapTile{
         if(this.map.getCheckList().getCollectedItems() >= 4)
         {
             this.isHidden = false;
-            System.out.println("items have been collected");
         }
         
         if (player.overlaps(this) && !hasInteracted && this.isHidden == false)

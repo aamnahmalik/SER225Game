@@ -3,6 +3,7 @@ package Game;
 import Engine.GameWindow;
 import Engine.ScreenManager;
 
+
 /*
  * The game starts here
  * 
@@ -21,4 +22,7 @@ public class Game {
         screenManager.setCurrentScreen(new ScreenCoordinator());
         gameWindow.startGame();
     }
+
+
+    
 }

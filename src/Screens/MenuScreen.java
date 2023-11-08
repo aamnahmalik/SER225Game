@@ -9,6 +9,7 @@ import SpriteFont.SpriteFont;
 
 import java.awt.*;
 
+
 // This is the class for the main menu screen
 public class MenuScreen extends Screen {
     protected ScreenCoordinator screenCoordinator;
@@ -21,6 +22,8 @@ public class MenuScreen extends Screen {
     protected int keyPressTimer;
     protected int pointerLocationX, pointerLocationY;
     protected KeyLocker keyLocker = new KeyLocker();
+    protected BackgroundMusic backgroundMusic;
+    protected boolean musicInitialized = false;
 
     public MenuScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -46,7 +49,17 @@ public class MenuScreen extends Screen {
         keyPressTimer = 0;
         menuItemSelected = -1;
         keyLocker.lockKey(Key.SPACE);
+    
+        if (!musicInitialized) {
+            backgroundMusic = new BackgroundMusic("Resources/Menu.wav");
+            musicInitialized = true;
+        }
+
+        if (!backgroundMusic.isPlaying()) {
+            backgroundMusic.play(); // Start playing the background music
+        }
     }
+
 
     public void update() {
         // update background map (to play tile animations)
@@ -100,6 +113,7 @@ public class MenuScreen extends Screen {
         if (!keyLocker.isKeyLocked(Key.SPACE) && Keyboard.isKeyDown(Key.SPACE)) {
             menuItemSelected = currentMenuItemHovered;
             if (menuItemSelected == 0) {
+                backgroundMusic.stop();
                 screenCoordinator.setGameState(GameState.LEVEL);
             } else if (menuItemSelected == 1) {
                 screenCoordinator.setGameState(GameState.CREDITS);
