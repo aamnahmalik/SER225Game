@@ -151,17 +151,18 @@ public class JurassicTileset extends Tileset
         MapTileBuilder tile16 = new MapTileBuilder(frame16);
 
         mapTiles.add(tile16);
+        //end of dirt
 
+        //beginning of plants/rocks
         Frame frame17 = new FrameBuilder(getSubImage(2, 0))
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile17 = new MapTileBuilder(frame17);
+        MapTileBuilder tile17 = new MapTileBuilder(frame1)
+                .withTopLayer(frame17);
 
         mapTiles.add(tile17);
-        //end of dirt
-
-        //beginning of plants/rocks
+        
         Frame frame18 = new FrameBuilder(getSubImage(2, 1))
                 .withScale(tileScale)
                 .build();
@@ -532,8 +533,7 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile57 = new MapTileBuilder(frame1)
-                .withTopLayer(frame57);
+        MapTileBuilder tile57 = new MapTileBuilder(frame57);
 
         mapTiles.add(tile57);
 
@@ -541,8 +541,7 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile58 = new MapTileBuilder(frame2)
-                .withTopLayer(frame58);
+        MapTileBuilder tile58 = new MapTileBuilder(frame58);
 
         mapTiles.add(tile58);
 
@@ -550,8 +549,7 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile59 = new MapTileBuilder(frame3)
-                .withTopLayer(frame59);
+        MapTileBuilder tile59 = new MapTileBuilder(frame59);
 
         mapTiles.add(tile59);
 
@@ -694,8 +692,7 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile76 = new MapTileBuilder(frame76)
-                .withTileType(TileType.NOT_PASSABLE);
+        MapTileBuilder tile76 = new MapTileBuilder(frame76);
 
         mapTiles.add(tile76);
 
@@ -703,8 +700,7 @@ public class JurassicTileset extends Tileset
                 .withScale(tileScale)
                 .build();
 
-        MapTileBuilder tile77 = new MapTileBuilder(frame77)
-                .withTileType(TileType.NOT_PASSABLE);
+        MapTileBuilder tile77 = new MapTileBuilder(frame77);
 
         mapTiles.add(tile77);
 

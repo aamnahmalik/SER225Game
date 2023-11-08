@@ -311,9 +311,9 @@ public class GameObject extends AnimatedSprite {
 
 			// Uncomment this to draw player's bounds to screen -- useful for debugging
 			
-			if (this instanceof Player) {
-				drawBounds(graphicsHandler, new Color(255, 0, 0, 100));
-			}
+			// if (this instanceof Player) {
+			// 	drawBounds(graphicsHandler, new Color(255, 0, 0, 100));
+			// }
 			
 		} else {
 			super.draw(graphicsHandler);
