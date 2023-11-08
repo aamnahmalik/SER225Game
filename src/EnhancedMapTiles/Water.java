@@ -46,9 +46,10 @@ public class Water extends EnhancedMapTile{
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
-                .withScale(0.2f)
+                .withScale(0.17f)
+                .withBounds(1, 1, 93, 256)
                 .build();
         		
-        return new GameObject(x+12, y, frame);
+        return new GameObject(x, y, frame);
     }
 }

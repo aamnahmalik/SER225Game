@@ -105,7 +105,7 @@ public class CheckList {
 
         if (collectedItems == 4)
         { 
-            KeyPurple keyPurple = new KeyPurple (map.getMapTile(0, 2).getLocation(),map);
+            KeyPurple keyPurple = new KeyPurple (map.getMapTile(2, 2).getLocation(),map);
             keyPurple.setMap(map);
             map.enhancedMapTiles.add(keyPurple);
 
@@ -115,10 +115,10 @@ public class CheckList {
 
         if (collectedItems ==5) {
             
-            Portal portal = new Portal (map.getMapTile(9, 10).getLocation(),map);
+            Portal portal = new Portal (map.getMapTile(4, 7).getLocation(),map);
             portal.setMap(map);
             map.enhancedMapTiles.add(portal);
-
+            
         }
     }
 
