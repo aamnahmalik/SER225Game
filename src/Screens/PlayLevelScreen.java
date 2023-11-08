@@ -7,6 +7,7 @@ import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
+import Maps.JurassicMap;
 import Maps.TestMap;
 import Maps.ZombieMap;
 import Players.Blair;
@@ -57,6 +58,7 @@ public class PlayLevelScreen extends Screen {
                 if(Map.getMapTransition() == 1)
                 {
                     mapTransition();
+                    player.update();
                     this.map.setMapTansition(2);
                 }
                 map.update(player);
@@ -164,7 +166,7 @@ public class PlayLevelScreen extends Screen {
     //check the map number
     public void mapTransition(){
             // define/setup map
-            this.map = new TestMap();
+            this.map = new JurassicMap();
             map.setFlagManager(flagManager);
             // let pieces of map know which button to listen for as the "interact" button
             map.getTextbox().setInteractKey(player.getInteractKey());
@@ -173,6 +175,7 @@ public class PlayLevelScreen extends Screen {
             Point playerStartPosition = map.getPlayerStartPosition();
             this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
             this.player.setFacingDirection(Direction.LEFT);
+            
 
             // let pieces of map know which button to listen for as the "interact" button
                 map.getTextbox().setInteractKey(player.getInteractKey());

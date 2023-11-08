@@ -24,7 +24,7 @@ public class ZombieMap extends Map {
     public ZombieMap() 
     {
         super("zombie_map.txt", new ZombieTileset());
-        this.playerStartPosition = getMapTile(17, 20).getLocation();
+        this.playerStartPosition = getMapTile(13, 5).getLocation();
     }
     
     @Override
@@ -32,10 +32,10 @@ public class ZombieMap extends Map {
     {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        enhancedMapTiles.add(new Water(getMapTile(5, 4).getLocation(), this));
-        enhancedMapTiles.add(new FirstAidKit(getMapTile(19, 28).getLocation(), this));
-        enhancedMapTiles.add(new Food(getMapTile(4, 26).getLocation(), this));
-        enhancedMapTiles.add(new Weapon(getMapTile(17, 13).getLocation(), this));
+        enhancedMapTiles.add(new Water(getMapTile(19, 24).getLocation(), this));
+        enhancedMapTiles.add(new FirstAidKit(getMapTile(11, 18).getLocation(), this));
+        enhancedMapTiles.add(new Food(getMapTile(5, 28).getLocation(), this));
+        enhancedMapTiles.add(new Weapon(getMapTile(1, 17).getLocation(), this));
         
 
         return enhancedMapTiles;
