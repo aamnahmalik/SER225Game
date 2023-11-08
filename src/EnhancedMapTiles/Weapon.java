@@ -52,10 +52,10 @@ public class Weapon extends EnhancedMapTile
     {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
                 .withScale(2)
-                .withBounds(1, 2, 14, 24)
+                .withBounds(1, 2, 16, 28)
                 .build();
         		
-        return new GameObject(x+12, y, frame);
+        return new GameObject(x, y, frame);
     }
 
     public static boolean hasTheWeapon()

@@ -93,6 +93,6 @@ public class KeyPurple extends EnhancedMapTile{
                 .withBounds(1, 2, 17, 17)
                 .build();
         		
-        return new GameObject(x+12, y, frame);
+        return new GameObject(x, y, frame);
     }
 }

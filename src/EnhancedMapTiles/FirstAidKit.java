@@ -48,9 +48,9 @@ public class FirstAidKit extends EnhancedMapTile{
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
                 .withScale(0.5f)
-                .withBounds(0, 0, 40, 40)
+                .withBounds(0, 0, 39, 39)
                 .build();
         		
-        return new GameObject(x+12, y, frame);
+        return new GameObject(x, y, frame);
     }
 }
