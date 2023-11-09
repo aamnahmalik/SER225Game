@@ -1,12 +1,11 @@
 package Screens;
 
-import java.util.ArrayList;
-
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
+import Maps.BlankMap;
 import Maps.TestMap;
 import Maps.ZombieMap;
 import Players.Blair;
@@ -45,6 +44,7 @@ public class PlayLevelScreen extends Screen {
 
         winScreen = new WinScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
+
     }
 
 
@@ -65,13 +65,16 @@ public class PlayLevelScreen extends Screen {
                 break;
             case INTRO:
                 introVideoScreen.update();
+                break;
         }
 
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
+
     }
+
 
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
@@ -88,6 +91,7 @@ public class PlayLevelScreen extends Screen {
             case INTRO:
                 introVideoScreen.draw(graphicsHandler);
         }
+       
     }
 
     public void setGameState(PlayLevelScreenState playLevelScreenState) {
@@ -155,6 +159,5 @@ public class PlayLevelScreen extends Screen {
     protected enum PlayLevelScreenState {
         RUNNING, LEVEL_COMPLETED, SELECTION, INTRO
     }
-
 
 }

@@ -1,0 +1,36 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/**/*.jar",
+            "/Users/milenamartinon/Downloads/DreamTeam2-master/**/*.jar",
+            "/Users/milenamartinon/Downloads/javacv-master/**/*.jar",
+            "/Users/milenamartinon/Downloads/vlcj-master/**/*.jar",
+            "/Users/milenamartinon/Downloads/xuggle-xuggler-master/**/*.jar",
+            "/Users/milenamartinon/Downloads/javafx-sdk-17.0.9/**/*.jar",
+            "src/javafx-sdk-17.0.9/lib/javafx-swt.jar",
+            "src/javafx-sdk-17.0.9/lib/javafx.base.jar",
+            "src/javafx-sdk-17.0.9/lib/javafx.controls.jar",
+            "src/javafx-sdk-17.0.9/lib/javafx.fxml.jar",
+            "src/javafx-sdk-17.0.9/lib/javafx.graphics.jar",
+            "src/javafx-sdk-17.0.9/lib/javafx.media.jar",
+            "src/javafx-sdk-17.0.9/lib/javafx.swing.jar",
+            "src/javafx-sdk-17.0.9/lib/javafx.web.jar"
+        ],
+        "exclude": [
+            "/Users/milenamartinon/Downloads/xuggle-xuggler-master/mk/buildtools/lib/UmlGraph-5.3.jar",
+            "/Users/milenamartinon/Downloads/xuggle-xuggler-master/mk/buildtools/lib/ant-contrib.jar",
+            "/Users/milenamartinon/Downloads/xuggle-xuggler-master/mk/buildtools/lib/ivy-2.2.0.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/javafx-swt.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/javafx.base.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/javafx.controls.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/javafx.fxml.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/javafx.graphics.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/javafx.media.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/javafx.swing.jar",
+            "/Users/milenamartinon/Documents/javafx-sdk-19.0.2.1/lib/javafx.web.jar",
+            "/Users/milenamartinon/Downloads/xuggle-xuggler-master/mk/buildtools/lib/proguard-4.4.jar",
+            "/Users/milenamartinon/Downloads/xuggle-xuggler-master/mk/buildtools/lib/umlgraph.jar"
+        ]
+    }
+}
