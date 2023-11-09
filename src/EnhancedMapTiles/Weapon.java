@@ -44,6 +44,13 @@ public class Weapon extends EnhancedMapTile
             hasInteracted = true;
             this.isHidden = true;
             this.map.getCheckList().itemCollected();
+            this.map.getCheckList().weaponCollected();
+        }
+
+        if (Map.getMapTransition() == 2)
+        {
+            hasInteracted = false;
+            this.map.setMapTansition(3);
         }
     }
 
@@ -52,9 +59,10 @@ public class Weapon extends EnhancedMapTile
     {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
                 .withScale(2)
+                .withBounds(1, 2, 16, 28)
                 .build();
         		
-        return new GameObject(x+12, y, frame);
+        return new GameObject(x, y, frame);
     }
 
     public static boolean hasTheWeapon()

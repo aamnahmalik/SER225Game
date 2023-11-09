@@ -81,6 +81,7 @@ public abstract class Map {
     //map's health meter instance
     protected HealthMeter healthMeter;
     protected boolean hasChangedHealthMeter = false;
+    static int mapTransition = 0;
 
     protected CheckList checkList; 
 
@@ -96,6 +97,15 @@ public abstract class Map {
         this.yMidPoint = (ScreenManager.getScreenHeight() / 2);
         this.playerStartPosition = new Point(0, 0);
     }
+
+    
+    public void setMapTansition (int i) { 
+        mapTransition =i;
+        System.out.println("mapTransition =1");
+    }
+    public static int getMapTransition () {
+        return mapTransition;
+     }
 
     // sets up map by reading in the map file to create the tile map
     // loads in enemies, enhanced map tiles, and npcs

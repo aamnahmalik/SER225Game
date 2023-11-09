@@ -33,6 +33,7 @@ import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
 
+import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 
 // Represents a test map to be used in a level
@@ -128,5 +129,6 @@ public class TestMap extends Map {
 
 
     }
-}
 
+    
+}

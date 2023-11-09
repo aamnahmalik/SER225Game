@@ -138,9 +138,10 @@ public abstract class Player extends GameObject {
                 if (!isAttacking) {
                     // Start the attacking animation
                     playerState = PlayerState.ATTACKING;
-                    isAttacking = true;
+                    isAttacking = true;    
                 }
-            } else {
+            }
+          else {
                 // The "E" key is released, reset the flag to allow for attacking again
                 isAttacking = false;
     
@@ -156,6 +157,12 @@ public abstract class Player extends GameObject {
             playerState = PlayerState.STANDING;
         }
     }
+
+    public boolean isAttacking()
+    {
+        return this.isAttacking;
+    }
+    
 
     private boolean isAttackAnimationComplete() {
         // Check if the current frame index for the attack animation has reached the last frame
@@ -339,6 +346,7 @@ public abstract class Player extends GameObject {
             }
         }
         else if (playerState == PlayerState.ATTACKING) { 
+            
             if (facingDirection == Direction.RIGHT) {
                 this.currentAnimationName = "ATTACK_RIGHT";
             } 

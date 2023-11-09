@@ -26,7 +26,7 @@ public class Serena extends NPC {
            put("STAND_LEFT", new Frame[] {
                     new FrameBuilder(spriteSheet.getSprite(0, 0))
                             .withScale(.8f)
-                            .withBounds(5, 6, 15, 30)
+                            .withBounds(0, 0, 25, 42)
                             .build()
             });
         }};

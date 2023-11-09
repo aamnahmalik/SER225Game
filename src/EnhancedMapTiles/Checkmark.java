@@ -28,8 +28,8 @@ import EnhancedMapTiles.Weapon;
 import EnhancedMapTiles.FirstAidKit;
 
 
-public class KeyPurple extends EnhancedMapTile{
-    public int collectedItems;
+public class Checkmark extends EnhancedMapTile{
+    public int collectedWater;
     protected Map map;
     private boolean hasInteracted = false;
     protected CheckList checklist;
@@ -38,25 +38,25 @@ public class KeyPurple extends EnhancedMapTile{
     @Override
     public void update() {
         super.update();
-        itemCollected();
+        waterCollected();
     }
-    public KeyPurple(Point location)
+    public Checkmark(Point location)
     {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("keyPurple.png"),17, 17), TileType.PASSABLE);
     }
      
-    public KeyPurple(Point location, Map map) 
+    public Checkmark(Point location, Map map) 
     {
         super(location.x, location.y, new SpriteSheet(ImageLoader.load("keyPurple.png"),17, 17), TileType.PASSABLE);
         this.map = map;
         this.checklist = this.map.getCheckList();
     }
 
-    public void itemCollected () {
-        this.collectedItems = this.collectedItems + 1;
+    public void waterCollected () {
+        this.collectedWater = this.collectedWater + 1;
         update();
 
-        if (this.collectedItems >=4 )
+        if (this.collectedWater >=4 )
         { 
             System.out.println("4 items have been collected");
         }
@@ -71,27 +71,27 @@ public class KeyPurple extends EnhancedMapTile{
     public void update(Player player) {
         super.update(player);
 
-        System.out.println(this.map.getCheckList().getCollectedItems());
-        if(this.map.getCheckList().getCollectedItems() >= 4)
+        System.out.println(this.map.getCheckList().getCollectedWater());
+        if(this.map.getCheckList().getCollectedWater() == 1)
         {
             this.isHidden = false;
+            System.out.println("item have been collected");
         }
         
         if (player.overlaps(this) && !hasInteracted && this.isHidden == false)
         {
             hasInteracted = true;
             this.isHidden = true;
-            this.map.getCheckList().itemCollected();
+            this.map.getCheckList().waterCollected();
         }
     }
 
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
-                .withScale(1.3f)
-                .withBounds(1, 2, 17, 17)
+                .withScale(2)
                 .build();
         		
-        return new GameObject(x, y, frame);
+        return new GameObject(x+12, y, frame);
     }
 }

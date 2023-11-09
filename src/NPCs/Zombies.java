@@ -26,6 +26,7 @@ public class Zombies extends NPC
         super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Zombie11.png"), 24, 32), "STAND_LEFT");
         directionChangeDelay = random.nextInt(1500) + 500;
         directionChangeCounter = directionChangeDelay;
+        this.isUpdateOffScreen = true;
         int newDirection = random.nextInt(4);
             
             switch (newDirection) 
@@ -56,6 +57,21 @@ public class Zombies extends NPC
                 map.setHasChangedHealthMeter(true);
                 hasInteracted = true;
         }
+
+        // if (player.overlaps(this) && player.isAttacking()) {
+                
+        //         this.isHidden = true;
+        // }
+
+        Point playerLocation = player.getLocation();
+        Point zombie1L = this.getLocation();
+
+        if (player.isAttacking() && (((Math.abs(playerLocation.x - zombie1L.x) >= 26) && (Math.abs(playerLocation.x - zombie1L.x) <= 39))
+            || 
+            ((Math.abs(playerLocation.y - zombie1L.y) <= 47) && (Math.abs(playerLocation.y-zombie1L.y) >= 34)))) {
+                this.isHidden = true;
+            }
+
 
         directionChangeCounter--;
 
