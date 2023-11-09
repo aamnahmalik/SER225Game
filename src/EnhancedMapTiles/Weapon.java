@@ -46,6 +46,12 @@ public class Weapon extends EnhancedMapTile
             this.map.getCheckList().itemCollected();
             this.map.getCheckList().weaponCollected();
         }
+
+        if (Map.getMapTransition() == 2)
+        {
+            hasInteracted = false;
+            this.map.setMapTansition(3);
+        }
     }
 
     @Override
