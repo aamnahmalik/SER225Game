@@ -7,6 +7,7 @@ import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
+import Level.HealthMeter;
 import Maps.JurassicMap;
 import Maps.TestMap;
 import Maps.ZombieMap;
@@ -22,6 +23,7 @@ public class PlayLevelScreen extends Screen {
     protected Player player;
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
+    protected LoseScreen loseScreen;
     protected FlagManager flagManager;
     protected PlayerSelection selectionScreen;
     protected IntroVideoScreen introVideoScreen;
@@ -46,6 +48,9 @@ public class PlayLevelScreen extends Screen {
 
         winScreen = new WinScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
+
+        loseScreen = new LoseScreen(this);
+        playLevelScreenState = PlayLevelScreenState.SELECTION;
     }
 
 
@@ -61,23 +66,31 @@ public class PlayLevelScreen extends Screen {
                     player.update();
                     this.map.setMapTansition(2);
                 }
+                if (HealthMeter.count <= 0){
+                    playLevelScreenState = PlayLevelScreenState.LOSE;
+                }
                 map.update(player);
                 break;
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
+             case LOSE:
+                loseScreen.update();
+                break;
             case SELECTION:
                 selectionScreen.update();
                 break;
             case INTRO:
                 introVideoScreen.update();
+                break;
         }
 
         // if flag is set at any point during gameplay, game is "won"
         if (map.getFlagManager().isFlagSet("hasFoundBall")) {
             playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
         }
+
     }
 
     public void draw(GraphicsHandler graphicsHandler) {
@@ -89,9 +102,12 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_COMPLETED:
                 winScreen.draw(graphicsHandler);
                 break;
+            case LOSE:
+                loseScreen.draw(graphicsHandler);
+                break; 
             case SELECTION:
                 selectionScreen.draw(graphicsHandler);
-                break;                
+                break;               
             case INTRO:
                 introVideoScreen.draw(graphicsHandler);
         }
@@ -151,16 +167,18 @@ public class PlayLevelScreen extends Screen {
 
 
     public void resetLevel() {
+        HealthMeter.count = 50;
         initialize();
     }
 
     public void goBackToMenu() {
+        HealthMeter.count = 50;
         screenCoordinator.setGameState(GameState.MENU);
     }
 
     // This enum represents the different states this screen can be in
     protected enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, SELECTION, INTRO
+        RUNNING, LEVEL_COMPLETED, SELECTION, INTRO, LOSE
     }
 
     //check the map number

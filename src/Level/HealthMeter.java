@@ -5,7 +5,6 @@ import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
 import SpriteFont.SpriteFont;
-
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -29,7 +28,7 @@ public class HealthMeter {
     private SpriteFont text = null;
     private Map map;
     
-    int count = 50;
+    public static int count = 50;
 
     public HealthMeter(Map map) {
         this.map = map;
@@ -49,11 +48,11 @@ public class HealthMeter {
     }    
 
     public int getHealthMeter() {
-	return count;
+	    return count;
     }
     
     public void setHealthMeter(int count) {
-	this.count = count;
+	    HealthMeter.count = count;
     }
 
     public void update() {
