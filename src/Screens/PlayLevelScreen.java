@@ -1,7 +1,5 @@
 package Screens;
 
-import java.util.ArrayList;
-
 import Engine.GraphicsHandler;
 import Engine.Screen;
 import Game.GameState;
@@ -9,6 +7,7 @@ import Game.ScreenCoordinator;
 import Level.*;
 import Level.HealthMeter;
 import Maps.JurassicMap;
+import Maps.BlankMap;
 import Maps.TestMap;
 import Maps.ZombieMap;
 import Players.Blair;
@@ -51,6 +50,7 @@ public class PlayLevelScreen extends Screen {
 
         loseScreen = new LoseScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
+
     }
 
 
@@ -93,6 +93,7 @@ public class PlayLevelScreen extends Screen {
 
     }
 
+
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
         switch (playLevelScreenState) {
@@ -111,6 +112,7 @@ public class PlayLevelScreen extends Screen {
             case INTRO:
                 introVideoScreen.draw(graphicsHandler);
         }
+       
     }
 
     public void setGameState(PlayLevelScreenState playLevelScreenState) {
@@ -225,6 +227,5 @@ public class PlayLevelScreen extends Screen {
                 }
 
         }
-
 
 }
