@@ -2,6 +2,7 @@ package Screens;
 
 import Engine.GraphicsHandler;
 import Engine.Screen;
+import EnhancedMapTiles.Weapon;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
@@ -23,6 +24,7 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected LoseScreen loseScreen;
+    protected QuitScreen quitScreen;
     protected FlagManager flagManager;
     protected PlayerSelection selectionScreen;
     protected IntroVideoScreen introVideoScreen;
@@ -51,6 +53,8 @@ public class PlayLevelScreen extends Screen {
         loseScreen = new LoseScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
 
+        quitScreen = new QuitScreen(this);
+        playLevelScreenState = PlayLevelScreenState.SELECTION;
     }
 
 
@@ -62,12 +66,14 @@ public class PlayLevelScreen extends Screen {
                 player.update();
                 if(Map.getMapTransition() == 1)
                 {
+                    playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
                     mapTransition();
                     player.update();
                     this.map.setMapTansition(2);
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
+                    this.map.setMapTansition(2);
                 }
                 map.update(player);
                 break;
@@ -75,7 +81,7 @@ public class PlayLevelScreen extends Screen {
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
-             case LOSE:
+            case LOSE:
                 loseScreen.update();
                 break;
             case SELECTION:
@@ -84,12 +90,15 @@ public class PlayLevelScreen extends Screen {
             case INTRO:
                 introVideoScreen.update();
                 break;
+            case BETWEEN_LEVELS:
+                quitScreen.update();
+                break;
         }
 
-        // if flag is set at any point during gameplay, game is "won"
-        if (map.getFlagManager().isFlagSet("hasFoundBall")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-        }
+        // // if flag is set at any point during gameplay, game is "won"
+        // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
+        //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        // }
 
     }
 
@@ -111,6 +120,10 @@ public class PlayLevelScreen extends Screen {
                 break;               
             case INTRO:
                 introVideoScreen.draw(graphicsHandler);
+                break;
+            case BETWEEN_LEVELS:
+                quitScreen.draw(graphicsHandler);
+                break;
         }
        
     }
@@ -173,6 +186,10 @@ public class PlayLevelScreen extends Screen {
         initialize();
     }
 
+    public void nextLevel() {
+        update();
+    }
+
     public void goBackToMenu() {
         HealthMeter.count = 50;
         screenCoordinator.setGameState(GameState.MENU);
@@ -180,12 +197,13 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     protected enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, SELECTION, INTRO, LOSE
+        RUNNING, LEVEL_COMPLETED, SELECTION, INTRO, LOSE, BETWEEN_LEVELS
     }
 
     //check the map number
     public void mapTransition(){
             // define/setup map
+            this.playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
             this.map = new JurassicMap();
             map.setFlagManager(flagManager);
             // let pieces of map know which button to listen for as the "interact" button
