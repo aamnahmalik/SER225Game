@@ -1,10 +1,17 @@
 package Maps;
 
+import java.util.ArrayList;
+
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.ImageEffect;
 import GameObject.Sprite;
 import Level.Map;
+import Level.NPC;
+import NPCs.NightSky;
+import NPCs.Serena;
+import NPCs.Zombies;
+import Scripts.TestMap.SerenaScript;
 import Tilesets.CommonTileset;
 import Utils.Colors;
 import Utils.Point;
@@ -12,20 +19,25 @@ import Utils.Point;
 // Represents the map that is used as a background for the main menu and credits menu screen
 public class TitleScreenMap extends Map {
 
-    private Sprite cat;
 
     public TitleScreenMap() {
         super("title_screen_map.txt", new CommonTileset());
-        Point catLocation = getMapTile(8, 6).getLocation().subtractX(6).subtractY(7);
-        cat = new Sprite(ImageLoader.loadSubImage("Cat.png", Colors.MAGENTA, 0, 0, 24, 24));
-        cat.setScale(3);
-        cat.setImageEffect(ImageEffect.FLIP_HORIZONTAL);
-        cat.setLocation(catLocation.x, catLocation.y);
+    }
+
+     @Override
+    public ArrayList<NPC> loadNPCs() 
+    {
+        ArrayList<NPC> npcs = new ArrayList<>();
+
+        NightSky night = new NightSky(1, getMapTile(1,1).getLocation());
+        npcs.add(night);
+
+        return npcs;
     }
 
     @Override
     public void draw(GraphicsHandler graphicsHandler) {
         super.draw(graphicsHandler);
-        cat.draw(graphicsHandler);
+        
     }
 }

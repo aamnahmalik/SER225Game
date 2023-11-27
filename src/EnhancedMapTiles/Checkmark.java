@@ -1,31 +1,17 @@
 package EnhancedMapTiles;
 
 
-import Engine.GraphicsHandler;
 import Engine.ImageLoader;
-import EnhancedMapTiles.KeyPurple;
-import GameObject.Sprite;
 import GameObject.SpriteSheet;
-import SpriteFont.SpriteFont;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import Builders.FrameBuilder;
 import GameObject.Frame;
 import GameObject.GameObject;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
 import Level.CheckList;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
-import EnhancedMapTiles.Food;
-import EnhancedMapTiles.Water;
-import EnhancedMapTiles.Weapon;
-import EnhancedMapTiles.FirstAidKit;
 
 
 public class Checkmark extends EnhancedMapTile{
