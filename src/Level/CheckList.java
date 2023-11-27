@@ -113,7 +113,7 @@ public class CheckList {
             //System.out.println("4 items have been collected");
         }
 
-        if (collectedItems ==5) {
+        if ((collectedItems ==5) && (Map.getMapTransition() == 0)) {
             
             Portal portal = new Portal (map.getMapTile(4, 7).getLocation(),map);
             portal.setMap(map);
