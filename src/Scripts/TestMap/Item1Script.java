@@ -13,7 +13,8 @@ public class Item1Script extends Script<EnhancedMapTile>
     private String[] options = {"Monaco", "France", "Sweden"};
 
     @Override
-    protected void setup() {
+    protected void setup() 
+    {
         lockPlayer();
         showTextbox();
         
@@ -21,19 +22,6 @@ public class Item1Script extends Script<EnhancedMapTile>
         {
             addTextToTextboxQueue("Blair married the prince of which country?");
             addTextToTextboxQueue("1. Monaco\t 2. France\t 3. Sweden");
-
-            if (Keyboard.isKeyDown(Key.LEFT) && selectedOption > 0) 
-            {
-                selectedOption--;
-            } 
-            else if (Keyboard.isKeyDown(Key.RIGHT) && selectedOption < options.length - 1) 
-            {
-                selectedOption++;
-            } 
-            else if (Keyboard.isKeyDown(Key.ENTER)) 
-            {
-                handleOptionSelection(selectedOption);
-            }
         }
 
     }
@@ -69,20 +57,6 @@ public class Item1Script extends Script<EnhancedMapTile>
 
         return ScriptState.RUNNING;
     }
- 
-    // private void handleInput() {
-
-    //     if (Keyboard.isKeyDown(Key.ONE)) {
-    //         selectedOption = 1;
-    //     } else if (Keyboard.isKeyDown(Key.TWO)) {
-    //         selectedOption = 2;
-    //     } else if (Keyboard.isKeyDown(Key.THREE)) {
-    //         selectedOption = 3;
-    //     }
-        
-    //     handleOptionSelection(selectedOption);
-
-    // }
 
     private void handleOptionSelection(int selectedOptionIndex) {
         switch (selectedOptionIndex) {
