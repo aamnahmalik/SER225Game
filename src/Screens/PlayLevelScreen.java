@@ -1,11 +1,12 @@
 package Screens;
 
 import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.Keyboard;
 import Engine.Screen;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
-import Level.HealthMeter;
 import Maps.JurassicMap;
 import Maps.BlankMap;
 import Maps.TestMap;
@@ -14,6 +15,9 @@ import Players.Blair;
 import Players.Chuck;
 import Utils.Direction;
 import Utils.Point;
+import Level.Script;
+import Level.ScriptState;
+import Utils.Direction;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -25,7 +29,6 @@ public class PlayLevelScreen extends Screen {
     protected LoseScreen loseScreen;
     protected FlagManager flagManager;
     protected PlayerSelection selectionScreen;
-    protected IntroVideoScreen introVideoScreen;
     protected boolean isChuckSelected;
 
 
@@ -37,13 +40,13 @@ public class PlayLevelScreen extends Screen {
         // setup state
         flagManager = new FlagManager();
         flagManager.addFlag("hasTalkedToSerena", false);
+        flagManager.addFlag("introVideo", false);
 
         // define/setup map
-        this.map = new ZombieMap();
+        this.map = new BlankMap();
         map.setFlagManager(flagManager);
 
         selectionScreen = new PlayerSelection(this);
-        introVideoScreen = new IntroVideoScreen(this, isChuckSelected);
 
         winScreen = new WinScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
@@ -60,11 +63,24 @@ public class PlayLevelScreen extends Screen {
                 // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
                 player.update();
+                if(Map.getMapTransition() == 0)
+                {
+                    if (Keyboard.isKeyDown(Key.ENTER)) {
+                        mapTransition1();
+                        player.update();
+                        this.map.setMapTansition(1);
+                    }
+                    
+                }
+
                 if(Map.getMapTransition() == 1)
                 {
-                    mapTransition();
-                    player.update();
-                    this.map.setMapTansition(2);
+                    if (Keyboard.isKeyDown(Key.ENTER)) {
+                        mapTransition();
+                        player.update();
+                        this.map.setMapTansition(2);
+                    }
+                    
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
@@ -81,9 +97,6 @@ public class PlayLevelScreen extends Screen {
             case SELECTION:
                 selectionScreen.update();
                 break;
-            case INTRO:
-                introVideoScreen.update();
-                break;
         }
 
         // if flag is set at any point during gameplay, game is "won"
@@ -92,7 +105,6 @@ public class PlayLevelScreen extends Screen {
         }
 
     }
-
 
     public void draw(GraphicsHandler graphicsHandler) {
         // based on screen state, draw appropriate graphics
@@ -109,8 +121,6 @@ public class PlayLevelScreen extends Screen {
             case SELECTION:
                 selectionScreen.draw(graphicsHandler);
                 break;               
-            case INTRO:
-                introVideoScreen.draw(graphicsHandler);
         }
        
     }
@@ -180,7 +190,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     protected enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, SELECTION, INTRO, LOSE
+        RUNNING, LEVEL_COMPLETED, SELECTION, LOSE
     }
 
     //check the map number
@@ -227,5 +237,51 @@ public class PlayLevelScreen extends Screen {
                 }
 
         }
+
+    //check the map number
+    public void mapTransition1(){
+            // define/setup map
+            this.map = new ZombieMap();
+            map.setFlagManager(flagManager);
+            // let pieces of map know which button to listen for as the "interact" button
+            map.getTextbox().setInteractKey(player.getInteractKey());
+
+            this.player.setMap(map);
+            Point playerStartPosition = map.getPlayerStartPosition();
+            this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+            this.player.setFacingDirection(Direction.LEFT);
+            
+
+            // let pieces of map know which button to listen for as the "interact" button
+                map.getTextbox().setInteractKey(player.getInteractKey());
+
+                // setup map scripts to have references to the map and player
+                for (MapTile mapTile : map.getMapTiles()) {
+                    if (mapTile.getInteractScript() != null) {
+                        mapTile.getInteractScript().setMap(map);
+                        mapTile.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (NPC npc : map.getNPCs()) {
+                    if (npc.getInteractScript() != null) {
+                        npc.getInteractScript().setMap(map);
+                        npc.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
+                    if (enhancedMapTile.getInteractScript() != null) {
+                        enhancedMapTile.getInteractScript().setMap(map);
+                        enhancedMapTile.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (Trigger trigger : map.getTriggers()) {
+                    if (trigger.getTriggerScript() != null) {
+                        trigger.getTriggerScript().setMap(map);
+                        trigger.getTriggerScript().setPlayer(player);
+                    }
+                }
+
+        }
+
 
 }
