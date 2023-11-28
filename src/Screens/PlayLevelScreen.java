@@ -73,23 +73,20 @@ public class PlayLevelScreen extends Screen {
                     if (Keyboard.isKeyDown(Key.ENTER)) {
                         mapTransition1();
                         player.update();
-                        // this.map.setMapTansition(1);
                     }
                     
                 }
 
                 if(Map.getMapTransition() == 1)
                 {
-                        playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
+                    playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
                         mapTransition();
                         player.update();
                         this.map.setMapTansition(2);
-                    
-                    
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
-                    this.map.setMapTansition(2);
+                    this.map.setMapTansition(3);
                 }
                 map.update(player);
                 break;
