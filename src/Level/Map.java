@@ -84,7 +84,7 @@ public abstract class Map {
     static int mapTransition = 0;
 
     protected CheckList checkList; 
-
+    
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
@@ -99,7 +99,7 @@ public abstract class Map {
     }
 
     
-    public void setMapTansition (int i) { 
+    public void setMapTransition (int i) { 
         mapTransition =i;
         System.out.println("mapTransition =1");
     }
@@ -615,6 +615,8 @@ public abstract class Map {
         else{
             checkList.draw(graphicsHandler);
         }
+
+    
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -647,4 +649,6 @@ public abstract class Map {
     public CheckList getCheckList(){
         return this.checkList;
     }
+
+    
 }

@@ -14,6 +14,8 @@ import Level.TileType;
 import Maps.TestMap;
 import Utils.Direction;
 import Utils.Point;
+import Level.ScriptState;
+import Level.Script;
 
 public class Portal extends EnhancedMapTile{
 
@@ -39,9 +41,22 @@ public class Portal extends EnhancedMapTile{
         	map.setHasChangedHealthMeter(true);
             hasInteracted = true;
             this.isHidden = true;
-            this.map.getCheckList().itemCollected();
+            this.map.getCheckList().itemCollected(); 
             this.map.getCheckList().portalCollected();
-            this.map.setMapTansition(1);
+            this.map.setMapTransition(1);
+            
+            if (player.overlaps(this) && !hasInteracted)
+        {
+        	map.setHasChangedHealthMeter(true);
+            hasInteracted = true;
+            this.isHidden = true;
+            this.map.getCheckList().itemCollected(); 
+            this.map.getCheckList().portalCollected();
+            this.map.setMapTransition(2);
+            
+
+        }
+
         
 
         }

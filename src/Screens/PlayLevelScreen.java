@@ -15,6 +15,7 @@ import Players.Blair;
 import Players.Chuck;
 import Utils.Direction;
 import Utils.Point;
+import Level.CheckList;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -54,6 +55,7 @@ public class PlayLevelScreen extends Screen {
     }
 
 
+
     public void update() {
         // based on screen state, perform specific actions
         switch (playLevelScreenState) {
@@ -64,10 +66,17 @@ public class PlayLevelScreen extends Screen {
                 {
                     mapTransition();
                     player.update();
-                    this.map.setMapTansition(2);
+                    this.map.setMapTransition(2);
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
+                    if (done == true) {
+                        
+                    }
+                    
+                }
+                if ((CheckList.collectedItems ==5) && (Map.getMapTransition() == 3)) {
+                    playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
                 }
                 map.update(player);
                 break;
@@ -84,6 +93,7 @@ public class PlayLevelScreen extends Screen {
             case INTRO:
                 introVideoScreen.update();
                 break;
+            
         }
 
         // if flag is set at any point during gameplay, game is "won"
