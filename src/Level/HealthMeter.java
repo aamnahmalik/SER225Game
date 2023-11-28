@@ -42,7 +42,7 @@ public class HealthMeter {
     }
 
     public void minusHealth(int health){
-        health = 30;
+        health = 20;
         count = count - health;
         update();
     }    

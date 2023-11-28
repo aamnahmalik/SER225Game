@@ -39,6 +39,7 @@ public class PlayLevelScreen extends Screen {
         // setup state
         flagManager = new FlagManager();
         flagManager.addFlag("hasTalkedToSerena", false);
+        flagManager.addFlag("hasCollectedItem1", false);
 
         // define/setup map
         this.map = new ZombieMap();
