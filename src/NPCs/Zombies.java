@@ -50,7 +50,7 @@ public class Zombies extends NPC
         super.update(player);
 
         if (player.overlaps(this) && !hasInteracted) {
-                int healthDecreaseAmount = 0; 
+                int healthDecreaseAmount = 20; 
                 
                 map.getHealthMeter().minusHealth(healthDecreaseAmount);
         
