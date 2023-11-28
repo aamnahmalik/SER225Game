@@ -62,6 +62,15 @@ public class Dinosaur extends NPC
                         hasInteracted = true;
                 }
 
+                Point playerLocation = player.getLocation();
+                Point dinasour = this.getLocation();
+        
+                if (player.isAttacking() && (((Math.abs(playerLocation.x - dinasour.x) >= 26) && (Math.abs(playerLocation.x - dinasour.x) <= 39))
+                    || 
+                    ((Math.abs(playerLocation.y - dinasour.y) <= 47) && (Math.abs(playerLocation.y-dinasour.y) >= 34)))) {
+                        this.isHidden = true;
+                    }
+                    
                 directionChangeCounter--;
 
                 if (directionChangeCounter <= 0) 
