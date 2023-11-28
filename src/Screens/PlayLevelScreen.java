@@ -73,19 +73,18 @@ public class PlayLevelScreen extends Screen {
                     if (Keyboard.isKeyDown(Key.ENTER)) {
                         mapTransition1();
                         player.update();
-                        this.map.setMapTansition(1);
+                        // this.map.setMapTansition(1);
                     }
                     
                 }
 
                 if(Map.getMapTransition() == 1)
                 {
-                    if (Keyboard.isKeyDown(Key.ENTER)) {
                         playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
                         mapTransition();
                         player.update();
                         this.map.setMapTansition(2);
-                    }
+                    
                     
                 }
                 if (HealthMeter.count <= 0){
@@ -94,6 +93,7 @@ public class PlayLevelScreen extends Screen {
                 }
                 map.update(player);
                 break;
+
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
@@ -131,7 +131,6 @@ public class PlayLevelScreen extends Screen {
             case SELECTION:
                 selectionScreen.draw(graphicsHandler);
                 break;               
-                break;
             case BETWEEN_LEVELS:
                 quitScreen.draw(graphicsHandler);
                 break;
@@ -214,7 +213,6 @@ public class PlayLevelScreen extends Screen {
     //check the map number
     public void mapTransition(){
             // define/setup map
-            this.playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
             this.map = new JurassicMap();
             map.setFlagManager(flagManager);
             // let pieces of map know which button to listen for as the "interact" button
