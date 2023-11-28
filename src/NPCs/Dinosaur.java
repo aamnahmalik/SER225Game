@@ -44,7 +44,7 @@ public class Dinosaur extends NPC
                         case 2:
                         currentDirection = Direction.UP;
                         break;
-                        case 4:
+                        case 3:
                         currentDirection = Direction.DOWN;
                 }
         }
@@ -79,7 +79,7 @@ public class Dinosaur extends NPC
                         case 2:
                         currentDirection = Direction.UP;
                         break;
-                        case 4:
+                        case 3:
                         currentDirection = Direction.DOWN;
                 }
 
