@@ -52,18 +52,6 @@ public class Item1Script extends Script<EnhancedMapTile>
             return ScriptState.RUNNING;
         }
 
-        handleInput();
-
-        if (isWaitTimeUp()) {
-            end();
-            return ScriptState.COMPLETED;
-        }
-
-        return ScriptState.RUNNING;
-    }
-
-    private void handleInput() {
-
         if (Keyboard.isKeyDown(Key.ONE)) {
             selectedOption = 1;
         } else if (Keyboard.isKeyDown(Key.TWO)) {
@@ -74,7 +62,27 @@ public class Item1Script extends Script<EnhancedMapTile>
         
         handleOptionSelection(selectedOption);
 
+        if (isWaitTimeUp()) {
+            end();
+            return ScriptState.COMPLETED;
+        }
+
+        return ScriptState.RUNNING;
     }
+ 
+    // private void handleInput() {
+
+    //     if (Keyboard.isKeyDown(Key.ONE)) {
+    //         selectedOption = 1;
+    //     } else if (Keyboard.isKeyDown(Key.TWO)) {
+    //         selectedOption = 2;
+    //     } else if (Keyboard.isKeyDown(Key.THREE)) {
+    //         selectedOption = 3;
+    //     }
+        
+    //     handleOptionSelection(selectedOption);
+
+    // }
 
     private void handleOptionSelection(int selectedOptionIndex) {
         switch (selectedOptionIndex) {

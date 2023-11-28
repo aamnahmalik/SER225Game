@@ -74,7 +74,7 @@ public class PlayLevelScreen extends Screen {
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
-                    this.map.setMapTansition(2);
+                    this.map.setMapTansition(3);
                 }
                 map.update(player);
                 break;
