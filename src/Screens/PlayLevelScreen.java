@@ -88,15 +88,11 @@ public class PlayLevelScreen extends Screen {
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
-                    this.map.setMapTansition(3);
-                    if (done == true) {
-                        
-                    }
-                    
+                    this.map.setMapTransition(3);
                 }
-                if ((CheckList.collectedItems ==5) && (Map.getMapTransition() == 3)) {
-                    playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-                }
+                // if ((CheckList.collectedItems ==5) && (Map.getMapTransition() == 3)) {
+                //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+                // }
                 map.update(player);
                 break;
 
