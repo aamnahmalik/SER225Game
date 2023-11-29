@@ -109,6 +109,9 @@ public class PlayLevelScreen extends Screen {
             case BETWEEN_LEVELS:
                 quitScreen.update();
                 break;
+            case WIN:
+                winScreen.update();
+                break;
             
         }
 
@@ -141,6 +144,9 @@ public class PlayLevelScreen extends Screen {
                 break;               
             case BETWEEN_LEVELS:
                 quitScreen.draw(graphicsHandler);
+                break;
+            case WIN:
+                winScreen.draw(graphicsHandler);
                 break;
         }
        
@@ -217,7 +223,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     protected enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, SELECTION, LOSE, BETWEEN_LEVELS
+        RUNNING, LEVEL_COMPLETED, SELECTION, LOSE, BETWEEN_LEVELS, WIN
     }
 
     //check the map number
