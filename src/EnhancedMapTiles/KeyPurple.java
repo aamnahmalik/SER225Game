@@ -53,7 +53,6 @@ public class KeyPurple extends EnhancedMapTile{
     public void update(Player player) {
         super.update(player);
 
-        System.out.println(this.map.getCheckList().getCollectedItems());
         if(this.map.getCheckList().getCollectedItems() >= 4)
         {
             this.isHidden = false;
