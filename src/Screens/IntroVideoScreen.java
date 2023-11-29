@@ -1,16 +1,27 @@
 package Screens;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
 import Engine.GraphicsHandler;
+import Engine.ImageLoader;
 import Engine.Key;
 import Engine.Keyboard;
 import Engine.Screen;
 import Game.ScreenCoordinator;
 import Level.Player;
+import Level.Trigger;
+import Maps.BlankMap;
+import Maps.ZombieMap;
 import Players.Blair;
 import Players.Chuck;
 import Screens.PlayLevelScreen.PlayLevelScreenState;
 import Utils.Direction;
+import Level.EnhancedMapTile;
+import Level.Map;
+import Level.MapTile;
+import Level.NPC;
+import Utils.Point;
 
 public class IntroVideoScreen extends Screen{
 
@@ -22,15 +33,15 @@ public class IntroVideoScreen extends Screen{
     protected Player player;
     private boolean isChuckSelected;
     protected Blair blair;
+    protected Map map;
 
     public IntroVideoScreen(PlayLevelScreen playLevelScreen, boolean isChuckSelected) {
         this.playLevelScreen = playLevelScreen;
         this.isChuckSelected = isChuckSelected;
-        initialize();
     }
     public void initialize() {
-        //screenCoordinator = new ScreenCoordinator();
-
+        // define/setup map
+        this.map = new BlankMap();
     }
 
     public void update() {
@@ -40,11 +51,9 @@ public class IntroVideoScreen extends Screen{
         } //set up the isChuckSelected value
         
     }
-    public void draw(GraphicsHandler graphicsHandler) {
-         // Draw a black background
-         graphicsHandler.drawFilledRectangle( 0, 0, 800, 600, Color.BLACK);
-         graphicsHandler.fillRect(0, 0, 600, 800);
+    public void draw(GraphicsHandler graphicsHandler) 
+    {
+        ///map.draw(player, graphicsHandler);
     }
+
 }
-
-

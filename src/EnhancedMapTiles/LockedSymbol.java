@@ -1,23 +1,10 @@
 package EnhancedMapTiles;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
-import EnhancedMapTiles.FirstAidKit;
-import EnhancedMapTiles.Food;
-import EnhancedMapTiles.Water;
-import EnhancedMapTiles.Weapon;
 import GameObject.Sprite;
-import GameObject.SpriteSheet;
-import Level.Map;
-import Level.Player;
-import Level.TileType;
 import Utils.ImageUtils;
-import Utils.Point;
-import Maps.TestMap;
 
 public class LockedSymbol {
 

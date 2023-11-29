@@ -251,6 +251,11 @@ public class Camera extends Rectangle {
             }
         }
 
+        // COMMENT THIS OUT WHEN YOU ARE DONE
+        // for (Trigger trigger: activeTriggers) {
+        //     trigger.draw(graphicsHandler);
+        // }
+
         // player is drawn to screen
         player.draw(graphicsHandler);
 

@@ -21,6 +21,7 @@ public abstract class Player extends GameObject {
     protected Direction lastWalkingXDirection;
     protected Direction lastWalkingYDirection;
     protected boolean isAttacking = false;
+    protected boolean walking = false;
 
     // values used to handle player movement
     protected float moveAmountX, moveAmountY;

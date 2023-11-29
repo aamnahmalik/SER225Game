@@ -20,6 +20,16 @@ public class Trigger extends MapEntity {
         this.setBounds(new Rectangle(1, 1, width, height));
     }
 
+    public Trigger(Utils.Point p, int width, int height, Script triggerScript) {
+        super(p.x, p.y);
+        this.triggerScript = triggerScript;
+        this.setX(x);
+        this.setY(y);
+        this.setWidth(width);
+        this.setHeight(height);
+        this.setBounds(new Rectangle(1, 1, width, height));
+    }
+
     public Trigger(int x, int y, int width, int height, Script triggerScript, String existenceFlag) {
         super(x, y);
         this.triggerScript = triggerScript;

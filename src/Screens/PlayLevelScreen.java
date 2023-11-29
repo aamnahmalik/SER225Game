@@ -1,20 +1,24 @@
 package Screens;
 
-import java.util.ArrayList;
-
 import Engine.GraphicsHandler;
+import Engine.Key;
+import Engine.Keyboard;
 import Engine.Screen;
+import EnhancedMapTiles.Weapon;
 import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.*;
-import Level.HealthMeter;
 import Maps.JurassicMap;
+import Maps.BlankMap;
 import Maps.TestMap;
 import Maps.ZombieMap;
 import Players.Blair;
 import Players.Chuck;
 import Utils.Direction;
 import Utils.Point;
+import Level.Script;
+import Level.ScriptState;
+import Utils.Direction;
 import Level.CheckList;
 
 // This class is for when the platformer game is actually being played
@@ -25,9 +29,9 @@ public class PlayLevelScreen extends Screen {
     protected PlayLevelScreenState playLevelScreenState;
     protected WinScreen winScreen;
     protected LoseScreen loseScreen;
+    protected QuitScreen quitScreen;
     protected FlagManager flagManager;
     protected PlayerSelection selectionScreen;
-    protected IntroVideoScreen introVideoScreen;
     protected boolean isChuckSelected;
 
 
@@ -39,18 +43,22 @@ public class PlayLevelScreen extends Screen {
         // setup state
         flagManager = new FlagManager();
         flagManager.addFlag("hasTalkedToSerena", false);
+        flagManager.addFlag("introVideo", false);
+        flagManager.addFlag("hasCollectedItem1", false);
 
         // define/setup map
-        this.map = new ZombieMap();
+        this.map = new BlankMap();
         map.setFlagManager(flagManager);
 
         selectionScreen = new PlayerSelection(this);
-        introVideoScreen = new IntroVideoScreen(this, isChuckSelected);
 
         winScreen = new WinScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
 
         loseScreen = new LoseScreen(this);
+        playLevelScreenState = PlayLevelScreenState.SELECTION;
+
+        quitScreen = new QuitScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
     }
 
@@ -62,14 +70,25 @@ public class PlayLevelScreen extends Screen {
                 // if level is "running" update player and map to keep game logic for the platformer level going
             case RUNNING:
                 player.update();
+                if(Map.getMapTransition() == 0)
+                {
+                    if (Keyboard.isKeyDown(Key.ENTER)) {
+                        mapTransition1();
+                        player.update();
+                    }
+                    
+                }
+
                 if(Map.getMapTransition() == 1)
                 {
-                    mapTransition();
-                    player.update();
-                    this.map.setMapTransition(2);
+                    playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
+                        mapTransition();
+                        player.update();
+                        this.map.setMapTransition(2);
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
+                    this.map.setMapTansition(3);
                     if (done == true) {
                         
                     }
@@ -80,26 +99,32 @@ public class PlayLevelScreen extends Screen {
                 }
                 map.update(player);
                 break;
+
             // if level has been completed, bring up level cleared screen
             case LEVEL_COMPLETED:
                 winScreen.update();
                 break;
-             case LOSE:
+            case LOSE:
                 loseScreen.update();
                 break;
             case SELECTION:
                 selectionScreen.update();
                 break;
-            case INTRO:
-                introVideoScreen.update();
+            case BETWEEN_LEVELS:
+                quitScreen.update();
                 break;
             
         }
 
-        // if flag is set at any point during gameplay, game is "won"
-        if (map.getFlagManager().isFlagSet("hasFoundBall")) {
-            playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
-        }
+        // // if flag is set at any point during gameplay, game is "won"
+        // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
+        //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        // }
+
+        // // if flag is set at any point during gameplay, game is "won"
+        // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
+        //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        // }
 
     }
 
@@ -118,9 +143,11 @@ public class PlayLevelScreen extends Screen {
             case SELECTION:
                 selectionScreen.draw(graphicsHandler);
                 break;               
-            case INTRO:
-                introVideoScreen.draw(graphicsHandler);
+            case BETWEEN_LEVELS:
+                quitScreen.draw(graphicsHandler);
+                break;
         }
+       
     }
 
     public void setGameState(PlayLevelScreenState playLevelScreenState) {
@@ -181,6 +208,10 @@ public class PlayLevelScreen extends Screen {
         initialize();
     }
 
+    public void nextLevel() {
+        update();
+    }
+
     public void goBackToMenu() {
         HealthMeter.count = 50;
         screenCoordinator.setGameState(GameState.MENU);
@@ -188,13 +219,58 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     protected enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, SELECTION, INTRO, LOSE
+        RUNNING, LEVEL_COMPLETED, SELECTION, LOSE, BETWEEN_LEVELS
     }
 
     //check the map number
     public void mapTransition(){
             // define/setup map
             this.map = new JurassicMap();
+            map.setFlagManager(flagManager);
+            // let pieces of map know which button to listen for as the "interact" button
+            map.getTextbox().setInteractKey(player.getInteractKey());
+
+            this.player.setMap(map);
+            Point playerStartPosition = map.getPlayerStartPosition();
+            this.player.setLocation(playerStartPosition.x, playerStartPosition.y);
+            this.player.setFacingDirection(Direction.LEFT);
+            
+
+            // let pieces of map know which button to listen for as the "interact" button
+                map.getTextbox().setInteractKey(player.getInteractKey());
+
+                // setup map scripts to have references to the map and player
+                for (MapTile mapTile : map.getMapTiles()) {
+                    if (mapTile.getInteractScript() != null) {
+                        mapTile.getInteractScript().setMap(map);
+                        mapTile.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (NPC npc : map.getNPCs()) {
+                    if (npc.getInteractScript() != null) {
+                        npc.getInteractScript().setMap(map);
+                        npc.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (EnhancedMapTile enhancedMapTile : map.getEnhancedMapTiles()) {
+                    if (enhancedMapTile.getInteractScript() != null) {
+                        enhancedMapTile.getInteractScript().setMap(map);
+                        enhancedMapTile.getInteractScript().setPlayer(player);
+                    }
+                }
+                for (Trigger trigger : map.getTriggers()) {
+                    if (trigger.getTriggerScript() != null) {
+                        trigger.getTriggerScript().setMap(map);
+                        trigger.getTriggerScript().setPlayer(player);
+                    }
+                }
+
+        }
+
+    //check the map number
+    public void mapTransition1(){
+            // define/setup map
+            this.map = new ZombieMap();
             map.setFlagManager(flagManager);
             // let pieces of map know which button to listen for as the "interact" button
             map.getTextbox().setInteractKey(player.getInteractKey());

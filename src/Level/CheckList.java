@@ -12,6 +12,8 @@ import java.awt.image.BufferedImage;
 import EnhancedMapTiles.Checkmark;
 import EnhancedMapTiles.Portal;
 import Maps.TestMap;
+import Maps.TestMap;
+
 //Represents the game's textbox for the checklist 
 //will display the text it is given to its textQueue 
 //each String in the textQueue will be displayed in the textbox, and hitting the interact key will cycle between additional Strings 
@@ -55,15 +57,18 @@ public class CheckList {
     public int collectedSoda;
 
     
-
+    int transitionValue = Map.getMapTransition();
     int count = 0; 
 
     public CheckList(Map map) { 
         this.map = map; 
         text = new SpriteFont("Items: " + String.valueOf(count), fontX, fontTopY, "Arial", 12, Color.white);
         BufferedImage waterBottleImage = ImageLoader.load("WaterWhite.png");
-        BufferedImage foodImage = ImageLoader.load("foodWhite.png");
+        BufferedImage waterBottleImage2 = ImageLoader.load("Soda.jpeg");
+        BufferedImage foodImage1 = ImageLoader.load("foodWhite.png");
+        BufferedImage foodImage2 = ImageLoader.load("ChickenLeg.png");
         BufferedImage firstAidKitWhiteImage = ImageLoader.load("firstAidKitWhite.png");
+        BufferedImage firstAidKitWhiteImage2 = ImageLoader.load("bandAid.png");
         BufferedImage axeWhiteImage = ImageLoader.load("AxeWhite.png");
         BufferedImage keyWhiteImage = ImageLoader.load("keyWhite.png");
         BufferedImage LockedSymbolImage = ImageLoader.load("lockedSymbol.png");
@@ -73,12 +78,23 @@ public class CheckList {
         BufferedImage SodaImage = ImageLoader.load("soda.png");
 
         
+        if(transitionValue == 1)
+        {
+            food = new Sprite(foodImage2, x+22, topY + 2);
+            food.setScale(.06f);
+            firstAidKitWhite = new Sprite(firstAidKitWhiteImage2, x + 50, topY);
+            firstAidKitWhite.setScale(.7f);
+            waterBottle = new Sprite(waterBottleImage2, x , topY );
+        }
+        else 
+        {
+            food = new Sprite(foodImage1, x +25, topY + 3);
+            food.setScale(.4f);
+            firstAidKitWhite = new Sprite(firstAidKitWhiteImage, x + 50, topY);
+            firstAidKitWhite.setScale(.7f);
+            waterBottle = new Sprite(waterBottleImage, x , topY );
+        }
 
-        waterBottle = new Sprite(waterBottleImage, x , topY );
-        food = new Sprite(foodImage, x +25, topY + 3);
-        food.setScale(.4f);
-        firstAidKitWhite = new Sprite(firstAidKitWhiteImage, x + 50, topY);
-        firstAidKitWhite.setScale(.7f);
         axeWhite = new Sprite(axeWhiteImage, x+77, topY);
         axeWhite.setScale(.9f);
         keyWhite = new Sprite(keyWhiteImage, x+95, topY +3);
@@ -119,7 +135,7 @@ public class CheckList {
             //System.out.println("4 items have been collected");
         }
 
-        if ((collectedItems ==5) && (Map.getMapTransition() == 0)) {
+        if ((collectedItems >=5) && (Map.getMapTransition() != 2)) {
             
             Portal portal = new Portal (map.getMapTile(4, 7).getLocation(),map);
             portal.setMap(map);
@@ -305,4 +321,5 @@ public class CheckList {
     public void setIsActive(boolean isActive) { 
         this.isActive = isActive;
     }
+    
 }

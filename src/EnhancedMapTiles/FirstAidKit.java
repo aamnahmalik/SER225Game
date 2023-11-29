@@ -7,6 +7,7 @@ import GameObject.GameObject;
 import GameObject.SpriteSheet;
 import Level.HealthMeter;
 import Level.EnhancedMapTile;
+import Level.FlagManager;
 import Level.Map;
 import Level.Player;
 import Level.PlayerState;
@@ -32,8 +33,18 @@ public class FirstAidKit extends EnhancedMapTile{
     }
 
     @Override
-    public void update(Player player) {
+    public void update(Player player) 
+    {
         super.update(player);
+
+        if (Map.getMapTransition() == 2 && player.overlaps(this) && !hasInteracted && map.getFlagManager().isFlagSet("hasCollectedItem1") == true)
+        {
+        	map.setHasChangedHealthMeter(true);
+            hasInteracted = true;
+            this.isHidden = true;
+            this.map.getCheckList().itemCollected();
+            this.map.getCheckList().firstAidKitCollected();
+        }
         
         if (player.overlaps(this) && !hasInteracted)
         {
