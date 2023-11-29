@@ -58,7 +58,7 @@ public class Portal extends EnhancedMapTile{
                 this.map.setMapTransition(2);
             }
         }
-    }
+    
 
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
@@ -68,5 +68,5 @@ public class Portal extends EnhancedMapTile{
         		
         return new GameObject(x+12, y, frame);
     }
-}
 
+}

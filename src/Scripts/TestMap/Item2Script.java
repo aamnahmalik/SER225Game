@@ -65,8 +65,13 @@ public class Item2Script extends Script<EnhancedMapTile>
             unlockPlayer();
             if (selectedOption == 2)
             {
+                try {
+                    this.map.getCheckList().itemCollected();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } 
                 map.setHasChangedHealthMeter(true);
-                this.map.getCheckList().itemCollected();
                 this.map.getCheckList().foodCollected();
                 for (EnhancedMapTile emt : map.getEnhancedMapTiles()) {
                     if (emt instanceof Food) {

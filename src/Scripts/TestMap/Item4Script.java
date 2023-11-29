@@ -65,8 +65,12 @@ public class Item4Script extends Script<EnhancedMapTile>
             unlockPlayer();
             if (selectedOption == 1)
             {
-                map.setHasChangedHealthMeter(true);
-                this.map.getCheckList().itemCollected();
+                try {
+                    this.map.getCheckList().itemCollected();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } 
                 this.map.getCheckList().weaponCollected();
                 for (EnhancedMapTile emt : map.getEnhancedMapTiles()) {
                     if (emt instanceof Weapon) {
