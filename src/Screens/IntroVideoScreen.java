@@ -1,27 +1,15 @@
 package Screens;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 import Engine.GraphicsHandler;
-import Engine.ImageLoader;
 import Engine.Key;
 import Engine.Keyboard;
 import Engine.Screen;
 import Game.ScreenCoordinator;
 import Level.Player;
-import Level.Trigger;
 import Maps.BlankMap;
-import Maps.ZombieMap;
 import Players.Blair;
-import Players.Chuck;
 import Screens.PlayLevelScreen.PlayLevelScreenState;
-import Utils.Direction;
-import Level.EnhancedMapTile;
 import Level.Map;
-import Level.MapTile;
-import Level.NPC;
-import Utils.Point;
 
 public class IntroVideoScreen extends Screen{
 

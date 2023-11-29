@@ -2,7 +2,6 @@ package Level;
 
 import Engine.GraphicsHandler;
 import Engine.ScreenManager;
-import Game.Game;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 

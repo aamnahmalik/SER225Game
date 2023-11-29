@@ -2,41 +2,27 @@ package Maps;
 
 import EnhancedMapTiles.FirstAidKit;
 import EnhancedMapTiles.Food;
-import EnhancedMapTiles.KeyPurple;
 import EnhancedMapTiles.PushableRock;
 import EnhancedMapTiles.Water;
 import EnhancedMapTiles.Weapon;
-import EnhancedMapTiles.LockedSymbol;
-import Game.Game;
-import GameObject.Frame;
-import GameObject.GameObject;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Serena;
-import NPCs.Dan;
 import NPCs.Walrus;
 import NPCs.Zombies;
-import Screens.IntroVideoScreen;
-import Level.CheckList;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
-// import Scripts.TestMap.IntroVideoScript1;
-// import Scripts.TestMap.IntroVideoScript2;
-// import Scripts.TestMap.IntroVideoScript3;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.SerenaScript;
-import Scripts.TestMap.DanScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
 
 import java.util.ArrayList;
 
-import Engine.GraphicsHandler;
-import Engine.ImageLoader;
 
 // Represents a test map to be used in a level
 public class TestMap extends Map {

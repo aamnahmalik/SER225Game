@@ -10,16 +10,11 @@ import Game.ScreenCoordinator;
 import Level.*;
 import Maps.JurassicMap;
 import Maps.BlankMap;
-import Maps.TestMap;
 import Maps.ZombieMap;
 import Players.Blair;
 import Players.Chuck;
 import Utils.Direction;
 import Utils.Point;
-import Level.Script;
-import Level.ScriptState;
-import Utils.Direction;
-import Level.CheckList;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -44,7 +39,7 @@ public class PlayLevelScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("hasTalkedToSerena", false);
         flagManager.addFlag("introVideo", false);
-        flagManager.addFlag("hasCollectedItem1", false);
+        // flagManager.addFlag("hasCollectedItem1", false);
 
         // define/setup map
         this.map = new BlankMap();
@@ -83,12 +78,14 @@ public class PlayLevelScreen extends Screen {
                 {
                     playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
                         mapTransition();
-                        player.update();
+                        Weapon.hasInteracted = false;
                         this.map.setMapTransition(2);
+                        player.update();
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
                     this.map.setMapTransition(3);
+                    player.update();
                 }
                 // if ((CheckList.collectedItems ==5) && (Map.getMapTransition() == 3)) {
                 //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
@@ -224,6 +221,8 @@ public class PlayLevelScreen extends Screen {
     public void mapTransition(){
             // define/setup map
             this.map = new JurassicMap();
+            this.map.setMapTransition(2);
+            player.update();
             map.setFlagManager(flagManager);
             // let pieces of map know which button to listen for as the "interact" button
             map.getTextbox().setInteractKey(player.getInteractKey());

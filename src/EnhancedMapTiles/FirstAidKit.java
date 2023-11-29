@@ -5,17 +5,11 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
-import Level.FlagManager;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
-import EnhancedMapTiles.KeyPurple;
 
 public class FirstAidKit extends EnhancedMapTile{
     
@@ -36,17 +30,8 @@ public class FirstAidKit extends EnhancedMapTile{
     public void update(Player player) 
     {
         super.update(player);
-
-        if (Map.getMapTransition() == 2 && player.overlaps(this) && !hasInteracted && map.getFlagManager().isFlagSet("hasCollectedItem1") == true)
-        {
-        	map.setHasChangedHealthMeter(true);
-            hasInteracted = true;
-            this.isHidden = true;
-            this.map.getCheckList().itemCollected();
-            this.map.getCheckList().firstAidKitCollected();
-        }
         
-        if (player.overlaps(this) && !hasInteracted)
+        if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
         {
         	map.setHasChangedHealthMeter(true);
             hasInteracted = true;

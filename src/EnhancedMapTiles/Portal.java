@@ -5,17 +5,11 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
-import Level.ScriptState;
-import Level.Script;
 
 public class Portal extends EnhancedMapTile{
 
@@ -33,34 +27,28 @@ public class Portal extends EnhancedMapTile{
     }
 
     @Override
-    public void update(Player player) {
-        super.update(player);
-        
-        if (player.overlaps(this) && !hasInteracted)
+    public void update(Player player)
         {
-        	map.setHasChangedHealthMeter(true);
-            hasInteracted = true;
-            this.isHidden = true;
-            this.map.getCheckList().itemCollected(); 
-            this.map.getCheckList().portalCollected();
-            this.map.setMapTransition(1);
+            super.update(player);
             
-            if (player.overlaps(this) && !hasInteracted)
-        {
-        	map.setHasChangedHealthMeter(true);
-            hasInteracted = true;
-            this.isHidden = true;
-            this.map.getCheckList().itemCollected(); 
-            this.map.getCheckList().portalCollected();
-            this.map.setMapTransition(2);
-            
-
+            if (player.overlaps(this) && !hasInteracted && Map.getMapTransition() == 0)
+            {
+                hasInteracted = true;
+                this.isHidden = true;
+                this.map.getCheckList().itemCollected(); 
+                this.map.getCheckList().portalCollected();
+                this.map.setMapTransition(1);
+            }
+            else if (player.overlaps(this) && !hasInteracted)
+            {
+                hasInteracted = true;
+                this.isHidden = true;
+                this.map.getCheckList().itemCollected(); 
+                this.map.getCheckList().portalCollected();
+                this.map.setMapTransition(2);
+            }
         }
-
-        
-
-        }
-    }
+    
 
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
