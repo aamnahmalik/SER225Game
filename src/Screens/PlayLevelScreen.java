@@ -44,7 +44,7 @@ public class PlayLevelScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("hasTalkedToSerena", false);
         flagManager.addFlag("introVideo", false);
-        flagManager.addFlag("hasCollectedItem1", false);
+        // flagManager.addFlag("hasCollectedItem1", false);
 
         // define/setup map
         this.map = new BlankMap();

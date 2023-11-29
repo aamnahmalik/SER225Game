@@ -46,7 +46,7 @@ public class FirstAidKit extends EnhancedMapTile{
             this.map.getCheckList().firstAidKitCollected();
         }
         
-        if (player.overlaps(this) && !hasInteracted)
+        if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
         {
         	map.setHasChangedHealthMeter(true);
             hasInteracted = true;
