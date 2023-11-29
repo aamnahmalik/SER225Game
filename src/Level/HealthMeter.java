@@ -1,14 +1,8 @@
 package Level;
 
 import Engine.GraphicsHandler;
-import Engine.Key;
-import Engine.KeyLocker;
-import Engine.Keyboard;
 import SpriteFont.SpriteFont;
 import java.awt.*;
-import java.util.LinkedList;
-import java.util.Queue;
-import Level.CheckList;
 
 // Represents the game's textbox
 // will display the text it is given to its textQueue
@@ -39,7 +33,7 @@ public class HealthMeter {
     }
 
     public void addHealth(int health) {
-        health = 100;
+        health = 10;
         count = count + health;
         update();
     }
@@ -47,9 +41,9 @@ public class HealthMeter {
     public void minusHealth(int health){
         health = 30;
         count = count - health;
-        if (HealthMeter.count <= 0){
-            boolean done = true;
-        }
+        // if (HealthMeter.count <= 0){
+        //     boolean done = true;
+        // }
         update();
     }    
 

@@ -4,15 +4,11 @@ import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import EnhancedMapTiles.KeyPurple;
 import GameObject.Sprite;
-import GameObject.SpriteSheet;
-import Maps.TestMap;
 import SpriteFont.SpriteFont;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import EnhancedMapTiles.Checkmark;
 import EnhancedMapTiles.Portal;
-import Maps.TestMap;
-import Maps.TestMap;
 
 //Represents the game's textbox for the checklist 
 //will display the text it is given to its textQueue 

@@ -5,7 +5,6 @@ import Level.Script;
 import Level.ScriptState;
 import Engine.Key;
 import Engine.Keyboard;
-import EnhancedMapTiles.FirstAidKit;
 import EnhancedMapTiles.Water;
 
 public class Item3Script extends Script<EnhancedMapTile>

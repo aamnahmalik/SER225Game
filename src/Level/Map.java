@@ -2,16 +2,11 @@ package Level;
 
 import Engine.Config;
 import Engine.GraphicsHandler;
-import Engine.ImageLoader;
 import Engine.ScreenManager;
-import Game.Game;
-import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 import Utils.Direction;
 import Utils.Point;
-import Level.HealthMeter;
-import Level.CheckList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

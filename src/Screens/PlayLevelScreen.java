@@ -10,16 +10,11 @@ import Game.ScreenCoordinator;
 import Level.*;
 import Maps.JurassicMap;
 import Maps.BlankMap;
-import Maps.TestMap;
 import Maps.ZombieMap;
 import Players.Blair;
 import Players.Chuck;
 import Utils.Direction;
 import Utils.Point;
-import Level.Script;
-import Level.ScriptState;
-import Utils.Direction;
-import Level.CheckList;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -224,6 +219,7 @@ public class PlayLevelScreen extends Screen {
     public void mapTransition(){
             // define/setup map
             this.map = new JurassicMap();
+            update();
             map.setFlagManager(flagManager);
             // let pieces of map know which button to listen for as the "interact" button
             map.getTextbox().setInteractKey(player.getInteractKey());

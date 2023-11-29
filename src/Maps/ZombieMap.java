@@ -4,21 +4,15 @@ import java.util.ArrayList;
 
 import EnhancedMapTiles.FirstAidKit;
 import EnhancedMapTiles.Food;
-import EnhancedMapTiles.KeyPurple;
 import EnhancedMapTiles.Water;
 import EnhancedMapTiles.Weapon;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
-import Level.CheckList;
-import Level.Trigger;
 import NPCs.Serena;
-import NPCs.Dan;
 import NPCs.Zombies;
 import Scripts.TestMap.SerenaScript;
-import Scripts.TestMap.DanScript;
 import Tilesets.ZombieTileset;
-import Utils.Point;
 
 public class ZombieMap extends Map {
     

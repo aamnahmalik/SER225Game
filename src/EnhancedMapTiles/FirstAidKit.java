@@ -5,17 +5,11 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
-import Level.FlagManager;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
-import EnhancedMapTiles.KeyPurple;
 
 public class FirstAidKit extends EnhancedMapTile{
     

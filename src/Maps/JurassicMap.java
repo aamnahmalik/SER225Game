@@ -1,6 +1,5 @@
 package Maps;
 
-import java.nio.file.DirectoryNotEmptyException;
 import java.util.ArrayList;
 
 import EnhancedMapTiles.FirstAidKit;
@@ -10,19 +9,15 @@ import EnhancedMapTiles.Weapon;
 import Level.EnhancedMapTile;
 import Level.NPC;
 import Level.Map;
-import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import Scripts.TestMap.Item1Script;
 import Scripts.TestMap.Item2Script;
 import Scripts.TestMap.Item3Script;
 import Scripts.TestMap.Item4Script;
-import Scripts.TestMap.LostBallScript;
-import Scripts.TestMap.SerenaScript;
 import NPCs.Dan;
 import Scripts.TestMap.DanScript;
 import Tilesets.JurassicTileset;
-import Utils.Point;
 
 public class JurassicMap extends Map
 {

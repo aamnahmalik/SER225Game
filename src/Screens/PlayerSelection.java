@@ -1,11 +1,8 @@
 package Screens;
 
 import Engine.*;
-import Game.GameState;
 import Game.ScreenCoordinator;
 import Level.Map;
-import Level.Player;
-import Maps.TitleScreenMap;
 import Players.*;
 import Screens.PlayLevelScreen.PlayLevelScreenState;
 import SpriteFont.SpriteFont;
@@ -15,7 +12,6 @@ import java.awt.*;
 
 public class PlayerSelection extends Screen {
 
-    private static final String Players = null;
     protected ScreenCoordinator screenCoordinator;
     protected Map background;
     protected KeyLocker keyLocker = new KeyLocker();

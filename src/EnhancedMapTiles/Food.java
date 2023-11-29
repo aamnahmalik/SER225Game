@@ -5,14 +5,10 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
 
 public class Food extends EnhancedMapTile{
@@ -24,7 +20,7 @@ public class Food extends EnhancedMapTile{
     }
 
     public Food(Point location, Map map) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("ChickenLegRightSize.png"),57, 53), TileType.PASSABLE);
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("food.png"),57, 53), TileType.PASSABLE);
         this.map = map;
     }
 

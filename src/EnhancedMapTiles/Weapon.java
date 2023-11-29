@@ -5,14 +5,10 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
 
 
@@ -39,12 +35,19 @@ public class Weapon extends EnhancedMapTile
     {
         super.update(player);
 
-        if (Map.getMapTransition() == 2 && player.overlaps(this) && !hasInteracted)
+        if (Map.getMapTransition() == 2)
         {
-            hasInteracted = true;
-            this.isHidden = true;
-            this.map.getCheckList().itemCollected();
-            this.map.getCheckList().weaponCollected();
+            if (player.overlaps(this) && !hasInteracted)
+            {
+                hasInteracted = true;
+                this.isHidden = true;
+                this.map.getCheckList().itemCollected();
+                this.map.getCheckList().weaponCollected();
+            }
+            else
+            {
+                hasInteracted = false;
+            }
         }
         
         if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
