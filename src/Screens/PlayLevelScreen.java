@@ -30,6 +30,8 @@ public class PlayLevelScreen extends Screen {
     protected PlayerSelection selectionScreen;
     protected boolean isChuckSelected;
     protected BackgroundMusic backgroundMusic;
+    // Declare a boolean variable to track the state of the ENTER key
+    private boolean enterKeyPressed = false;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -70,12 +72,15 @@ public class PlayLevelScreen extends Screen {
                 player.update();
                 if(Map.getMapTransition() == 0)
                 {
-                    if (Keyboard.isKeyDown(Key.ENTER)) {
+                    if (Keyboard.isKeyDown(Key.ENTER) && !enterKeyPressed) {
                         backgroundMusic.play(); // Start playing the background music
+                    
                         mapTransition1();
                         player.update();
-                    }
                     
+                        // Set the flag to true to lock the ENTER key
+                        enterKeyPressed = true;
+                    }
                 }
 
                 if(Map.getMapTransition() == 1)
@@ -103,6 +108,7 @@ public class PlayLevelScreen extends Screen {
                 winScreen.update();
                 break;
             case LOSE:
+                enterKeyPressed = false;
                 loseScreen.update();
                 break;
             case SELECTION:
