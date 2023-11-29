@@ -5,15 +5,11 @@ import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import EnhancedMapTiles.KeyPurple;
 import GameObject.Sprite;
-import GameObject.SpriteSheet;
-import Maps.TestMap;
 import SpriteFont.SpriteFont;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import EnhancedMapTiles.Checkmark;
 import EnhancedMapTiles.Portal;
-import Maps.TestMap;
-import Maps.TestMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -50,13 +46,16 @@ public class CheckList {
     private Sprite Checkmark3;
     private Sprite Checkmark4;
     private Sprite Portal;
+    private Sprite Soda;
     public int collectedItems;
     public int collectedWater;
     public int collectedFood;
     public int collectedFirstAidKit;
     public int collectedWeapon;
     public int collectedPortal;
-    protected BackgroundMusic backgroundMusic;
+    protected BackgroundMusic backgroundMusic;    
+    public int collectedSoda;
+
     
     int transitionValue = Map.getMapTransition();
     int count = 0; 
@@ -65,7 +64,7 @@ public class CheckList {
         this.map = map; 
         text = new SpriteFont("Items: " + String.valueOf(count), fontX, fontTopY, "Arial", 12, Color.white);
         BufferedImage waterBottleImage = ImageLoader.load("WaterWhite.png");
-        BufferedImage waterBottleImage2 = ImageLoader.load("Soda.jpeg");
+        BufferedImage waterBottleImage2 = ImageLoader.load("sodaColor.png");
         BufferedImage foodImage1 = ImageLoader.load("foodWhite.png");
         BufferedImage foodImage2 = ImageLoader.load("ChickenLeg.png");
         BufferedImage firstAidKitWhiteImage = ImageLoader.load("firstAidKitWhite.png");
@@ -76,15 +75,17 @@ public class CheckList {
         BufferedImage keyPurpleImage = ImageLoader.load("keyPurple.png");
         BufferedImage CheckmarkImage = ImageLoader.load("Checkmark.png");
         BufferedImage PortalImage = ImageLoader.load("portal.png");
+        BufferedImage SodaImage = ImageLoader.load("sodaColor.png");
 
         
         if(transitionValue == 1)
         {
             food = new Sprite(foodImage2, x+22, topY + 2);
             food.setScale(.06f);
-            firstAidKitWhite = new Sprite(firstAidKitWhiteImage2, x + 50, topY);
-            firstAidKitWhite.setScale(.7f);
-            waterBottle = new Sprite(waterBottleImage2, x , topY );
+            firstAidKitWhite = new Sprite(firstAidKitWhiteImage2, x + 50, topY +3);
+            firstAidKitWhite.setScale(.09f);
+            waterBottle = new Sprite(waterBottleImage2, x+2 , topY );
+            waterBottle.setScale(.4f);
         }
         else 
         {
@@ -110,6 +111,9 @@ public class CheckList {
         Checkmark4 = new Sprite(CheckmarkImage, x+75, topY);
         Checkmark4.setScale(.1f);
         Portal = new Sprite (PortalImage, x-100, topY);
+        Soda = new Sprite (SodaImage, x, topY);
+        Soda.setScale(.2f);
+        
 
         
         
@@ -132,7 +136,7 @@ public class CheckList {
             //System.out.println("4 items have been collected");
         }
 
-        if ((collectedItems >= 5) && (Map.getMapTransition() != 2)) {
+        if ((collectedItems >= 5) && ((Map.getMapTransition() == 2)|| Map.getMapTransition() == 0)) {
             backgroundMusic = new BackgroundMusic("Resources/Portal.wav");
             backgroundMusic.play(); // Start playing the background music
             Portal portal = new Portal(map.getMapTile(4, 7).getLocation(), map);
@@ -146,6 +150,7 @@ public class CheckList {
             }
             backgroundMusic.stop();
     
+            
         }
     }
 
@@ -189,39 +194,24 @@ public class CheckList {
 
         if (collectedWeapon ==1);
         {
-            System.out.println("weapon is collected");
             Checkmark checkmark4 = new Checkmark (map.getMapTile(0,2).getLocation(),map);
             checkmark4.setMap(map);
         }
     }
 
+    
+
     public void portalCollected ()  {
         collectedPortal = collectedPortal + 1;
         update(); 
 
-        if (collectedPortal ==1)
-        {
-            System.out.println("portal is collceted");
-            //change logic to get screen to switch when portal is touched 
+        // if (collectedPortal ==1)
+        // {
+        //     // System.out.println("portal is collceted");
+        //     //change logic to get screen to switch when portal is touched 
 
-        }
+        // }
     }
-
-
-
-
-
-    // public void waterCollected () {
-    //     protected boolean collectedWater = false; 
-    //     Checkmark.isHidden = true;
-    //     update();
-
-    //     if (collectedWater == true) { 
-    //         this.isHidden = false;
-    //     }
-    // }
-
-
 
     public int getCollectedItems() {
         return collectedItems;
@@ -234,6 +224,8 @@ public class CheckList {
     public int getCollectedFood() {
         return collectedFood;
     }
+
+    
 
     public void addItem (int item) { 
         item = item + item; 
@@ -299,6 +291,8 @@ public class CheckList {
             if (collectedWeapon >= 1) {
                 Checkmark4.draw(graphicsHandler);
             }
+
+            
             
         // }
         // else { 

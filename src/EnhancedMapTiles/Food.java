@@ -6,14 +6,10 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
 
 public class Food extends EnhancedMapTile{
@@ -35,7 +31,7 @@ public class Food extends EnhancedMapTile{
     public void update(Player player) {
         super.update(player);
         
-        if (player.overlaps(this) && !hasInteracted)
+         if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
         {
             backgroundMusic = new BackgroundMusic("Resources/Item.wav");
             backgroundMusic.play(); // Start playing the background music

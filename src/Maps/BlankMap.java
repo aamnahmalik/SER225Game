@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import Level.Map;
 import Level.Trigger;
 import Scripts.TestMap.IntroVideoScript;
-import Scripts.TestMap.SerenaScript;
 import Tilesets.BlankTileset;
 import Utils.Point;
 

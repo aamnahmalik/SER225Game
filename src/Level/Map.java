@@ -2,16 +2,11 @@ package Level;
 
 import Engine.Config;
 import Engine.GraphicsHandler;
-import Engine.ImageLoader;
 import Engine.ScreenManager;
-import Game.Game;
-import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.Rectangle;
 import Utils.Direction;
 import Utils.Point;
-import Level.HealthMeter;
-import Level.CheckList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -84,7 +79,7 @@ public abstract class Map {
     static int mapTransition = 0;
 
     protected CheckList checkList; 
-
+    
     public Map(String mapFileName, Tileset tileset) {
         this.mapFileName = mapFileName;
         this.tileset = tileset;
@@ -99,9 +94,8 @@ public abstract class Map {
     }
 
     
-    public void setMapTansition (int i) { 
+    public void setMapTransition (int i) { 
         mapTransition =i;
-        System.out.println("mapTransition =1");
     }
     public static int getMapTransition () {
         return mapTransition;
@@ -615,6 +609,8 @@ public abstract class Map {
         else{
             checkList.draw(graphicsHandler);
         }
+
+    
     }
 
     public FlagManager getFlagManager() { return flagManager; }
@@ -647,4 +643,6 @@ public abstract class Map {
     public CheckList getCheckList(){
         return this.checkList;
     }
+
+    
 }

@@ -5,7 +5,6 @@ import Engine.BackgroundMusic;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Frame;
-import GameObject.ImageEffect;
 import GameObject.SpriteSheet;
 import Level.NPC;
 import Level.Player;
@@ -15,7 +14,6 @@ import Utils.Point;
 import java.util.HashMap;
 import java.util.Random;
 
-import java.util.HashMap;
 
 // This class is for the dinosaur NPC
 public class Dinosaur extends NPC 

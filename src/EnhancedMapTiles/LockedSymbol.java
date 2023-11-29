@@ -4,15 +4,11 @@ import java.awt.image.BufferedImage;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Sprite;
-import Utils.ImageUtils;
 
 public class LockedSymbol {
 
     public String name; 
     public String image; 
-    private ImageUtils imageToRemove;
-    private int inventoryCountToRemove =1;
-    private boolean isHidden = false;
     private Sprite lockedSymbol;
 
     public LockedSymbol(String name) { 
@@ -27,35 +23,3 @@ public class LockedSymbol {
             lockedSymbol.draw(graphicsHandler);
     }
 }
-
-    // List<CollectibleItems> inventory = new ArrayList<>();
-    // {
-
-    // if (inventory.size() >= inventoryCountToRemove) { 
-    //     removeImage(imageToRemove);
-    // }
-
-    // int itemsToCollect = inventory.size(); 
-    // imageToRemove.isHidden = true;
-
-    // public void removeImage() { 
-    //     if (inventory.size() >= inventoryCountToRemove){
-    //         //remove image here 
-    //     }
-    // }
-    
-    // @Override
-    // public void update(Player player) {
-    //     //checking for player interaction
-    //     if(player.overlaps(this)) { 
-    //         isHidden = true;
-    //     }
-        
-    //         }
-    // }
-    // Class CollectibleItems { 
-        
-    // }
-
-
-

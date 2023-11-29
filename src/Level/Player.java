@@ -321,7 +321,7 @@ public abstract class Player extends GameObject {
             {
                 this.currentAnimationName = "WALK_UP";
             }
-            else 
+            else
             {
                 this.currentAnimationName = "WALK_DOWN";
             }

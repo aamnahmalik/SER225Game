@@ -1,8 +1,6 @@
 package Screens;
 
 import Engine.*;
-import Level.HealthMeter;
-import Screens.PlayLevelScreen.PlayLevelScreenState;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;

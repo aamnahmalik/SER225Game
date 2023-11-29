@@ -40,7 +40,7 @@ public class PlayLevelScreen extends Screen {
         flagManager = new FlagManager();
         flagManager.addFlag("hasTalkedToSerena", false);
         flagManager.addFlag("introVideo", false);
-        flagManager.addFlag("hasCollectedItem1", false);
+        // flagManager.addFlag("hasCollectedItem1", false);
 
         // define/setup map
         this.map = new BlankMap();
@@ -59,6 +59,7 @@ public class PlayLevelScreen extends Screen {
         quitScreen = new QuitScreen(this);
         playLevelScreenState = PlayLevelScreenState.SELECTION;
     }
+
 
 
     public void update() {
@@ -82,13 +83,18 @@ public class PlayLevelScreen extends Screen {
                   backgroundMusic.stop();
                     playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
                         mapTransition();
+                        Weapon.hasInteracted = false;
+                        this.map.setMapTransition(2);
                         player.update();
-                        this.map.setMapTansition(2);
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
-                    this.map.setMapTansition(3);
+                    this.map.setMapTransition(3);
+                    player.update();
                 }
+                // if ((CheckList.collectedItems ==5) && (Map.getMapTransition() == 3)) {
+                //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+                // }
                 map.update(player);
                 break;
 
@@ -105,7 +111,13 @@ public class PlayLevelScreen extends Screen {
             case BETWEEN_LEVELS:
                 quitScreen.update();
                 break;
+            
         }
+
+        // // if flag is set at any point during gameplay, game is "won"
+        // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
+        //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
+        // }
 
         // // if flag is set at any point during gameplay, game is "won"
         // if (map.getFlagManager().isFlagSet("hasFoundBall")) {
@@ -193,7 +205,11 @@ public class PlayLevelScreen extends Screen {
     public void resetLevel() {
         HealthMeter.count = 50;
         Weapon.hasInteracted = false;
+<<<<<<< HEAD
         initialize();    
+=======
+        initialize();
+>>>>>>> 9a9b16e56ee0c2e7ed6c8cfa653c84deb56b6cc4
     }
 
     public void nextLevel() {
@@ -202,6 +218,7 @@ public class PlayLevelScreen extends Screen {
 
     public void goBackToMenu() {
         HealthMeter.count = 50;
+        Weapon.hasInteracted = false;
         screenCoordinator.setGameState(GameState.MENU);
     }
 
@@ -214,6 +231,8 @@ public class PlayLevelScreen extends Screen {
     public void mapTransition(){
             // define/setup map
             this.map = new JurassicMap();
+            this.map.setMapTransition(2);
+            player.update();
             map.setFlagManager(flagManager);
             // let pieces of map know which button to listen for as the "interact" button
             map.getTextbox().setInteractKey(player.getInteractKey());

@@ -4,19 +4,15 @@ import java.util.ArrayList;
 
 import EnhancedMapTiles.FirstAidKit;
 import EnhancedMapTiles.Food;
-import EnhancedMapTiles.KeyPurple;
 import EnhancedMapTiles.Water;
 import EnhancedMapTiles.Weapon;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.NPC;
-import Level.CheckList;
-import Level.Trigger;
 import NPCs.Serena;
 import NPCs.Zombies;
 import Scripts.TestMap.SerenaScript;
 import Tilesets.ZombieTileset;
-import Utils.Point;
 
 public class ZombieMap extends Map {
     
@@ -110,6 +106,7 @@ public class ZombieMap extends Map {
         serena.setInteractScript(new SerenaScript());
         npcs.add(serena);
 
+        
         return npcs;
     }
 

@@ -6,17 +6,11 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
-import Level.FlagManager;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
-import EnhancedMapTiles.KeyPurple;
 
 public class FirstAidKit extends EnhancedMapTile{
     
@@ -40,7 +34,7 @@ public class FirstAidKit extends EnhancedMapTile{
     {
         super.update(player);
 
-        if (Map.getMapTransition() == 2 && player.overlaps(this) && !hasInteracted && map.getFlagManager().isFlagSet("hasCollectedItem1") == true)
+        if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
         {
             backgroundMusic = new BackgroundMusic("Resources/Item.wav");
             backgroundMusic.play(); // Start playing the background music
@@ -64,28 +58,7 @@ public class FirstAidKit extends EnhancedMapTile{
             this.map.getCheckList().firstAidKitCollected();
         }
         
-        if (player.overlaps(this) && !hasInteracted)
-        {
-            backgroundMusic = new BackgroundMusic("Resources/Item.wav");
-            backgroundMusic.play(); // Start playing the background music
-            try {
-                // Sleep for 1 second (1000 milliseconds)
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            backgroundMusic.stop();
-        	map.setHasChangedHealthMeter(true);
-            hasInteracted = true;
-            this.isHidden = true;
-            try {
-                this.map.getCheckList().itemCollected();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            this.map.getCheckList().firstAidKitCollected();
-        }
+        
     }
 
     @Override

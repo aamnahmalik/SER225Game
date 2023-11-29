@@ -42,10 +42,6 @@ public class Checkmark extends EnhancedMapTile{
         this.collectedWater = this.collectedWater + 1;
         update();
 
-        if (this.collectedWater >=4 )
-        { 
-            System.out.println("4 items have been collected");
-        }
     }
 
     public void addKeyItem (int item){
@@ -61,7 +57,6 @@ public class Checkmark extends EnhancedMapTile{
         if(this.map.getCheckList().getCollectedWater() == 1)
         {
             this.isHidden = false;
-            System.out.println("item have been collected");
         }
         
         if (player.overlaps(this) && !hasInteracted && this.isHidden == false)

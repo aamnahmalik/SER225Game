@@ -5,14 +5,10 @@ import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
 
 public class Portal extends EnhancedMapTile{
@@ -31,24 +27,36 @@ public class Portal extends EnhancedMapTile{
     }
 
     @Override
-    public void update(Player player) {
-        super.update(player);
-        
-        if (player.overlaps(this) && !hasInteracted)
+    public void update(Player player)
         {
-        	map.setHasChangedHealthMeter(true);
-            hasInteracted = true;
-            this.isHidden = true;
-            try {
-                this.map.getCheckList().itemCollected();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            super.update(player);
+            
+            if (player.overlaps(this) && !hasInteracted && Map.getMapTransition() == 0)
+            {
+                hasInteracted = true;
+                this.isHidden = true;
+                try {
+                    this.map.getCheckList().itemCollected();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } 
+                this.map.getCheckList().portalCollected();
+                this.map.setMapTransition(1);
             }
-            this.map.getCheckList().portalCollected();
-            this.map.setMapTansition(1);
-        
-
+            else if (player.overlaps(this) && !hasInteracted)
+            {
+                hasInteracted = true;
+                this.isHidden = true;
+                try {
+                    this.map.getCheckList().itemCollected();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } 
+                this.map.getCheckList().portalCollected();
+                this.map.setMapTransition(2);
+            }
         }
     }
 
