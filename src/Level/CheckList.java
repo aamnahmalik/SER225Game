@@ -47,12 +47,14 @@ public class CheckList {
     private Sprite Checkmark3;
     private Sprite Checkmark4;
     private Sprite Portal;
+    private Sprite Soda;
     public int collectedItems;
     public int collectedWater;
     public int collectedFood;
     public int collectedFirstAidKit;
     public int collectedWeapon;
     public int collectedPortal;
+    public int collectedSoda;
 
     
     int transitionValue = Map.getMapTransition();
@@ -73,6 +75,7 @@ public class CheckList {
         BufferedImage keyPurpleImage = ImageLoader.load("keyPurple.png");
         BufferedImage CheckmarkImage = ImageLoader.load("Checkmark.png");
         BufferedImage PortalImage = ImageLoader.load("portal.png");
+        BufferedImage SodaImage = ImageLoader.load("soda.png");
 
         
         if(transitionValue == 1)
@@ -107,6 +110,9 @@ public class CheckList {
         Checkmark4 = new Sprite(CheckmarkImage, x+75, topY);
         Checkmark4.setScale(.1f);
         Portal = new Sprite (PortalImage, x-100, topY);
+        Soda = new Sprite (SodaImage, x, topY);
+        Soda.setScale(.2f);
+        
 
         
         
@@ -184,6 +190,8 @@ public class CheckList {
         }
     }
 
+    
+
     public void portalCollected ()  {
         collectedPortal = collectedPortal + 1;
         update(); 
@@ -223,6 +231,8 @@ public class CheckList {
     public int getCollectedFood() {
         return collectedFood;
     }
+
+    
 
     public void addItem (int item) { 
         item = item + item; 
@@ -288,6 +298,8 @@ public class CheckList {
             if (collectedWeapon >= 1) {
                 Checkmark4.draw(graphicsHandler);
             }
+
+            
             
         // }
         // else { 

@@ -13,8 +13,10 @@ import Level.NPC;
 import Level.CheckList;
 import Level.Trigger;
 import NPCs.Serena;
+import NPCs.Dan;
 import NPCs.Zombies;
 import Scripts.TestMap.SerenaScript;
+import Scripts.TestMap.DanScript;
 import Tilesets.ZombieTileset;
 import Utils.Point;
 
@@ -110,6 +112,7 @@ public class ZombieMap extends Map {
         serena.setInteractScript(new SerenaScript());
         npcs.add(serena);
 
+        
         return npcs;
     }
 

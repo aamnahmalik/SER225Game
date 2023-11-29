@@ -16,17 +16,19 @@ import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import NPCs.Serena;
+import NPCs.Dan;
 import NPCs.Walrus;
 import NPCs.Zombies;
 import Screens.IntroVideoScreen;
 import Level.CheckList;
 import Scripts.SimpleTextScript;
 import Scripts.TestMap.DinoScript;
-import Scripts.TestMap.IntroVideoScript1;
-import Scripts.TestMap.IntroVideoScript2;
-import Scripts.TestMap.IntroVideoScript3;
+// import Scripts.TestMap.IntroVideoScript1;
+// import Scripts.TestMap.IntroVideoScript2;
+// import Scripts.TestMap.IntroVideoScript3;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.SerenaScript;
+import Scripts.TestMap.DanScript;
 import Scripts.TestMap.TreeScript;
 import Scripts.TestMap.WalrusScript;
 import Tilesets.CommonTileset;
@@ -93,6 +95,7 @@ public class TestMap extends Map {
         serena.setInteractScript(new SerenaScript());
         npcs.add(serena);
 
+
         return npcs;
     }
 
@@ -103,9 +106,9 @@ public class TestMap extends Map {
         triggers.add(new Trigger(790, 960, 10, 80, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(890, 960, 10, 80, new LostBallScript(), "hasLostBall"));
         triggers.add(new Trigger(200, 200, 10,80, new SerenaScript(), "hasTalkedToSerena"));
-        triggers.add(new Trigger(200, 200, 600,600, new IntroVideoScript1(), "enter1"));
-        triggers.add(new Trigger(0, 0, 100,100, new IntroVideoScript2(), "enter2"));
-        triggers.add(new Trigger(0, 0, 80,100, new IntroVideoScript3(), "enter3"));
+        // triggers.add(new Trigger(200, 200, 600,600, new IntroVideoScript1(), "enter1"));
+        // triggers.add(new Trigger(0, 0, 100,100, new IntroVideoScript2(), "enter2"));
+        // triggers.add(new Trigger(0, 0, 80,100, new IntroVideoScript3(), "enter3"));
         return triggers;
     }
 
@@ -121,13 +124,15 @@ public class TestMap extends Map {
 
         getMapTile(20, 25).setInteractScript(new SerenaScript());
                
-        getMapTile(20, 25).setInteractScript(new IntroVideoScript1());
+        // getMapTile(20, 25).setInteractScript(new IntroVideoScript1());
 
-        getMapTile(20, 25).setInteractScript(new IntroVideoScript2());
+        // getMapTile(20, 25).setInteractScript(new IntroVideoScript2());
 
-        getMapTile(20, 25).setInteractScript(new IntroVideoScript3());
+        // getMapTile(20, 25).setInteractScript(new IntroVideoScript3());
 
 
+
+        
     }
 
     
