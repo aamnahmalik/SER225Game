@@ -8,6 +8,7 @@ import SpriteFont.SpriteFont;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.Queue;
+import Level.CheckList;
 
 // Represents the game's textbox
 // will display the text it is given to its textQueue
@@ -30,13 +31,15 @@ public class HealthMeter {
     
     public static int count = 50;
 
+    
+
     public HealthMeter(Map map) {
         this.map = map;
         text = new SpriteFont("Health: " + String.valueOf(count), fontX, fontTopY, "Arial", 12, Color.white);
     }
 
     public void addHealth(int health) {
-        health = 10;
+        health = 100;
         count = count + health;
         update();
     }
@@ -44,6 +47,9 @@ public class HealthMeter {
     public void minusHealth(int health){
         health = 30;
         count = count - health;
+        if (HealthMeter.count <= 0){
+            boolean done = true;
+        }
         update();
     }    
 

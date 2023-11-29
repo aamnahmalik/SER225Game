@@ -49,6 +49,17 @@ public class MapTile extends MapEntity {
         return null;
     }
 
+    public MapTile(float x, float y, SpriteSheet spriteSheet, TileType tileType, int i) {
+        super(x, y);
+        this.bottomLayer = loadBottomLayer(spriteSheet);
+        this.topLayer = loadTopLayer(spriteSheet);
+        this.tileType = tileType;
+    }
+
+    protected GameObject loadBottomLayer2(SpriteSheet spriteSheet) {
+        return null;
+    }
+
     protected GameObject loadTopLayer(SpriteSheet spriteSheet) {
         return null;
     }

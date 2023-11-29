@@ -63,7 +63,7 @@ public class PlayerSelection extends Screen {
         //Transition to another screen when Enter is pressed
         if (Keyboard.isKeyDown(Key.ENTER)) {
             backgroundMusic.stop();
-            playLevelScreen.setGameState(PlayLevelScreenState.INTRO);
+            playLevelScreen.setGameState(PlayLevelScreenState.RUNNING);
         }
     }
 

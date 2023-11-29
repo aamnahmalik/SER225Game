@@ -50,7 +50,10 @@ public class Weapon extends EnhancedMapTile
         if (Map.getMapTransition() == 3)
         {
             hasInteracted = false;
+            this.map.setMapTransition(3);
         }
+
+
     }
 
     @Override
