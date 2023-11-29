@@ -64,7 +64,7 @@ public class CheckList {
         this.map = map; 
         text = new SpriteFont("Items: " + String.valueOf(count), fontX, fontTopY, "Arial", 12, Color.white);
         BufferedImage waterBottleImage = ImageLoader.load("WaterWhite.png");
-        BufferedImage waterBottleImage2 = ImageLoader.load("Soda.jpeg");
+        BufferedImage waterBottleImage2 = ImageLoader.load("sodaColor.png");
         BufferedImage foodImage1 = ImageLoader.load("foodWhite.png");
         BufferedImage foodImage2 = ImageLoader.load("ChickenLeg.png");
         BufferedImage firstAidKitWhiteImage = ImageLoader.load("firstAidKitWhite.png");
@@ -75,16 +75,17 @@ public class CheckList {
         BufferedImage keyPurpleImage = ImageLoader.load("keyPurple.png");
         BufferedImage CheckmarkImage = ImageLoader.load("Checkmark.png");
         BufferedImage PortalImage = ImageLoader.load("portal.png");
-        BufferedImage SodaImage = ImageLoader.load("soda.png");
+        BufferedImage SodaImage = ImageLoader.load("sodaColor.png");
 
         
         if(transitionValue == 1)
         {
             food = new Sprite(foodImage2, x+22, topY + 2);
             food.setScale(.06f);
-            firstAidKitWhite = new Sprite(firstAidKitWhiteImage2, x + 50, topY);
-            firstAidKitWhite.setScale(.7f);
-            waterBottle = new Sprite(waterBottleImage2, x , topY );
+            firstAidKitWhite = new Sprite(firstAidKitWhiteImage2, x + 50, topY +3);
+            firstAidKitWhite.setScale(.09f);
+            waterBottle = new Sprite(waterBottleImage2, x+2 , topY );
+            waterBottle.setScale(.4f);
         }
         else 
         {

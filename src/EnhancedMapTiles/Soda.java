@@ -22,11 +22,11 @@ public class Soda extends EnhancedMapTile{
 
 	
     public Soda(Point location) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("pop.png"),41, 67), TileType.PASSABLE);
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("soda.png"),39, 63), TileType.PASSABLE);
     }
 
     public Soda(Point location, Map map) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("pop.png"),41, 67), TileType.PASSABLE);
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("soda.png"),39, 63), TileType.PASSABLE);
         this.map = map;
     }
 
@@ -47,8 +47,8 @@ public class Soda extends EnhancedMapTile{
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
         Frame frame = new FrameBuilder(spriteSheet.getSubImage(0, 0))
-                .withScale(1)
-                .withBounds(1, 1, 41, 67)
+                .withScale(.2f)
+                .withBounds(1, 1, 39, 63)
                 .build();
         		
         return new GameObject(x, y, frame);
