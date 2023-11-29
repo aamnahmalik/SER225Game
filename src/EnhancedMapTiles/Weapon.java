@@ -21,7 +21,7 @@ import Utils.Point;
 public class Weapon extends EnhancedMapTile
 {
     protected Map map;
-	private static boolean hasInteracted = false;
+	public static boolean hasInteracted = false;
 	
     public Weapon(Point location) 
     {

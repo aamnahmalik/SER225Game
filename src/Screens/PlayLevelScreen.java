@@ -184,6 +184,7 @@ public class PlayLevelScreen extends Screen {
 
     public void resetLevel() {
         HealthMeter.count = 50;
+        Weapon.hasInteracted = false;
         initialize();
     }
 
@@ -193,6 +194,7 @@ public class PlayLevelScreen extends Screen {
 
     public void goBackToMenu() {
         HealthMeter.count = 50;
+        Weapon.hasInteracted = false;
         screenCoordinator.setGameState(GameState.MENU);
     }
 
