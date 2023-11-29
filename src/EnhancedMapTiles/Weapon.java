@@ -1,6 +1,7 @@
 package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
+import Engine.BackgroundMusic;
 import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
@@ -18,6 +19,7 @@ public class Weapon extends EnhancedMapTile
 {
     protected Map map;
 	public static boolean hasInteracted = false;
+    protected BackgroundMusic backgroundMusic;
 	
     public Weapon(Point location) 
     {
@@ -38,9 +40,24 @@ public class Weapon extends EnhancedMapTile
         
         if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
         {
+            backgroundMusic = new BackgroundMusic("Resources/Item.wav");
+            backgroundMusic.play(); // Start playing the background music
+            try {
+                // Sleep for 1 second (1000 milliseconds)
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            backgroundMusic.stop();
+            
             hasInteracted = true;
             this.isHidden = true;
-            this.map.getCheckList().itemCollected();
+            try {
+                this.map.getCheckList().itemCollected();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             this.map.getCheckList().weaponCollected();
         }
 

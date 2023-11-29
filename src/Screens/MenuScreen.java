@@ -44,10 +44,6 @@ public class MenuScreen extends Screen {
         instructions = new SpriteFont("INSTRUCTIONS", 200, 319, "Comic Sans", 30, new Color(49, 207, 240));
         instructions.setOutlineColor(Color.black);
         instructions.setOutlineThickness(3);
-        background = new TitleScreenMap();
-        background.setAdjustCamera(false);
-        keyPressTimer = 0;
-        menuItemSelected = -1;
         keyLocker.lockKey(Key.SPACE);
     
         if (!musicInitialized) {

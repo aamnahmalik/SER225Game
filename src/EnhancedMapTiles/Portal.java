@@ -35,7 +35,12 @@ public class Portal extends EnhancedMapTile{
             {
                 hasInteracted = true;
                 this.isHidden = true;
-                this.map.getCheckList().itemCollected(); 
+                try {
+                    this.map.getCheckList().itemCollected();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } 
                 this.map.getCheckList().portalCollected();
                 this.map.setMapTransition(1);
             }
@@ -43,7 +48,12 @@ public class Portal extends EnhancedMapTile{
             {
                 hasInteracted = true;
                 this.isHidden = true;
-                this.map.getCheckList().itemCollected(); 
+                try {
+                    this.map.getCheckList().itemCollected();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } 
                 this.map.getCheckList().portalCollected();
                 this.map.setMapTransition(2);
             }
@@ -58,5 +68,5 @@ public class Portal extends EnhancedMapTile{
         		
         return new GameObject(x+12, y, frame);
     }
-}
 
+}

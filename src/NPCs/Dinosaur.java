@@ -1,6 +1,7 @@
 package NPCs;
 
 import Builders.FrameBuilder;
+import Engine.BackgroundMusic;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Frame;
@@ -22,6 +23,7 @@ public class Dinosaur extends NPC
         private int directionChangeCounter;
         private Random random = new Random();
         private boolean hasInteracted = false;
+        protected BackgroundMusic backgroundMusic;
 
         public Dinosaur(int id, Point location) 
         {
@@ -58,6 +60,15 @@ public class Dinosaur extends NPC
                 
                         map.setHasChangedHealthMeter(true);
                         hasInteracted = true;
+                        backgroundMusic = new BackgroundMusic("Resources/Damage.wav");
+                        backgroundMusic.play(); // Start playing the background music
+
+                        try {
+                        Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        }
+                        backgroundMusic.stop();
                 }
 
                 Point playerLocation = player.getLocation();

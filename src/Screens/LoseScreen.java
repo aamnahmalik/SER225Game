@@ -18,7 +18,6 @@ public class LoseScreen extends Screen {
     }
 
 
-
     @Override
     public void initialize() {
         loseMessage = new SpriteFont("You lose!", 350, 239, "Comic Sans", 30, Color.white);

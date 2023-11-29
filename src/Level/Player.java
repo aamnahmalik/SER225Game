@@ -1,5 +1,6 @@
 package Level;
 
+import Engine.BackgroundMusic;
 import Engine.Key;
 import Engine.KeyLocker;
 import Engine.Keyboard;
@@ -48,6 +49,7 @@ public abstract class Player extends GameObject {
     protected Key RUN_UP_KEY = Key.W; 
     protected Key RUN_DOWN_KEY = Key.S; 
     protected Key ATTACK = Key.E;
+    protected BackgroundMusic backgroundMusic;
 
 
     public Player(SpriteSheet spriteSheet, float x, float y, String startingAnimationName) {
@@ -137,6 +139,8 @@ public abstract class Player extends GameObject {
         if (Weapon.hasTheWeapon()) {
             if (Keyboard.isKeyDown(ATTACK)) {
                 if (!isAttacking) {
+                    backgroundMusic = new BackgroundMusic("Resources/Hit.wav");
+                    backgroundMusic.play(); // Start playing the background music
                     // Start the attacking animation
                     playerState = PlayerState.ATTACKING;
                     isAttacking = true;    
@@ -145,7 +149,8 @@ public abstract class Player extends GameObject {
           else {
                 // The "E" key is released, reset the flag to allow for attacking again
                 isAttacking = false;
-    
+                backgroundMusic.stop();
+
                 // Transition to another state when the attack animation is complete, if needed.
                 // For example, you can transition to STANDING state here.
                 if (isAttackAnimationComplete()) {
@@ -171,6 +176,10 @@ public abstract class Player extends GameObject {
         return getCurrentFrameIndex() == totalFrames - 1;
     }
     
+    public void setWalking(boolean walking)
+    {
+        this.walking = walking;
+    }
     
     // player WALKING state logic
     protected void playerWalking() {
@@ -318,15 +327,27 @@ public abstract class Player extends GameObject {
             }
         }
         else if (playerState == PlayerState.INTERACTING) {
-            // sets animation to STAND when player is interacting
-            // player can be told to stand or walk during Script by using the "stand" and "walk" methods
-            if (Weapon.hasTheWeapon() == false)
+            if(walking)
             {
-                // sets animation to a STAND animation based on which way player is facing
-                this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_RIGHT" : "STAND_LEFT";
+                if (facingDirection == Direction.RIGHT) {
+                    this.currentAnimationName = "WALK_RIGHT";
+                } 
+                else if (facingDirection == Direction.LEFT)
+                {
+                    this.currentAnimationName = "WALK_LEFT";
+                }
+                else if (facingDirection == Direction.UP)
+                {
+                    this.currentAnimationName = "WALK_UP";
+                }
+                else 
+                {
+                    this.currentAnimationName = "WALK_DOWN";
+                }
             }
-            else{
-                this.currentAnimationName = facingDirection == Direction.RIGHT ? "STAND_AXL" : "STAND_AXL";
+            else
+            {
+                this.currentAnimationName = "STAND_RIGHT";
             }
         }
         else if (playerState == PlayerState.RUNNING) { 

@@ -66,7 +66,12 @@ public class Item1Script extends Script<EnhancedMapTile>
             if (selectedOption == 0)
             {
                 map.setHasChangedHealthMeter(true);
-                this.map.getCheckList().itemCollected();
+                try {
+                    this.map.getCheckList().itemCollected();
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } 
                 this.map.getCheckList().firstAidKitCollected();
                 for (EnhancedMapTile emt : map.getEnhancedMapTiles()) {
                     if (emt instanceof FirstAidKit) {

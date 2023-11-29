@@ -32,9 +32,9 @@ public class JurassicMap extends Map
     {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        enhancedMapTiles.add(new Water(getMapTile(4, 14).getLocation(), this));
-        enhancedMapTiles.add(new FirstAidKit(getMapTile(22, 1).getLocation(), this));
-        enhancedMapTiles.add(new Food(getMapTile(5, 1).getLocation(), this));
+        enhancedMapTiles.add(new Water(getMapTile(4, 14).getLocation(), this, 1));
+        enhancedMapTiles.add(new FirstAidKit(getMapTile(22, 1).getLocation(), this, 1));
+        enhancedMapTiles.add(new Food(getMapTile(5, 1).getLocation(), this, 1));
         enhancedMapTiles.add(new Weapon(getMapTile(18, 22).getLocation(), this));
         //41,67
 
