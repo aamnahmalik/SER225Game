@@ -1,5 +1,6 @@
 package Screens;
 
+import Engine.BackgroundMusic;
 import Engine.GraphicsHandler;
 import Engine.Key;
 import Engine.Keyboard;
@@ -10,15 +11,11 @@ import Game.ScreenCoordinator;
 import Level.*;
 import Maps.JurassicMap;
 import Maps.BlankMap;
-import Maps.TestMap;
 import Maps.ZombieMap;
 import Players.Blair;
 import Players.Chuck;
 import Utils.Direction;
 import Utils.Point;
-import Level.Script;
-import Level.ScriptState;
-import Utils.Direction;
 
 // This class is for when the platformer game is actually being played
 public class PlayLevelScreen extends Screen {
@@ -32,7 +29,7 @@ public class PlayLevelScreen extends Screen {
     protected FlagManager flagManager;
     protected PlayerSelection selectionScreen;
     protected boolean isChuckSelected;
-
+    protected BackgroundMusic backgroundMusic;
 
     public PlayLevelScreen(ScreenCoordinator screenCoordinator) {
         this.screenCoordinator = screenCoordinator;
@@ -48,6 +45,8 @@ public class PlayLevelScreen extends Screen {
         // define/setup map
         this.map = new BlankMap();
         map.setFlagManager(flagManager);
+    
+        backgroundMusic = new BackgroundMusic("Resources/Zombies.wav");
 
         selectionScreen = new PlayerSelection(this);
 
@@ -71,6 +70,7 @@ public class PlayLevelScreen extends Screen {
                 if(Map.getMapTransition() == 0)
                 {
                     if (Keyboard.isKeyDown(Key.ENTER)) {
+                        backgroundMusic.play(); // Start playing the background music
                         mapTransition1();
                         player.update();
                     }
@@ -79,6 +79,7 @@ public class PlayLevelScreen extends Screen {
 
                 if(Map.getMapTransition() == 1)
                 {
+                  backgroundMusic.stop();
                     playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
                         mapTransition();
                         player.update();
@@ -137,6 +138,7 @@ public class PlayLevelScreen extends Screen {
 
     public void setGameState(PlayLevelScreenState playLevelScreenState) {
         //set up the isChuckSelected value
+        if (playLevelScreenState == PlayLevelScreenState.RUNNING) {
         boolean isChuckSelected = selectionScreen.isChuckSelected();
 
         // Setup player
@@ -179,7 +181,7 @@ public class PlayLevelScreen extends Screen {
                     trigger.getTriggerScript().setPlayer(player);
                 }
             }
-
+        }
         this.playLevelScreenState = playLevelScreenState;
     }
 
@@ -190,7 +192,8 @@ public class PlayLevelScreen extends Screen {
 
     public void resetLevel() {
         HealthMeter.count = 50;
-        initialize();
+        Weapon.hasInteracted = false;
+        initialize();    
     }
 
     public void nextLevel() {

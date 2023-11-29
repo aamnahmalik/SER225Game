@@ -36,7 +36,7 @@ public class HealthMeter {
     }
 
     public void addHealth(int health) {
-        health = 100;
+        health = 10;
         count = count + health;
         update();
     }

@@ -68,7 +68,12 @@ public class KeyPurple extends EnhancedMapTile{
         {
             hasInteracted = true;
             this.isHidden = true;
-            this.map.getCheckList().itemCollected();
+            try {
+                this.map.getCheckList().itemCollected();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package Level;
 
+import Engine.BackgroundMusic;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import EnhancedMapTiles.KeyPurple;
@@ -13,6 +14,8 @@ import EnhancedMapTiles.Checkmark;
 import EnhancedMapTiles.Portal;
 import Maps.TestMap;
 import Maps.TestMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //Represents the game's textbox for the checklist 
 //will display the text it is given to its textQueue 
@@ -53,7 +56,7 @@ public class CheckList {
     public int collectedFirstAidKit;
     public int collectedWeapon;
     public int collectedPortal;
-
+    protected BackgroundMusic backgroundMusic;
     
     int transitionValue = Map.getMapTransition();
     int count = 0; 
@@ -115,7 +118,7 @@ public class CheckList {
         
         //super(id, location.x, location.y, new SpriteSheet(ImageLoader.load("Water.png"), 69, 90), "STAND_LEFT");
 
-    public void itemCollected () { 
+    public void itemCollected () throws InterruptedException { 
         collectedItems = collectedItems +1;
         update();
 
@@ -129,12 +132,20 @@ public class CheckList {
             //System.out.println("4 items have been collected");
         }
 
-        if ((collectedItems >=5) && (Map.getMapTransition() != 2)) {
-            
-            Portal portal = new Portal (map.getMapTile(4, 7).getLocation(),map);
+        if ((collectedItems >= 5) && (Map.getMapTransition() != 2)) {
+            backgroundMusic = new BackgroundMusic("Resources/Portal.wav");
+            backgroundMusic.play(); // Start playing the background music
+            Portal portal = new Portal(map.getMapTile(4, 7).getLocation(), map);
             portal.setMap(map);
             map.enhancedMapTiles.add(portal);
-            
+            try {
+                // Sleep for 5 seconds (5000 milliseconds)
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            backgroundMusic.stop();
+    
         }
     }
 
