@@ -44,7 +44,7 @@ public class Portal extends EnhancedMapTile{
                 this.map.getCheckList().portalCollected();
                 this.map.setMapTransition(1);
             }
-            else if (player.overlaps(this) && !hasInteracted)
+            else if (player.overlaps(this) && !hasInteracted && Map.getMapTransition() == 2)
             {
                 hasInteracted = true;
                 this.isHidden = true;
@@ -55,7 +55,7 @@ public class Portal extends EnhancedMapTile{
                     e.printStackTrace();
                 } 
                 this.map.getCheckList().portalCollected();
-                this.map.setMapTransition(2);
+                this.map.setMapTransition(5);
             }
         }
     

@@ -33,7 +33,7 @@ public class JurassicMap extends Map
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
         enhancedMapTiles.add(new Water(getMapTile(4, 14).getLocation(), this, 1));
-        enhancedMapTiles.add(new FirstAidKit(getMapTile(22, 1).getLocation(), this, 1));
+        enhancedMapTiles.add(new FirstAidKit(getMapTile(23, 5).getLocation(), this, 1));
         enhancedMapTiles.add(new Food(getMapTile(5, 1).getLocation(), this, 1));
         enhancedMapTiles.add(new Weapon(getMapTile(18, 22).getLocation(), this));
         //41,67
@@ -50,7 +50,7 @@ public class JurassicMap extends Map
         //water
         triggers.add(new Trigger(getMapTile(4,14).getLocation(), 40, 40, new Item3Script()));
         //firstaid
-        triggers.add(new Trigger(getMapTile(22,1).getLocation(), 40, 40, new Item1Script()));
+        triggers.add(new Trigger(getMapTile(23,5).getLocation(), 40, 40, new Item1Script()));
         //food
         triggers.add(new Trigger(getMapTile(5,1).getLocation(), 40, 40, new Item2Script()));
         //weapon

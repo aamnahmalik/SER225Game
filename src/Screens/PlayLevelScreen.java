@@ -87,6 +87,15 @@ public class PlayLevelScreen extends Screen {
                         this.map.setMapTransition(2);
                         player.update();
                 }
+
+                if (Map.getMapTransition() == 5)
+                {
+                    backgroundMusic.stop();
+                    playLevelScreenState = PlayLevelScreenState.WIN;
+                    this.map.setMapTransition(6);
+                    player.update();
+                }
+
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
                     this.map.setMapTransition(3);
