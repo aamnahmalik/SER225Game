@@ -87,6 +87,15 @@ public class PlayLevelScreen extends Screen {
                         this.map.setMapTransition(2);
                         player.update();
                 }
+
+                if (Map.getMapTransition() == 5)
+                {
+                    backgroundMusic.stop();
+                    playLevelScreenState = PlayLevelScreenState.WIN;
+                    this.map.setMapTransition(6);
+                    player.update();
+                }
+
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
                     this.map.setMapTransition(3);
@@ -110,6 +119,9 @@ public class PlayLevelScreen extends Screen {
                 break;
             case BETWEEN_LEVELS:
                 quitScreen.update();
+                break;
+            case WIN:
+                winScreen.update();
                 break;
             
         }
@@ -143,6 +155,9 @@ public class PlayLevelScreen extends Screen {
                 break;               
             case BETWEEN_LEVELS:
                 quitScreen.draw(graphicsHandler);
+                break;
+            case WIN:
+                winScreen.draw(graphicsHandler);
                 break;
         }
        
@@ -222,7 +237,7 @@ public class PlayLevelScreen extends Screen {
 
     // This enum represents the different states this screen can be in
     protected enum PlayLevelScreenState {
-        RUNNING, LEVEL_COMPLETED, SELECTION, LOSE, BETWEEN_LEVELS
+        RUNNING, LEVEL_COMPLETED, SELECTION, LOSE, BETWEEN_LEVELS, WIN
     }
 
     //check the map number

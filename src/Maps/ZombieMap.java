@@ -30,7 +30,7 @@ public class ZombieMap extends Map {
 
         enhancedMapTiles.add(new Water(getMapTile(19, 24).getLocation(), this));
         enhancedMapTiles.add(new FirstAidKit(getMapTile(11, 18).getLocation(), this));
-        enhancedMapTiles.add(new Food(getMapTile(5, 28).getLocation(), this));
+        enhancedMapTiles.add(new Food(getMapTile(3, 25).getLocation(), this));
         enhancedMapTiles.add(new Weapon(getMapTile(1, 17).getLocation(), this));
         
 
