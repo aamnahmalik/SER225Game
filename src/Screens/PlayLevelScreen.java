@@ -200,6 +200,7 @@ public class PlayLevelScreen extends Screen {
         HealthMeter.count = 50;
         Weapon.hasInteracted = false;
         initialize();
+        this.map.setMapTransition(0);
     }
 
     public void nextLevel() {
@@ -210,6 +211,7 @@ public class PlayLevelScreen extends Screen {
         HealthMeter.count = 50;
         Weapon.hasInteracted = false;
         screenCoordinator.setGameState(GameState.MENU);
+         this.map.setMapTransition(0);
     }
 
     // This enum represents the different states this screen can be in
