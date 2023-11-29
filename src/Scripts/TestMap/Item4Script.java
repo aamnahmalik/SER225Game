@@ -6,8 +6,9 @@ import Level.ScriptState;
 import Engine.Key;
 import Engine.Keyboard;
 import EnhancedMapTiles.FirstAidKit;
+import EnhancedMapTiles.Weapon;
 
-public class Item1Script extends Script<EnhancedMapTile>
+public class Item4Script extends Script<EnhancedMapTile>
 {
     private int sequence = 0;
     private int selectedOption = -1;
@@ -19,20 +20,20 @@ public class Item1Script extends Script<EnhancedMapTile>
                 lockPlayer();
                 selectedOption = -1;
                 showTextbox();
-                addTextToTextboxQueue( "Blair married the prince of which country?\n(Press Space to see options)");
-                addTextToTextboxQueue( "1. Monaco\t 2. France\t 3. Sweden\nPress Space, then the number of your answer");            
+                addTextToTextboxQueue( "Who was Dan's sister?\n(Press Space to see options)");
+                addTextToTextboxQueue( "1. Vanessa\t 2. Jenny\t 3. Liv\nPress Space, then the number of your answer");            
 
             }
             else if (sequence == 1) {
              
             }
             else if (sequence == 2) {
-                if (selectedOption == 0)
+                if (selectedOption == 1)
                 {
                     addTextToTextboxQueue("Correct!\nPress Space to exit.");
                     showTextbox();
                 }
-                else if (selectedOption == 1)
+                else if (selectedOption == 0)
                 {
                     addTextToTextboxQueue("Wrong!\nPress Space to try again.");
                     showTextbox();
@@ -62,13 +63,13 @@ public class Item1Script extends Script<EnhancedMapTile>
             hideTextbox();
             sequence++;
             unlockPlayer();
-            if (selectedOption == 0)
+            if (selectedOption == 1)
             {
                 map.setHasChangedHealthMeter(true);
                 this.map.getCheckList().itemCollected();
-                this.map.getCheckList().firstAidKitCollected();
+                this.map.getCheckList().weaponCollected();
                 for (EnhancedMapTile emt : map.getEnhancedMapTiles()) {
-                    if (emt instanceof FirstAidKit) {
+                    if (emt instanceof Weapon) {
                         emt.setIsHidden(true);
                         break;
                     }

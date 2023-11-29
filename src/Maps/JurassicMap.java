@@ -14,6 +14,9 @@ import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import Scripts.TestMap.Item1Script;
+import Scripts.TestMap.Item2Script;
+import Scripts.TestMap.Item3Script;
+import Scripts.TestMap.Item4Script;
 import Scripts.TestMap.LostBallScript;
 import Scripts.TestMap.SerenaScript;
 import NPCs.Dan;
@@ -49,7 +52,15 @@ public class JurassicMap extends Map
     {
         ArrayList<Trigger> triggers = new ArrayList<>();
 
+        //water
+        triggers.add(new Trigger(getMapTile(4,14).getLocation(), 40, 40, new Item3Script()));
+        //firstaid
         triggers.add(new Trigger(getMapTile(22,1).getLocation(), 40, 40, new Item1Script()));
+        //food
+        triggers.add(new Trigger(getMapTile(5,1).getLocation(), 40, 40, new Item2Script()));
+        //weapon
+        triggers.add(new Trigger(getMapTile(18,22).getLocation(), 40, 40, new Item4Script()));
+
 
         return triggers;
     }

@@ -32,8 +32,17 @@ public class Water extends EnhancedMapTile{
     @Override
     public void update(Player player) {
         super.update(player);
+
+        if (Map.getMapTransition() == 2 && player.overlaps(this) && !hasInteracted)
+        {
+        	map.setHasChangedHealthMeter(true);
+            hasInteracted = true;
+            this.isHidden = true;
+            this.map.getCheckList().itemCollected();
+            this.map.getCheckList().waterCollected();
+        }
         
-        if (player.overlaps(this) && !hasInteracted)
+        if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
         {
         	map.setHasChangedHealthMeter(true);
             hasInteracted = true;
