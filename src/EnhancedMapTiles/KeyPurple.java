@@ -42,11 +42,6 @@ public class KeyPurple extends EnhancedMapTile{
     public void itemCollected () {
         this.collectedItems = this.collectedItems + 1;
         update();
-
-        if (this.collectedItems >=4 )
-        { 
-            System.out.println("4 items have been collected");
-        }
     }
 
     public void addKeyItem (int item){
@@ -58,7 +53,6 @@ public class KeyPurple extends EnhancedMapTile{
     public void update(Player player) {
         super.update(player);
 
-        System.out.println(this.map.getCheckList().getCollectedItems());
         if(this.map.getCheckList().getCollectedItems() >= 4)
         {
             this.isHidden = false;
@@ -68,7 +62,12 @@ public class KeyPurple extends EnhancedMapTile{
         {
             hasInteracted = true;
             this.isHidden = true;
-            this.map.getCheckList().itemCollected();
+            try {
+                this.map.getCheckList().itemCollected();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 

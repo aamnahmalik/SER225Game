@@ -1,34 +1,31 @@
 package EnhancedMapTiles;
 
 import Builders.FrameBuilder;
+import Engine.BackgroundMusic;
 import Engine.ImageLoader;
 import GameObject.Frame;
 import GameObject.GameObject;
 import GameObject.SpriteSheet;
-import Level.HealthMeter;
 import Level.EnhancedMapTile;
-import Level.FlagManager;
 import Level.Map;
 import Level.Player;
-import Level.PlayerState;
 import Level.TileType;
-import Maps.TestMap;
-import Utils.Direction;
 import Utils.Point;
-import EnhancedMapTiles.KeyPurple;
 
 public class FirstAidKit extends EnhancedMapTile{
     
 	protected Map map;
 	private boolean hasInteracted = false;
+    protected BackgroundMusic backgroundMusic;
 
 	
-    public FirstAidKit(Point location) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("firstaidkit.png"),40, 40), TileType.PASSABLE);
+    public FirstAidKit(Point location, Map map) {
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("firstaidkit.png"),31, 31), TileType.PASSABLE);
+        this.map = map;
     }
 
-    public FirstAidKit(Point location, Map map) {
-        super(location.x, location.y, new SpriteSheet(ImageLoader.load("firstaidkit.png"),40, 40), TileType.PASSABLE);
+    public FirstAidKit(Point location, Map map, int n) {
+        super(location.x, location.y, new SpriteSheet(ImageLoader.load("BandAidResized.png"),31, 31), TileType.PASSABLE);
         this.map = map;
     }
 
@@ -37,23 +34,31 @@ public class FirstAidKit extends EnhancedMapTile{
     {
         super.update(player);
 
-        if (Map.getMapTransition() == 2 && player.overlaps(this) && !hasInteracted && map.getFlagManager().isFlagSet("hasCollectedItem1") == true)
+        if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
         {
+            backgroundMusic = new BackgroundMusic("Resources/Item.wav");
+            backgroundMusic.play(); // Start playing the background music
+            try {
+                // Sleep for 1 second (1000 milliseconds)
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            backgroundMusic.stop();
+
         	map.setHasChangedHealthMeter(true);
             hasInteracted = true;
             this.isHidden = true;
-            this.map.getCheckList().itemCollected();
+            try {
+                this.map.getCheckList().itemCollected();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             this.map.getCheckList().firstAidKitCollected();
         }
         
-        if (player.overlaps(this) && !hasInteracted)
-        {
-        	map.setHasChangedHealthMeter(true);
-            hasInteracted = true;
-            this.isHidden = true;
-            this.map.getCheckList().itemCollected();
-            this.map.getCheckList().firstAidKitCollected();
-        }
+        
     }
 
     @Override

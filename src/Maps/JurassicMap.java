@@ -1,6 +1,5 @@
 package Maps;
 
-import java.nio.file.DirectoryNotEmptyException;
 import java.util.ArrayList;
 
 import EnhancedMapTiles.FirstAidKit;
@@ -10,16 +9,15 @@ import EnhancedMapTiles.Weapon;
 import Level.EnhancedMapTile;
 import Level.NPC;
 import Level.Map;
-import Level.NPC;
 import Level.Trigger;
 import NPCs.Dinosaur;
 import Scripts.TestMap.Item1Script;
-import Scripts.TestMap.LostBallScript;
-import Scripts.TestMap.SerenaScript;
+import Scripts.TestMap.Item2Script;
+import Scripts.TestMap.Item3Script;
+import Scripts.TestMap.Item4Script;
 import NPCs.Dan;
 import Scripts.TestMap.DanScript;
 import Tilesets.JurassicTileset;
-import Utils.Point;
 
 public class JurassicMap extends Map
 {
@@ -34,9 +32,9 @@ public class JurassicMap extends Map
     {
         ArrayList<EnhancedMapTile> enhancedMapTiles = new ArrayList<>();
 
-        enhancedMapTiles.add(new Water(getMapTile(4, 14).getLocation(), this));
-        enhancedMapTiles.add(new FirstAidKit(getMapTile(22, 1).getLocation(), this));
-        enhancedMapTiles.add(new Food(getMapTile(5, 1).getLocation(), this));
+        enhancedMapTiles.add(new Water(getMapTile(4, 14).getLocation(), this, 1));
+        enhancedMapTiles.add(new FirstAidKit(getMapTile(22, 1).getLocation(), this, 1));
+        enhancedMapTiles.add(new Food(getMapTile(5, 1).getLocation(), this, 1));
         enhancedMapTiles.add(new Weapon(getMapTile(18, 22).getLocation(), this));
         //41,67
 
@@ -49,7 +47,15 @@ public class JurassicMap extends Map
     {
         ArrayList<Trigger> triggers = new ArrayList<>();
 
+        //water
+        triggers.add(new Trigger(getMapTile(4,14).getLocation(), 40, 40, new Item3Script()));
+        //firstaid
         triggers.add(new Trigger(getMapTile(22,1).getLocation(), 40, 40, new Item1Script()));
+        //food
+        triggers.add(new Trigger(getMapTile(5,1).getLocation(), 40, 40, new Item2Script()));
+        //weapon
+        triggers.add(new Trigger(getMapTile(18,22).getLocation(), 40, 40, new Item4Script()));
+
 
         return triggers;
     }

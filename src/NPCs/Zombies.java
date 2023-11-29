@@ -1,6 +1,7 @@
 package NPCs;
 
 import Builders.FrameBuilder;
+import Engine.BackgroundMusic;
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.Frame;
@@ -20,6 +21,7 @@ public class Zombies extends NPC
     private int directionChangeCounter;
     private Random random = new Random();
     private boolean hasInteracted = false;
+    protected BackgroundMusic backgroundMusic;
 
     public Zombies(int id, Point location) 
     {
@@ -50,12 +52,24 @@ public class Zombies extends NPC
         super.update(player);
 
         if (player.overlaps(this) && !hasInteracted) {
+            
                 int healthDecreaseAmount = 20; 
                 
                 map.getHealthMeter().minusHealth(healthDecreaseAmount);
         
                 map.setHasChangedHealthMeter(true);
                 hasInteracted = true;
+
+                backgroundMusic = new BackgroundMusic("Resources/Damage.wav");
+                backgroundMusic.play(); // Start playing the background music
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                backgroundMusic.stop();
+
         }
 
         // if (player.overlaps(this) && player.isAttacking()) {

@@ -1,8 +1,6 @@
 package Screens;
 
 import Engine.*;
-import Level.HealthMeter;
-import Screens.PlayLevelScreen.PlayLevelScreenState;
 import SpriteFont.SpriteFont;
 
 import java.awt.*;
@@ -18,7 +16,6 @@ public class LoseScreen extends Screen {
         this.playLevelScreen = playLevelScreen;
         initialize();
     }
-
 
 
     @Override

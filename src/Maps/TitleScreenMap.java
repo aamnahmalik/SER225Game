@@ -1,17 +1,11 @@
 package Maps;
 
-import java.util.ArrayList;
 
 import Engine.GraphicsHandler;
 import Engine.ImageLoader;
 import GameObject.ImageEffect;
 import GameObject.Sprite;
 import Level.Map;
-import Level.NPC;
-import NPCs.NightSky;
-import NPCs.Serena;
-import NPCs.Zombies;
-import Scripts.TestMap.SerenaScript;
 import Tilesets.CommonTileset;
 import Utils.Colors;
 import Utils.Point;
