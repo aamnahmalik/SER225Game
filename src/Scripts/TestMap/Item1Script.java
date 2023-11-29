@@ -24,9 +24,10 @@ public class Item1Script extends Script<EnhancedMapTile>
 
             }
             else if (sequence == 1) {
-             
+                lockPlayer();
             }
             else if (sequence == 2) {
+                lockPlayer();
                 if (selectedOption == 0)
                 {
                     addTextToTextboxQueue("Correct!\nPress Space to exit.");

@@ -96,7 +96,6 @@ public abstract class Map {
     
     public void setMapTransition (int i) { 
         mapTransition =i;
-        System.out.println("mapTransition =1");
     }
     public static int getMapTransition () {
         return mapTransition;

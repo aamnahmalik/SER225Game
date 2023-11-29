@@ -132,11 +132,12 @@ public class CheckList {
             //System.out.println("4 items have been collected");
         }
 
-        if ((collectedItems >=5) && (Map.getMapTransition() != 2)) {
+        if ((collectedItems >=5) && ((Map.getMapTransition() == 2)|| Map.getMapTransition() == 0)) {
             
             Portal portal = new Portal (map.getMapTile(4, 7).getLocation(),map);
             portal.setMap(map);
             map.enhancedMapTiles.add(portal);
+            
             
         }
     }
@@ -181,7 +182,6 @@ public class CheckList {
 
         if (collectedWeapon ==1);
         {
-            System.out.println("weapon is collected");
             Checkmark checkmark4 = new Checkmark (map.getMapTile(0,2).getLocation(),map);
             checkmark4.setMap(map);
         }
@@ -193,29 +193,13 @@ public class CheckList {
         collectedPortal = collectedPortal + 1;
         update(); 
 
-        if (collectedPortal ==1)
-        {
-            System.out.println("portal is collceted");
-            //change logic to get screen to switch when portal is touched 
+        // if (collectedPortal ==1)
+        // {
+        //     // System.out.println("portal is collceted");
+        //     //change logic to get screen to switch when portal is touched 
 
-        }
+        // }
     }
-
-
-
-
-
-    // public void waterCollected () {
-    //     protected boolean collectedWater = false; 
-    //     Checkmark.isHidden = true;
-    //     update();
-
-    //     if (collectedWater == true) { 
-    //         this.isHidden = false;
-    //     }
-    // }
-
-
 
     public int getCollectedItems() {
         return collectedItems;

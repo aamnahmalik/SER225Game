@@ -20,13 +20,14 @@ public class Item2Script extends Script<EnhancedMapTile>
                 selectedOption = -1;
                 showTextbox();
                 addTextToTextboxQueue( "What was Serena's dream school?\n(Press Space to see options)");
-                addTextToTextboxQueue( "1. Yale\t 2. Columbia\t 3. Princeton\nPress Space, then the number of your answer");            
+                addTextToTextboxQueue( "1. Yale\t 2. Columbia\t 3. Brown\nPress Space, then the number of your answer");            
 
             }
             else if (sequence == 1) {
-             
+                lockPlayer();
             }
             else if (sequence == 2) {
+                lockPlayer();
                 if (selectedOption == 2)
                 {
                     addTextToTextboxQueue("Correct!\nPress Space to exit.");

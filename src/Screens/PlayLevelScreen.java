@@ -78,12 +78,14 @@ public class PlayLevelScreen extends Screen {
                 {
                     playLevelScreenState = PlayLevelScreenState.BETWEEN_LEVELS;
                         mapTransition();
-                        player.update();
+                        Weapon.hasInteracted = false;
                         this.map.setMapTransition(2);
+                        player.update();
                 }
                 if (HealthMeter.count <= 0){
                     playLevelScreenState = PlayLevelScreenState.LOSE;
                     this.map.setMapTransition(3);
+                    player.update();
                 }
                 // if ((CheckList.collectedItems ==5) && (Map.getMapTransition() == 3)) {
                 //     playLevelScreenState = PlayLevelScreenState.LEVEL_COMPLETED;
@@ -219,7 +221,8 @@ public class PlayLevelScreen extends Screen {
     public void mapTransition(){
             // define/setup map
             this.map = new JurassicMap();
-            update();
+            this.map.setMapTransition(2);
+            player.update();
             map.setFlagManager(flagManager);
             // let pieces of map know which button to listen for as the "interact" button
             map.getTextbox().setInteractKey(player.getInteractKey());

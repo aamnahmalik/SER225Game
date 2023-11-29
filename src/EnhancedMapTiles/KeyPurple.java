@@ -42,11 +42,6 @@ public class KeyPurple extends EnhancedMapTile{
     public void itemCollected () {
         this.collectedItems = this.collectedItems + 1;
         update();
-
-        if (this.collectedItems >=4 )
-        { 
-            System.out.println("4 items have been collected");
-        }
     }
 
     public void addKeyItem (int item){

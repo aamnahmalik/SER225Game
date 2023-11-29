@@ -35,20 +35,6 @@ public class Weapon extends EnhancedMapTile
     {
         super.update(player);
 
-        if (Map.getMapTransition() == 2)
-        {
-            if (player.overlaps(this) && !hasInteracted)
-            {
-                hasInteracted = true;
-                this.isHidden = true;
-                this.map.getCheckList().itemCollected();
-                this.map.getCheckList().weaponCollected();
-            }
-            else
-            {
-                hasInteracted = false;
-            }
-        }
         
         if (Map.getMapTransition() == 0 && player.overlaps(this) && !hasInteracted)
         {
@@ -57,13 +43,6 @@ public class Weapon extends EnhancedMapTile
             this.map.getCheckList().itemCollected();
             this.map.getCheckList().weaponCollected();
         }
-
-        // if (Map.getMapTransition() == 2)
-        // {
-        //     hasInteracted = false;
-        //     this.map.setMapTransition(4);
-        // }
-
 
     }
 

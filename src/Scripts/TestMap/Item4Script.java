@@ -24,9 +24,10 @@ public class Item4Script extends Script<EnhancedMapTile>
 
             }
             else if (sequence == 1) {
-             
+                lockPlayer();
             }
             else if (sequence == 2) {
+                lockPlayer();
                 if (selectedOption == 1)
                 {
                     addTextToTextboxQueue("Correct!\nPress Space to exit.");
@@ -69,6 +70,7 @@ public class Item4Script extends Script<EnhancedMapTile>
                 this.map.getCheckList().weaponCollected();
                 for (EnhancedMapTile emt : map.getEnhancedMapTiles()) {
                     if (emt instanceof Weapon) {
+                        Weapon.hasInteracted = true;
                         emt.setIsHidden(true);
                         break;
                     }

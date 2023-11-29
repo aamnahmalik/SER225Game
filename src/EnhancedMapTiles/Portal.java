@@ -27,34 +27,28 @@ public class Portal extends EnhancedMapTile{
     }
 
     @Override
-    public void update(Player player) {
-        super.update(player);
-        
-        if (player.overlaps(this) && !hasInteracted)
+    public void update(Player player)
         {
-        	map.setHasChangedHealthMeter(true);
-            hasInteracted = true;
-            this.isHidden = true;
-            this.map.getCheckList().itemCollected(); 
-            this.map.getCheckList().portalCollected();
-            this.map.setMapTransition(1);
+            super.update(player);
             
-            if (player.overlaps(this) && !hasInteracted)
-        {
-        	map.setHasChangedHealthMeter(true);
-            hasInteracted = true;
-            this.isHidden = true;
-            this.map.getCheckList().itemCollected(); 
-            this.map.getCheckList().portalCollected();
-            this.map.setMapTransition(2);
-            
-
+            if (player.overlaps(this) && !hasInteracted && Map.getMapTransition() == 0)
+            {
+                hasInteracted = true;
+                this.isHidden = true;
+                this.map.getCheckList().itemCollected(); 
+                this.map.getCheckList().portalCollected();
+                this.map.setMapTransition(1);
+            }
+            else if (player.overlaps(this) && !hasInteracted)
+            {
+                hasInteracted = true;
+                this.isHidden = true;
+                this.map.getCheckList().itemCollected(); 
+                this.map.getCheckList().portalCollected();
+                this.map.setMapTransition(2);
+            }
         }
-
-        
-
-        }
-    }
+    
 
     @Override
     protected GameObject loadBottomLayer(SpriteSheet spriteSheet) {
